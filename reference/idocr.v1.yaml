@@ -113,9 +113,6 @@ paths:
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
-                example-7:
-                  value:
-                    message: string
             application/xml:
               schema:
                 type: object
