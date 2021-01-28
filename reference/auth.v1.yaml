@@ -35,8 +35,315 @@ paths:
       operationId: get-auth
       security:
         - api_key: []
+  auth/key:
+    post:
+      operationId: createKey
+      summary: API KEY 발급
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKey'
+            examples:
+              request:
+                value:
+                  username: test
+                  password: $123$abadfo124393eo
+      responses:
+        '201':
+          description: 올바른 요청 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    format: uuid
+                  secret:
+                    type: string
+              examples:
+                preview:
+                  value:
+                    key: 00000000-0000-0000-0000-000000000000
+                    secret: 6E686506B4B2516CDFBC
+        '400':
+          description: 잘못된 입력 값
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                invalid input:
+                  value:
+                    reason: 에러에 대한 내용
+        '401':
+          description: 허가 되지 않은 인증 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                unauthorized:
+                  value:
+                    reason: invalid authentication
+        '403':
+          description: API KEY 발급이 제한된 계정
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                access denied:
+                  value:
+                    reason: 에러에 대한 내용
+        '500':
+          description: 서버 측 처리 에러
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                server error:
+                  value:
+                    reason: 에러에 대한 내용
+    parameters: []
+  auth/token:
+    post:
+      operationId: createToken
+      summary: API Token 발급
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateToken'
+            examples:
+              request:
+                value:
+                  key: 00000000-0000-0000-0000-000000000000
+                  secret: 6E686506B4B2516CDFBC
+      responses:
+        '201':
+          description: 올바른 요청 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  expire:
+                    type: string
+                    format: datetime
+                  token:
+                    type: string
+                    format: jwt
+              examples:
+                preview:
+                  value:
+                    code: 200
+                    expire: '2050-01-01T00:00:00+09:00'
+                    token: header.payload.hash
+        '400':
+          description: 잘못된 입력 값
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                invalid input:
+                  value:
+                    reason: 에러에 대한 내용
+        '401':
+          description: 허가 되지 않은 인증 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                unauthorized:
+                  value:
+                    reason: invalid authentication
+        '500':
+          description: 서버 측 처리 에러
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                server error:
+                  value:
+                    reason: 에러에 대한 내용
+    patch:
+      operationId: refreshToken
+      summary: API Token 갱신
+      parameters:
+        - name: X-API-Token
+          in: header
+          description: 인증 토큰
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 올바른 요청 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  expire:
+                    type: string
+                    format: datetime
+                  token:
+                    type: string
+                    format: jwt
+              examples:
+                preview:
+                  value:
+                    code: 200
+                    expire: '2050-01-01T00:00:00+09:00'
+                    token: header.payload.hash
+        '400':
+          description: 잘못된 입력 값
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                invalid input:
+                  value:
+                    reason: 에러에 대한 내용
+        '401':
+          description: 허가 되지 않은 인증 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                unauthorized:
+                  value:
+                    reason: invalid authentication
+        '500':
+          description: 서버 측 처리 에러
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                server error:
+                  value:
+                    reason: 에러에 대한 내용
+    delete:
+      operationId: deleteToken
+      summary: API Token 삭제
+      responses:
+        '200':
+          description: 올바른 요청 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+              examples:
+                preview:
+                  value:
+                    code: 200
+        '400':
+          description: 잘못된 입력 값
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                invalid input:
+                  value:
+                    reason: 에러에 대한 내용
+        '401':
+          description: 허가 되지 않은 인증 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                unauthorized:
+                  value:
+                    reason: invalid authentication
+        '500':
+          description: 서버 측 처리 에러
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reason:
+                    type: string
+              examples:
+                server error:
+                  value:
+                    reason: 에러에 대한 내용        
 components:
-  schemas: {}
+  schemas:
+    CreateKey:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      x-examples: {}
+    CreateToken:
+      type: object
+      properties:
+        key:
+          type: string
+          format: uuid
+        secret:
+          type: string
+      x-examples:
+        example-1:
+          key: 4adfe27e-63d3-45b9-8238-62b6ed6fdb5e
+          secret: string
   securitySchemes:
     api_key:
       name: api_key

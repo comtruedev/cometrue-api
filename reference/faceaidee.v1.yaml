@@ -11,6 +11,7 @@ components:
           type: string
         password:
           type: string
+      x-examples: {}
     CreateToken:
       type: object
       properties:
@@ -19,6 +20,10 @@ components:
           format: uuid
         secret:
           type: string
+      x-examples:
+        example-1:
+          key: 4adfe27e-63d3-45b9-8238-62b6ed6fdb5e
+          secret: string
     CreateUser:
       type: object
       properties:

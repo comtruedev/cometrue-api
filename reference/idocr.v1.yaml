@@ -18,7 +18,9 @@ paths:
       operationId: post-idocr
       responses:
         '200':
-          description: OK
+          description: |-
+            OK
+            정상응답
           content:
             application/json:
               schema:
@@ -82,7 +84,9 @@ paths:
                       number: 11-90-041222-33
                       title: 자동차운전면허증
         '400':
-          description: Bad Request
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
           content:
             application/json:
               schema:
@@ -118,9 +122,13 @@ paths:
                 type: object
                 properties: {}
         '401':
-          description: Unauthorized
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
         '409':
-          description: Conflict
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
           content:
             application/json:
               schema:
@@ -146,7 +154,9 @@ paths:
                     message: matching error
           headers: {}
         '500':
-          description: Internal Server Error
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         신분증 인식 후 텍스트 검출하여 돌려줍니다.
         지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증입니다.
