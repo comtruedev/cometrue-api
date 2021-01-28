@@ -73,12 +73,6 @@ components:
         image:
           type: string
           format: base64
-  securitySchemes:
-    X-API-Token:
-      name: API Key
-      type: apiKey
-      in: header
-      description: 인증토큰
 paths:
   auth/key:
     post:
@@ -2381,8 +2375,6 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
-      security:
-        - X-API-Token: []
 servers:
-  - url: 'https://api.comtrue.com/v1'
+  - url: 'https://api.comtrue.com/v1/face'
     description: ''
