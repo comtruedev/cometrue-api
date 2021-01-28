@@ -75,7 +75,7 @@ components:
           format: base64
   securitySchemes:
     X-API-Token:
-      name: API Key
+      name: 인증토큰
       type: apiKey
       in: header
       description: 인증토큰
@@ -164,6 +164,8 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     parameters: []
   auth/token:
     post:
@@ -240,6 +242,8 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     patch:
       operationId: refreshToken
       summary: API Token 갱신
@@ -311,6 +315,8 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     delete:
       operationId: deleteToken
       summary: API Token 삭제
@@ -367,17 +373,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   projects:
     get:
       operationId: listProjects
       summary: 모든 프로젝트 조회
-      parameters:
-        - name: X-API-Token
-          in: header
-          description: API 토큰
-          required: true
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: 올바른 요청 처리
@@ -680,17 +682,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}':
     get:
       operationId: getProject
       summary: 프로젝트 조회
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -933,17 +931,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}/users':
     post:
       operationId: createUser
       summary: 유저 생성
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1048,17 +1042,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}/users/{user_id}':
     patch:
       operationId: updateUser
       summary: 유저 수정
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1181,16 +1171,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     delete:
       operationId: deleteUser
       summary: 유저 삭제
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1304,12 +1290,6 @@ paths:
       operationId: getFaces
       summary: 대상의 모든 얼굴 조회
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1414,16 +1394,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     delete:
       operationId: deleteFaces
       summary: 대상의 모든 얼굴 삭제
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1519,16 +1495,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     post:
       operationId: createFace
       summary: 얼굴 생성
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1668,17 +1640,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}/users/{user_id}/faces/{face_id}':
     get:
       operationId: getFace
       summary: 얼굴 조회
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1787,16 +1755,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     patch:
       operationId: updateFace
       summary: 얼굴 수정
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -1945,16 +1909,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
     delete:
       operationId: deleteFace
       summary: 얼굴 삭제
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -2059,17 +2019,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}/check-in':
     post:
       operationId: checkinFace
       summary: 얼굴 체크인
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
@@ -2218,17 +2174,13 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      security:
+        - X-API-Token: []
   'projects/{project_id}/_search':
     post:
       operationId: searchFace
       summary: 얼굴 탐색
       parameters:
-        - name: X-API-Token
-          in: header
-          description: 인증 토큰
-          required: true
-          schema:
-            type: string
         - name: project_id
           in: path
           description: 프로젝트 식별자
