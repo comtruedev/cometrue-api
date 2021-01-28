@@ -95,13 +95,59 @@ paths:
                 required:
                   - message
               examples:
-                Example:
+                id_type not given:
                   value:
-                    message: Error Message
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+                example-7:
+                  value:
+                    message: string
+            application/xml:
+              schema:
+                type: object
+                properties: {}
         '401':
           description: Unauthorized
-        '429':
-          description: Too Many Requests
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
         '500':
           description: Internal Server Error
       description: |-
@@ -124,9 +170,7 @@ paths:
                   minLength: 1
                   description: base64로 인코딩 한 스트링 or http URL
                 is_url:
-                  type:
-                    - string
-                    - boolean
+                  type: boolean
                   description: image속성이 url일때 true
               required:
                 - id_type
@@ -139,7 +183,7 @@ paths:
               URL Example:
                 value:
                   id_type: jumin
-                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
       security:
@@ -153,4 +197,16 @@ components:
       type: apiKey
       in: query
       description: api.cometrue.ai에서 발급받은 API key
-  responses: {}
+  responses:
+    ErrorResponse:
+      description: 신분증 인식 및 OCR에 대한 Error Message
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
