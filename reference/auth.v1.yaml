@@ -87,9 +87,9 @@ paths:
       operationId: refreshToken
       summary: API Token 갱신
       parameters:
-        - name: X-API-Token
+        - name: Authorization
           in: header
-          description: 인증 토큰
+          description: API Key(JWT)
           required: true
           schema:
             type: string
@@ -210,6 +210,12 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: API Key(JWT)
     parameters: []
 components:
   schemas:
@@ -234,7 +240,7 @@ components:
         password:
           type: string
   securitySchemes:
-    api_key:
-      name: api_key
+    Authorization:
+      name: API Key(JWT)
       type: apiKey
       in: query
