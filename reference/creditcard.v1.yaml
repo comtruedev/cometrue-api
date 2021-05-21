@@ -39,11 +39,11 @@ paths:
                       number:
                         type: string
                         minLength: 1
-                        description: 주민등록증 발급일자
+                        description: 신용카드 번호
                       expired_date:
                         type: string
                         minLength: 1
-                        description: 신분증 종류
+                        description: 만료일자
                 required:
                   - quadrilateral
                   - result
