@@ -161,7 +161,7 @@ components:
     Authorization:
       name: Authorization
       type: apiKey
-      in: query
+      in: header
   responses:
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
