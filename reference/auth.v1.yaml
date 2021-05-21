@@ -35,7 +35,7 @@ paths:
       operationId: get-auth
       security:
         - api_key: []
-  auth/key:
+  /auth/key:
     post:
       operationId: createKey
       summary: API KEY 발급
@@ -120,7 +120,7 @@ paths:
                   value:
                     reason: 에러에 대한 내용
     parameters: []
-  auth/token:
+  /auth/token:
     post:
       operationId: createToken
       summary: API Token 발급
@@ -321,7 +321,8 @@ paths:
               examples:
                 server error:
                   value:
-                    reason: 에러에 대한 내용        
+                    reason: 에러에 대한 내용
+    parameters: []
 components:
   schemas:
     CreateKey:
@@ -334,16 +335,16 @@ components:
       x-examples: {}
     CreateToken:
       type: object
-      properties:
-        key:
-          type: string
-          format: uuid
-        secret:
-          type: string
       x-examples:
         example-1:
           key: 4adfe27e-63d3-45b9-8238-62b6ed6fdb5e
           secret: string
+      properties:
+        username:
+          type: string
+          format: uuid
+        password:
+          type: string
   securitySchemes:
     api_key:
       name: api_key
