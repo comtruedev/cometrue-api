@@ -215,7 +215,7 @@ paths:
             type: string
           in: header
           name: Authorization
-          description: API Key(JWT)
+          description: Authorization
     parameters: []
 components:
   schemas:

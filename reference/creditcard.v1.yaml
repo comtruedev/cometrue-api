@@ -153,16 +153,15 @@ paths:
                   type: 0
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
-      security:
-        - Authorization: []
+      security: []
     parameters: []
 components:
   schemas: {}
   securitySchemes:
     Authorization:
-      name: API Key(JWT)
+      name: Authorization
       type: apiKey
-      in: header
+      in: query
   responses:
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
