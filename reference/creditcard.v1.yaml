@@ -14,7 +14,7 @@ servers:
 paths:
   /creditcard:
     post:
-      summary: 신용카드/체크카드 OCR
+      summary: 신용카드 OCR
       operationId: post-idocr
       responses:
         '200':
@@ -48,7 +48,7 @@ paths:
                   - quadrilateral
                   - result
               examples:
-                결과 예제:
+                Example:
                   value:
                     quadrilateral: true
                     result:
@@ -148,15 +148,10 @@ paths:
                 - type
                 - image
             examples:
-              Base64 Example:
+              Example:
                 value:
                   id_type: jumin
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: ''
       security:
         - Authorization: []
