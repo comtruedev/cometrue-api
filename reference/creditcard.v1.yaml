@@ -150,7 +150,7 @@ paths:
             examples:
               Example:
                 value:
-                  id_type: jumin
+                  type: 0
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
       security:
