@@ -8,9 +8,6 @@ info:
 servers:
   - url: 'https://api.cometrue.ai/v1'
 paths:
-  /auth: {}
-  /auth/key:
-    parameters: []
   /auth/token:
     post:
       operationId: createToken
