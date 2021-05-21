@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
-  title: license
+  title: auth
   version: '1.0'
   contact:
     email: info@cometrue.ai
     url: 'https://cometrue.ai'
 servers:
-  - url: 'https://api.cometrue.ai/v1'
+  - url: 'https://api.cometrue.ai/auth/v1'
 paths:
-  /auth/token:
+  /token:
     post:
       operationId: createToken
       summary: API Token 발급
