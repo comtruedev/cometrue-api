@@ -20,8 +20,8 @@ paths:
             examples:
               request:
                 value:
-                  key: 00000000-0000-0000-0000-000000000000
-                  secret: 6E686506B4B2516CDFBC
+                  username: 00000000-0000-0000-0000-000000000000
+                  password: 6E686506B4B2516CDFBC
       responses:
         '201':
           description: 올바른 요청 처리
