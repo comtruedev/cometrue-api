@@ -9,12 +9,12 @@ info:
     name: 인공지능사업부
   termsOfService: 서비스약관
 servers:
-  - url: 'https://api.cometrue.ai/v1/creditcard'
+  - url: 'https://api.cometrue.ai/ocr/v1'
     description: Cometrue
 paths:
-  /ocr:
+  /creditcard:
     post:
-      summary: Identification Card OCR
+      summary: 신용카드/체크카드 OCR
       operationId: post-idocr
       responses:
         '200':
@@ -48,23 +48,12 @@ paths:
                   - quadrilateral
                   - result
               examples:
-                주민등록증:
+                결과 예제:
                   value:
                     quadrilateral: true
                     result:
-                      date: 2009.8.13.
-                      name: 홍길동
-                      number: 610220-1250511
-                      title: 주민등록증
-                운전면허증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      birth_dt: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
+                      number: '1111222233334444'
+                      expired_date: 01/26
         '400':
           description: |-
             Bad Request
@@ -81,9 +70,9 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
+                type not given:
                   value:
-                    message: id_type not provided
+                    message: type not provided
                 image not given:
                   value:
                     message: image not provided
@@ -139,9 +128,7 @@ paths:
           description: |-
             Internal Server Error
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: |-
-        신분증 인식 후 텍스트 검출하여 돌려줍니다.
-        지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증입니다.
+      description: 신용/체크카드의 이미지에서 텍스트 검출하여 결과를 전달합니다.
       parameters: []
       requestBody:
         content:
