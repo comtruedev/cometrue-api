@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  title: ExtractText
+  version: '1.0'
+  description: 사진에서 텍스트를 추출해 주는 API입니다
+servers:
+  - url: 'https://api.cometrue.ai/v1/identifcation'
+paths:
+  /textocr:
+    post:
+      summary: Create New User
+      operationId: post-textocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  Template:
+                    type: string
+                  ROI:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - index
+                        - x
+                        - 'y'
+                        - width
+                        - height
+                        - text
+                        - tag
+                        - language
+                      properties:
+                        index:
+                          type: number
+                        x:
+                          type: number
+                        'y':
+                          type: number
+                        width:
+                          type: number
+                        height:
+                          type: number
+                        text:
+                          type: string
+                          minLength: 1
+                        tag:
+                          type: string
+                        language:
+                          type: string
+                        xPoints:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                        yPoints:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                required:
+                  - Template
+                  - ROI
+                x-examples:
+                  example-1:
+                    Template: ''
+                    ROI:
+                      - index: 0
+                        x: 63
+                        'y': 21
+                        width: 175
+                        height: 45
+                        text: 주민등록증
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 63
+                          - 239
+                          - 238
+                          - 62
+                        yPoints:
+                          - 21
+                          - 24
+                          - 66
+                          - 63
+                      - index: 1
+                        x: 69
+                        'y': 82
+                        width: 160
+                        height: 31
+                        text: 정승일(x-)
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 69
+                          - 229
+                          - 229
+                          - 69
+                        yPoints:
+                          - 82
+                          - 84
+                          - 113
+                          - 112
+                      - index: 2
+                        x: 60
+                        'y': 118
+                        width: 178
+                        height: 22
+                        text: 690212-1148921
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 60
+                          - 239
+                          - 238
+                          - 60
+                        yPoints:
+                          - 118
+                          - 120
+                          - 140
+                          - 138
+                      - index: 3
+                        x: 51
+                        'y': 154
+                        width: 228
+                        height: 20
+                        text: 인천광역시연수구옥련동633
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 51
+                          - 279
+                          - 279
+                          - 51
+                        yPoints:
+                          - 154
+                          - 155
+                          - 174
+                          - 173
+                      - index: 4
+                        x: 52
+                        'y': 173
+                        width: 188
+                        height: 17
+                        text: 현대아파트207동1504호
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 52
+                          - 240
+                          - 240
+                          - 53
+                        yPoints:
+                          - 173
+                          - 172
+                          - 190
+                          - 191
+                      - index: 5
+                        x: 129
+                        'y': 240
+                        width: 196
+                        height: 23
+                        text: 인천광역시연수구청장
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 129
+                          - 325
+                          - 325
+                          - 129
+                        yPoints:
+                          - 240
+                          - 240
+                          - 263
+                          - 263
+              examples:
+                New User Bob Fellow:
+                  value:
+                    id: 12
+                    firstName: Bob
+                    lastName: Fellow
+                    email: bob.fellow@gmail.com
+                    dateOfBirth: '1996-08-24'
+                    emailVerified: false
+                    createDate: '2020-11-18'
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: date
+              required:
+                - image
+            examples:
+              Create User Bob Fellow:
+                value:
+                  firstName: Bob
+                  lastName: Fellow
+                  email: bob.fellow@gmail.com
+                  dateOfBirth: '1996-08-24'
+        description: ''
+      description: 사진의 텍스트를 검출하여 돌려줍니다.
+    parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
