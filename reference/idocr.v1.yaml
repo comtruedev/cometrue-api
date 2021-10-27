@@ -179,7 +179,7 @@ paths:
                 id_type:
                   type: string
                   minLength: 1
-                  description: 'driver, jumin 을 지원함'
+                  description: 'jumin, driver, kpassport, alien, passport 을 지원함'
                 image:
                   type: string
                   minLength: 1
@@ -203,6 +203,7 @@ paths:
         description: ''
       security:
         - api_key: []
+      x-internal: false
     parameters: []
 components:
   schemas: {}
