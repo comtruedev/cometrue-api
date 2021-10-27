@@ -206,7 +206,6 @@ paths:
               properties:
                 image:
                   type: string
-                  format: date
               required:
                 - image
             examples:
