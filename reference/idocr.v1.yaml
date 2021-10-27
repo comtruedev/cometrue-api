@@ -56,12 +56,20 @@ paths:
                         type: string
                         minLength: 1
                         description: 신분증 종류
-                      birth_dt:
-                        type: string
-                        description: 운전면허증 생년월일
                       code:
                         type: string
                         description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
                 required:
                   - quadrilateral
                   - result
@@ -78,7 +86,7 @@ paths:
                   value:
                     quadrilateral: true
                     result:
-                      birth_dt: '19660220'
+                      birth_date: '19660220'
                       code: 7wggen
                       name: 홍길동
                       number: 11-90-041222-33
@@ -159,7 +167,7 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         신분증 인식 후 텍스트 검출하여 돌려줍니다.
-        지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증입니다.
+        지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
       parameters: []
       requestBody:
         content:
