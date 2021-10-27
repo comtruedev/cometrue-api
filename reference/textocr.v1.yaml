@@ -8,7 +8,7 @@ servers:
 paths:
   /textocr:
     post:
-      summary: Create New User
+      summary: ExtractText OCR
       operationId: post-textocr
       responses:
         '200':
