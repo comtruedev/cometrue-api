@@ -133,50 +133,42 @@ paths:
                           - 263
                           - 263
                 properties:
-                  Template:
-                    type: string
-                    description: ' '
                   ROI:
                     type: array
                     uniqueItems: true
                     minItems: 1
-                    description: ' '
+                    description: '텍스트 영역 리스트'
                     items:
                       type: object
+                      description: '텍스트 영역'
                       properties:
                         index:
                           type: number
-                          description: ' '
+                          description: '리스트 인덱스'
                         x:
                           type: number
-                          description: ' '
+                          description: '텍스트 영역의 왼쪽 상단 x 좌표'
                         'y':
                           type: number
-                          description: ' '
+                          description: '텍스트 영역의 왼쪽 상단 y 좌표'
                         width:
                           type: number
-                          description: ' '
+                          description: '텍스트 영역 넓이'
                         height:
                           type: number
-                          description: ' '
+                          description: '텍스트 영역 높이'
                         text:
                           type: string
                           minLength: 1
-                          description: ' '
-                        tag:
-                          type: string
-                          description: ' '
-                        language:
-                          type: string
-                          description: ' '
+                          description: '검출된 텍스트'
                         xPoints:
                           type: array
-                          description: ' '
+                          description: '텍스트 영역을 이루는 x 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
                           items:
                             type: object
                         yPoints:
                           type: array
-                          description: ' '
+                          description: '텍스트 영역을 이루는 y 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
                           items:
                             type: object
               examples:
