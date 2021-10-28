@@ -250,7 +250,7 @@ paths:
                     description: 신분증에 해당하는 사각형이 검출되었는지 확인
                   result:
                     type: object
-                    description: ''
+                    description: 검출한 정보
                     required:
                       - date
                       - name
