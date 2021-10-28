@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Licenseplatedetection
   version: '1.0'
-  description: ~~~ API입니다.
+  description: 자동차 번호판을 인식하여 돌려주는 API입니다.
   contact:
     email: info@cometrue.ai
     url: 'https://cometrue.ai'
@@ -337,7 +337,7 @@ paths:
           description: |-
             Internal Server Error
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 자격증 ~~~~
+      description: 이미지에서 자동차 번호판을 인식하여 돌려줍니다.
       parameters: []
       requestBody:
         content:

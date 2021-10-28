@@ -29,24 +29,50 @@ paths:
                 properties:
                   id:
                     type: string
+                    minLength: -1
+                    maxLength: 30
+                    description: |
+                      알 수 없음: -1
+                      주민등록증: 0
+                      건강보험증: 1
+                      근로소득원천징수영수증: 2
+                      주민등록표초본: 3
+                      거주자증명서: 4
+                      출입국에 관한 사실증명서: 5
+                      후견등기사항증명서: 6
+                      소득확인증명서(개인종합자산관리계좌가입용): 7
+                      여권: 8
+                      은행통장사본: 9
+                      법인인감증명서: 10
+                      법인등기부등본: 11
+                      외국인등록증: 12
+                      운전면허증: 13
+                      분류 이외의 문서: 14
+
+                      개인인감증명서&본인서명확인서: 15
+                      관계증명서(후견,가족,기본,혼인,입양,친양자): 16
+                      사업자등록증&고유번호증: 17
+                      사업자등록증명&폐업사실증명&소득금액증명: 18
+
+                      개인인감증명서: 19
+                      본인서명확인서: 20
+
+                      기본증명서: 21
+                      관계증명서-가족관계증명서: 22
+                      관계증명서-혼인관계증명서: 23
+                      관계증명서-친양자입양관계증명서: 24
+                      관계증명서-입양관계증명서: 25
+
+                      사업자등록증: 26
+                      고유번호증: 27
+
+                      사업자등록증명: 28
+                      폐업사실증명: 29
+                      소득금액증명: 30
               examples:
-                주민등록증:
+                결과:
                   value:
-                    quadrilateral: true
-                    result:
-                      date: 2009.8.13.
-                      name: 홍길동
-                      number: 610220-1250511
-                      title: 주민등록증
-                운전면허증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      birth_date: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
+                    id: '8'
         '400':
           description: |-
             Bad Request
@@ -121,7 +147,7 @@ paths:
           description: |-
             Internal Server Error
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증을 분류해줍니다
+      description: 문서를 분류해서 돌려줍니다.
       parameters: []
       requestBody:
         content:
@@ -130,10 +156,6 @@ paths:
               description: ''
               type: object
               properties:
-                id_type:
-                  type: string
-                  minLength: 1
-                  description: 'jumin, driver, kpassport, alien, passport 을 지원함'
                 image:
                   type: string
                   minLength: 1
@@ -142,7 +164,6 @@ paths:
                   type: boolean
                   description: image속성이 url일때 true
               required:
-                - id_type
                 - image
             examples:
               Base64 Example:
