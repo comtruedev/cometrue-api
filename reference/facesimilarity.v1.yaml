@@ -14,7 +14,7 @@ servers:
 paths:
   /face-similarity:
     post:
-      summary: Identification Card OCR
+      summary: Face Similarity OCR
       operationId: post-facesimilarity
       responses:
         '200':
