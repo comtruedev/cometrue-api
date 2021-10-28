@@ -744,7 +744,7 @@ paths:
                       type: array
                       minItems: 5
                       maxItems: 5
-                      description: 운전면허번호
+                      description: 주민등록번호
                       items:
                         type: string
                     issue_date:
