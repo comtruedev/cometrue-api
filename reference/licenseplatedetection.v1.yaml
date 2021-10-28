@@ -358,7 +358,6 @@ paths:
             examples:
               Base64 Example:
                 value:
-                  id_type: jumin
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
               URL Example:
                 value:
