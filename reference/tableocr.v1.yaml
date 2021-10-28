@@ -227,23 +227,27 @@ paths:
                               - 피
                               - tenprsay
               examples:
-                주민등록증:
+                결과:
                   value:
-                    quadrilateral: true
                     result:
-                      date: 2009.8.13.
-                      name: 홍길동
-                      number: 610220-1250511
-                      title: 주민등록증
-                운전면허증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      birth_date: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
+                      - table_index: 0
+                        cells:
+                          - x: 1
+                            'y': 3
+                            str: []
+                          - x: 2
+                            'y': 1
+                            str: []
+                          - x: 2
+                            'y': 2
+                            str:
+                              - longterm
+                              - debtrating
+                              - (s.ermioodys)
+                          - x: 2
+                            'y': 3
+                            str:
+                              - valuationpercentage
         '400':
           description: |-
             Bad Request
