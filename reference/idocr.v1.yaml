@@ -206,7 +206,7 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         신분증 인식 후 텍스트 검출하여 돌려줍니다.
-        
+
         지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
       parameters: []
       requestBody:
@@ -284,9 +284,7 @@ paths:
                       number:
                         type: string
                         minLength: 1
-                        description: |-
-                          주민등록증 - 주민등록번호
-                          운전면허증 - 운전면허번호
+                        description: 주민등록번호
                       title:
                         type: string
                         minLength: 1
@@ -896,7 +894,7 @@ paths:
         '500':
           description: |-
             Internal Server Error
-            
+
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 여권 인식 후 텍스트 검출하여 돌려줍니다.
       parameters: []
@@ -1076,7 +1074,7 @@ paths:
         '500':
           description: |-
             Internal Server Error
-            
+
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 한국인 여권 인식 후 텍스트 검출하여 돌려줍니다.
       parameters: []
