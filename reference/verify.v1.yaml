@@ -345,6 +345,230 @@ paths:
         - api_key: []
       x-internal: false
     parameters: []
+  /driver/verify:
+    post:
+      summary: Driver OCR
+      operationId: post-driververify
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    verified: false
+                properties:
+                  verified:
+                    type: boolean
+                    description: 검증결과
+                required:
+                  - verified
+              examples:
+                검증:
+                  value:
+                    verified: false
+        '400':
+          description: |-
+            Bad Request
+
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 운전면허증을 검증합니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  certs:
+                    Name: ''
+                    Number:
+                      - ''
+                      - ''
+                    PFX: ''
+                    Password: ''
+                  idcard:
+                    name: 박노현
+                    birthday:
+                      - '1966'
+                      - '07'
+                      - '16'
+                    number:
+                      - '11'
+                      - '90'
+                      - '041573'
+                      - '11'
+                    code: 7w6gen
+              properties:
+                certs:
+                  type: object
+                  required:
+                    - Name
+                    - Number
+                    - PFX
+                    - Password
+                  properties:
+                    Name:
+                      type: string
+                    Number:
+                      type: array
+                      minItems: 2
+                      description: 공동인증서 주민번호
+                      maxItems: 2
+                      items:
+                        type: string
+                    PFX:
+                      type: string
+                      description: 공동인증서
+                    Password:
+                      type: string
+                      description: 공동인증서 비밀번호
+                idcard:
+                  type: object
+                  required:
+                    - name
+                    - birthday
+                    - number
+                    - code
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                      description: 성명
+                    birthday:
+                      type: array
+                      minItems: 3
+                      description: 년 월 일
+                      maxItems: 3
+                      items:
+                        type: string
+                    number:
+                      type: array
+                      minItems: 5
+                      maxItems: 5
+                      description: 운전면허번호
+                      items:
+                        type: string
+                    code:
+                      type: string
+                      minLength: 1
+                      description: 식별코드
+              required:
+                - certs
+                - idcard
+            examples:
+              운전면허증 검증:
+                value:
+                  certs:
+                    Name: ''
+                    Number:
+                      - ''
+                      - ''
+                    PFX: ''
+                    Password: ''
+                  idcard:
+                    name: 박노현
+                    birthday:
+                      - '1966'
+                      - '07'
+                      - '16'
+                    number:
+                      - '11'
+                      - '90'
+                      - '041573'
+                      - '11'
+                    code: 7w6gen
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
   /alien/ocr:
     post:
       summary: Alien OCR
