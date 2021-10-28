@@ -347,7 +347,7 @@ paths:
     parameters: []
   /driver/verify:
     post:
-      summary: Driver OCR
+      summary: Driver Verify
       operationId: post-driververify
       responses:
         '200':
