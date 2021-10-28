@@ -276,7 +276,10 @@ paths:
                       date:
                         type: string
                         minLength: 1
-                        description: 주민등록증 발급일자
+                        description: |-
+                          주민등록증 발급일자
+
+                          YYYYMMDD
                       name:
                         type: string
                         minLength: 1
@@ -297,7 +300,7 @@ paths:
                   value:
                     quadrilateral: true
                     result:
-                      date: 2009.8.13.
+                      date: '20191205'
                       name: 홍길동
                       number: 610220-1250511
                       title: 주민등록증
