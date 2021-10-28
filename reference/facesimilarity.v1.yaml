@@ -30,6 +30,8 @@ paths:
                   result:
                     type: integer
                     description: 유사도
+                    minimum: 0
+                    maximum: 100
               examples:
                 유사도 결과:
                   value:

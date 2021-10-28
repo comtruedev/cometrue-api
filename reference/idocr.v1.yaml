@@ -51,7 +51,7 @@ paths:
                         minLength: 1
                         description: |-
                           주민등록증 - 주민등록번호
-                          
+
                           운전면허증 - 운전면허번호
                       title:
                         type: string
@@ -122,7 +122,7 @@ paths:
                     quadrilateral: true
                     result:
                       date: '20110101'
-                      name: HONG GIL DONG
+                      name: HONG KIL DONG
                       number: 123456-1234567
                       title: 외국인등록증
         '400':
@@ -628,7 +628,7 @@ paths:
                     quadrilateral: true
                     result:
                       date: '20110101'
-                      name: HONG GIL DONG
+                      name: HONG KIL DONG
                       number: 123456-1234567
                       title: 외국인등록증
         '400':
