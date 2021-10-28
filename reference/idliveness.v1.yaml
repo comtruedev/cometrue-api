@@ -14,7 +14,7 @@ servers:
 paths:
   /id-liveness:
     post:
-      summary: Identification Card OCR
+      summary: IdLiveness
       operationId: post-idliveness
       responses:
         '200':
