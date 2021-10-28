@@ -116,6 +116,14 @@ paths:
                       birth_date: 01JAN1975
                       issue_date: 10MAR2008
                       expiry_date: 10MAR2013
+                외국인등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: '20110101'
+                      name: HONG GIL DONG
+                      number: 123456-1234567
+                      title: 외국인등록증
         '400':
           description: |-
             Bad Request
