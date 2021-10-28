@@ -61,10 +61,10 @@ paths:
                           description: y좌표
                         width:
                           type: number
-                          description: ' '
+                          description: '번호판 너비 '
                         height:
                           type: number
-                          description: ' '
+                          description: '번호판 높이 '
                         text:
                           type: string
                           description: ' '
