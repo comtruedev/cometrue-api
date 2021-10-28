@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Tableocr
   version: '1.0'
-  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  description: 이미지에서 표를 검출하여 주는 API입니다.
   contact:
     email: info@cometrue.ai
     url: 'https://cometrue.ai'
