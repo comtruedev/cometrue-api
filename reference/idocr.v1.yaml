@@ -252,6 +252,7 @@ paths:
                     type: object
                     description: ''
                     required:
+                      - date
                       - name
                       - number
                       - title
@@ -274,20 +275,6 @@ paths:
                         type: string
                         minLength: 1
                         description: 신분증 종류
-                      code:
-                        type: string
-                        description: 운전면허증 식별코드
-                      mrz1:
-                        type: string
-                      mrz2:
-                        type: string
-                      birth_date:
-                        type: string
-                        description: 운전면허증 생년월일
-                      issue_date:
-                        type: string
-                      expiry_date:
-                        type: string
                 required:
                   - quadrilateral
                   - result
@@ -300,15 +287,6 @@ paths:
                       name: 홍길동
                       number: 610220-1250511
                       title: 주민등록증
-                운전면허증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      birth_date: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
         '400':
           description: |-
             Bad Request
