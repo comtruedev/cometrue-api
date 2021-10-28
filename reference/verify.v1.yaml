@@ -491,6 +491,7 @@ paths:
                   properties:
                     Name:
                       type: string
+                      description: 성명
                     Number:
                       type: array
                       minItems: 2
