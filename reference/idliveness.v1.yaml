@@ -1,0 +1,188 @@
+openapi: 3.0.0
+info:
+  title: IDliveness
+  version: '1.0'
+  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  contact:
+    email: info@cometrue.ai
+    url: 'https://cometrue.ai'
+    name: 인공지능사업부
+  termsOfService: 서비스약관
+servers:
+  - url: 'https://api.cometrue.ai/v1/identifcation'
+    description: Cometrue
+paths:
+  /id-liveness:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idliveness
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: number
+                  fakeScore:
+                    type: number
+                  realScore:
+                    type: number
+                  detectSquareErr:
+                    type: number
+                required:
+                  - result
+                  - fakeScore
+                  - realScore
+                  - detectSquareErr
+                x-examples:
+                  example-1:
+                    result: 1
+                    fakeScore: 0.476456
+                    realScore: 0.527431
+                    detectSquareErr: 0
+              examples:
+                결과:
+                  value:
+                    result: 1
+                    fakeScore: 0.476456
+                    realScore: 0.527431
+                    detectSquareErr: 0
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: ~~~~
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_liveness_type:
+                  type: integer
+                  description: '1, 2 둘중하나'
+                  maximum: 2
+                  minimum: 1
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  id_liveness_type: 1
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes:
+    api_key:
+      name: api_key
+      type: apiKey
+      in: query
+      description: api.cometrue.ai에서 발급받은 API key
+  responses:
+    ErrorResponse:
+      description: 신분증 인식 및 OCR에 대한 Error Message
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
