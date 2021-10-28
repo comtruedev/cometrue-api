@@ -20,6 +20,7 @@ paths:
         '200':
           description: |-
             OK
+
             정상응답
           content:
             application/json:
@@ -257,6 +258,7 @@ paths:
         '400':
           description: |-
             Bad Request
+
             사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
           content:
             application/json:
@@ -295,6 +297,7 @@ paths:
         '401':
           description: |-
             Unauthorized
+
             허가되지 않은 사용자의 접근
         '409':
           description: |-
@@ -327,6 +330,7 @@ paths:
         '500':
           description: |-
             Internal Server Error
+            
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 표를 인식 후 텍스트 검출하여 돌려줍니다.
       parameters: []
