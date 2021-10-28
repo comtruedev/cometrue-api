@@ -196,12 +196,9 @@ paths:
               required:
                 - image
             examples:
-              Create User Bob Fellow:
+              Base64 Example:
                 value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
       description: 사진의 텍스트를 검출하여 돌려줍니다.
     parameters: []
