@@ -392,7 +392,7 @@ paths:
     parameters: []
   /id-ocr-driver:
     post:
-      summary: Identification Card OCR
+      summary: Driver License Card OCR
       operationId: post-idocrdriver
       responses:
         '200':
@@ -577,7 +577,7 @@ paths:
     parameters: []
   /id-ocr-alien:
     post:
-      summary: Identification Card OCR
+      summary: Alien Registration Card OCR
       operationId: post-idocralien
       responses:
         '200':
