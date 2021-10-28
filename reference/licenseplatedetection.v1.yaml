@@ -41,30 +41,40 @@ paths:
                 properties:
                   Template:
                     type: string
+                    description: ' '
                   ROI:
                     type: array
                     uniqueItems: true
                     minItems: 1
+                    description: ' '
                     items:
                       type: object
                       properties:
                         index:
                           type: number
+                          description: ' '
                         x:
                           type: number
+                          description: x좌표
                         'y':
                           type: number
+                          description: y좌표
                         width:
                           type: number
+                          description: ' '
                         height:
                           type: number
+                          description: ' '
                         text:
                           type: string
+                          description: ' '
                         tag:
                           type: string
                           minLength: 1
+                          description: ' '
                         language:
                           type: string
+                          description: ' '
                       required:
                         - index
                         - x

@@ -29,6 +29,7 @@ paths:
                 properties:
                   result:
                     type: integer
+                    description: 유사도
               examples:
                 유사도 결과:
                   value:

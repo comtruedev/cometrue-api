@@ -26,26 +26,30 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  result:
-                    type: number
-                  fakeScore:
-                    type: number
-                  realScore:
-                    type: number
-                  detectSquareErr:
-                    type: number
-                required:
-                  - result
-                  - fakeScore
-                  - realScore
-                  - detectSquareErr
                 x-examples:
                   example-1:
                     result: 1
                     fakeScore: 0.476456
                     realScore: 0.527431
                     detectSquareErr: 0
+                properties:
+                  result:
+                    type: number
+                    description: ' '
+                  fakeScore:
+                    type: number
+                    description: ' '
+                  realScore:
+                    type: number
+                    description: ' '
+                  detectSquareErr:
+                    type: number
+                    description: ' '
+                required:
+                  - result
+                  - fakeScore
+                  - realScore
+                  - detectSquareErr
               examples:
                 결과:
                   value:

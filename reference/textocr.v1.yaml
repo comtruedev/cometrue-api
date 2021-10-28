@@ -135,36 +135,48 @@ paths:
                 properties:
                   Template:
                     type: string
+                    description: ' '
                   ROI:
                     type: array
                     uniqueItems: true
                     minItems: 1
+                    description: ' '
                     items:
                       type: object
                       properties:
                         index:
                           type: number
+                          description: ' '
                         x:
                           type: number
+                          description: ' '
                         'y':
                           type: number
+                          description: ' '
                         width:
                           type: number
+                          description: ' '
                         height:
                           type: number
+                          description: ' '
                         text:
                           type: string
                           minLength: 1
+                          description: ' '
                         tag:
                           type: string
+                          description: ' '
                         language:
                           type: string
+                          description: ' '
                         xPoints:
                           type: array
+                          description: ' '
                           items:
                             type: object
                         yPoints:
                           type: array
+                          description: ' '
                           items:
                             type: object
               examples:
