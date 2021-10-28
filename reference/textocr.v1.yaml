@@ -20,54 +20,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  Template:
-                    type: string
-                  ROI:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                        - index
-                        - x
-                        - 'y'
-                        - width
-                        - height
-                        - text
-                        - tag
-                        - language
-                      properties:
-                        index:
-                          type: number
-                        x:
-                          type: number
-                        'y':
-                          type: number
-                        width:
-                          type: number
-                        height:
-                          type: number
-                        text:
-                          type: string
-                          minLength: 1
-                        tag:
-                          type: string
-                        language:
-                          type: string
-                        xPoints:
-                          type: array
-                          items:
-                            required: []
-                            properties: {}
-                        yPoints:
-                          type: array
-                          items:
-                            required: []
-                            properties: {}
-                required:
-                  - Template
-                  - ROI
                 x-examples:
                   example-1:
                     Template: ''
@@ -180,6 +132,41 @@ paths:
                           - 240
                           - 263
                           - 263
+                properties:
+                  Template:
+                    type: string
+                  ROI:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: number
+                        x:
+                          type: number
+                        'y':
+                          type: number
+                        width:
+                          type: number
+                        height:
+                          type: number
+                        text:
+                          type: string
+                          minLength: 1
+                        tag:
+                          type: string
+                        language:
+                          type: string
+                        xPoints:
+                          type: array
+                          items:
+                            type: object
+                        yPoints:
+                          type: array
+                          items:
+                            type: object
               examples:
                 New User Bob Fellow:
                   value:
