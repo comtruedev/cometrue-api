@@ -12,7 +12,7 @@ servers:
   - url: 'https://api.cometrue.ai/v1/identifcation'
     description: Cometrue
 paths:
-  /idocr:
+  /id-ocr:
     post:
       summary: Identification Card OCR
       operationId: post-idocr
@@ -194,6 +194,931 @@ paths:
               Base64 Example:
                 value:
                   id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+  /id-ocr-jumin:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idocrjumin
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  quadrilateral:
+                    type: boolean
+                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
+                  result:
+                    type: object
+                    description: ''
+                    required:
+                      - name
+                      - number
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증 발급일자
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호
+                          운전면허증 - 운전면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증 종류
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
+                required:
+                  - quadrilateral
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: 2009.8.13.
+                      name: 홍길동
+                      number: 610220-1250511
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 자동차운전면허증
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 한국인 주민등록증 인식 후 텍스트 검출하여 돌려줍니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+  /id-ocr-driver:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idocrdriver
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  quadrilateral:
+                    type: boolean
+                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
+                  result:
+                    type: object
+                    description: ''
+                    required:
+                      - name
+                      - number
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증 발급일자
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호
+                          운전면허증 - 운전면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증 종류
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
+                required:
+                  - quadrilateral
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: 2009.8.13.
+                      name: 홍길동
+                      number: 610220-1250511
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 자동차운전면허증
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 한국인 운전면허증 인식 후 텍스트 검출하여 돌려줍니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+  /id-ocr-alien:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idocralien
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  quadrilateral:
+                    type: boolean
+                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
+                  result:
+                    type: object
+                    description: ''
+                    required:
+                      - name
+                      - number
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증 발급일자
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호
+                          운전면허증 - 운전면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증 종류
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
+                required:
+                  - quadrilateral
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: 2009.8.13.
+                      name: 홍길동
+                      number: 610220-1250511
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 자동차운전면허증
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 외국인 등록증 인식 후 텍스트 검출하여 돌려줍니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+  /id-ocr-passport:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idocrpassport
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  quadrilateral:
+                    type: boolean
+                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
+                  result:
+                    type: object
+                    description: ''
+                    required:
+                      - name
+                      - number
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증 발급일자
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호
+                          운전면허증 - 운전면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증 종류
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
+                required:
+                  - quadrilateral
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: 2009.8.13.
+                      name: 홍길동
+                      number: 610220-1250511
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 자동차운전면허증
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 여권 인식 후 텍스트 검출하여 돌려줍니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+  /id-ocr-kpassport:
+    post:
+      summary: Identification Card OCR
+      operationId: post-idocrkpassport
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  quadrilateral:
+                    type: boolean
+                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
+                  result:
+                    type: object
+                    description: ''
+                    required:
+                      - name
+                      - number
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증 발급일자
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호
+                          운전면허증 - 운전면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증 종류
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                      mrz2:
+                        type: string
+                      birth_date:
+                        type: string
+                        description: 운전면허증 생년월일
+                      issue_date:
+                        type: string
+                      expiry_date:
+                        type: string
+                required:
+                  - quadrilateral
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      date: 2009.8.13.
+                      name: 홍길동
+                      number: 610220-1250511
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    quadrilateral: true
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 자동차운전면허증
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 한국인 여권 인식 후 텍스트 검출하여 돌려줍니다.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
               URL Example:
                 value:
