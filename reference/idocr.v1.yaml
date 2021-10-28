@@ -404,36 +404,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  quadrilateral:
-                    type: boolean
-                  result:
-                    type: object
-                    properties:
-                      birth_date:
-                        type: string
-                        minLength: 1
-                      code:
-                        type: string
-                        minLength: 1
-                      name:
-                        type: string
-                        minLength: 1
-                      number:
-                        type: string
-                        minLength: 1
-                      title:
-                        type: string
-                        minLength: 1
-                    required:
-                      - birth_date
-                      - code
-                      - name
-                      - number
-                      - title
-                required:
-                  - quadrilateral
-                  - result
                 x-examples:
                   example-1:
                     quadrilateral: true
@@ -443,6 +413,41 @@ paths:
                       name: 홍길동
                       number: 11-90-041222-33
                       title: 자동차운전면허증
+                properties:
+                  quadrilateral:
+                    type: boolean
+                  result:
+                    type: object
+                    required:
+                      - birth_date
+                      - code
+                      - name
+                      - number
+                      - title
+                    properties:
+                      birth_date:
+                        type: string
+                        minLength: 1
+                        description: 생년월일
+                      code:
+                        type: string
+                        minLength: 1
+                        description: 식별번호
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 이름
+                      number:
+                        type: string
+                        minLength: 1
+                        description: 면허번호
+                      title:
+                        type: string
+                        minLength: 1
+                        description: 신분증종류
+                required:
+                  - quadrilateral
+                  - result
               examples:
                 운전면허증:
                   value:
