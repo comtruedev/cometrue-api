@@ -26,37 +26,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  result:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      required:
-                        - table_index
-                      properties:
-                        table_index:
-                          type: number
-                        cells:
-                          type: array
-                          uniqueItems: true
-                          minItems: 1
-                          items:
-                            required:
-                              - x
-                              - 'y'
-                            properties:
-                              x:
-                                type: number
-                              'y':
-                                type: number
-                              str:
-                                type: array
-                                items:
-                                  required: []
-                                  properties: {}
-                required:
-                  - result
                 x-examples:
                   example-1:
                     result:
@@ -226,6 +195,43 @@ paths:
                               - kuueur
                               - 피
                               - tenprsay
+                properties:
+                  result:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        table_index:
+                          type: number
+                          description: 표 번호
+                        cells:
+                          type: array
+                          uniqueItems: true
+                          minItems: 1
+                          description: 셀
+                          items:
+                            type: object
+                            properties:
+                              x:
+                                type: number
+                                description: x좌표
+                              'y':
+                                type: number
+                                description: y좌표
+                              str:
+                                type: array
+                                description: 텍스트
+                                items:
+                                  type: object
+                            required:
+                              - x
+                              - 'y'
+                      required:
+                        - table_index
+                required:
+                  - result
               examples:
                 결과:
                   value:
