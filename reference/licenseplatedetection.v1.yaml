@@ -53,7 +53,7 @@ paths:
                       properties:
                         index:
                           type: number
-                          description: ' '
+                          description: 리스트 인덱스
                         x:
                           type: number
                           description: x좌표
@@ -72,7 +72,7 @@ paths:
                         tag:
                           type: string
                           minLength: 1
-                          description: 번호판
+                          description: license_plate
                         language:
                           type: string
                           description: ' '
@@ -180,7 +180,7 @@ paths:
         '500':
           description: |-
             Internal Server Error
-            
+
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 이미지에서 자동차 번호판을 인식하여 돌려줍니다.
       parameters: []
