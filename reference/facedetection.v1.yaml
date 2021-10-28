@@ -54,23 +54,23 @@ paths:
                           description: '리스트 인덱스 '
                         x:
                           type: number
-                          description: 텍스트 영역의 왼쪽 상단 x 좌표
+                          description: 얼굴 영역의 왼쪽 상단 x 좌표
                         'y':
                           type: number
-                          description: 텍스트 영역의 왼쪽 상단 y 좌표
+                          description: 얼굴 영역의 왼쪽 상단 y 좌표
                         width:
                           type: number
-                          description: 텍스트 영역 너비
+                          description: 얼굴 영역 너비
                         height:
                           type: number
-                          description: 텍스트 영역 높이
+                          description: 얼굴 영역 높이
                         text:
                           type: string
-                          description: 검출된 텍스트
+                          description: ''
                         tag:
                           type: string
                           minLength: 1
-                          description: ' '
+                          description: 'face '
                         language:
                           type: string
                           description: ' '
