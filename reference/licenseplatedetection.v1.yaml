@@ -159,6 +159,9 @@ paths:
                 Matching error:
                   value:
                     message: matching error
+                object detection error:
+                  value:
+                    message: 'object detection error: 209'
           headers: {}
         '500':
           description: |-
