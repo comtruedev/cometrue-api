@@ -1,0 +1,393 @@
+openapi: 3.0.0
+info:
+  title: Licenseplatedetection
+  version: '1.0'
+  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  contact:
+    email: info@cometrue.ai
+    url: 'https://cometrue.ai'
+    name: 인공지능사업부
+  termsOfService: 서비스약관
+servers:
+  - url: 'https://api.cometrue.ai/v1/identifcation'
+    description: Cometrue
+paths:
+  /license-plate-detection:
+    post:
+      summary: Identification Card OCR
+      operationId: post-licenseplatedetection
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  Template:
+                    type: string
+                  ROI:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - index
+                        - x
+                        - 'y'
+                        - width
+                        - height
+                        - text
+                        - tag
+                        - language
+                      properties:
+                        index:
+                          type: number
+                        x:
+                          type: number
+                        'y':
+                          type: number
+                        width:
+                          type: number
+                        height:
+                          type: number
+                        text:
+                          type: string
+                          minLength: 1
+                        tag:
+                          type: string
+                        language:
+                          type: string
+                        xPoints:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                        yPoints:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                required:
+                  - Template
+                  - ROI
+                x-examples:
+                  example-1:
+                    Template: ''
+                    ROI:
+                      - index: 0
+                        x: 88
+                        'y': 33
+                        width: 289
+                        height: 65
+                        text: 주민등록종
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 88
+                          - 376
+                          - 377
+                          - 89
+                        yPoints:
+                          - 33
+                          - 30
+                          - 98
+                          - 102
+                      - index: 1
+                        x: 93
+                        'y': 128
+                        width: 257
+                        height: 38
+                        text: 박문수(사처)
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 93
+                          - 349
+                          - 350
+                          - 93
+                        yPoints:
+                          - 128
+                          - 124
+                          - 166
+                          - 170
+                      - index: 2
+                        x: 81
+                        'y': 189
+                        width: 290
+                        height: 27
+                        text: 111111-2111111
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 81
+                          - 371
+                          - 371
+                          - 81
+                        yPoints:
+                          - 189
+                          - 189
+                          - 216
+                          - 216
+                      - index: 3
+                        x: 64
+                        'y': 247
+                        width: 352
+                        height: 29
+                        text: 경기도포천시신북면중앙로
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 64
+                          - 416
+                          - 416
+                          - 65
+                        yPoints:
+                          - 247
+                          - 243
+                          - 276
+                          - 279
+                      - index: 4
+                        x: 60
+                        'y': 276
+                        width: 380
+                        height: 29
+                        text: 207번길54.204호(예원빌라)
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 60
+                          - 439
+                          - 440
+                          - 61
+                        yPoints:
+                          - 276
+                          - 273
+                          - 305
+                          - 308
+                      - index: 5
+                        x: 323
+                        'y': 357
+                        width: 168
+                        height: 29
+                        text: '-2012.5.17'
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 323
+                          - 491
+                          - 491
+                          - 324
+                        yPoints:
+                          - 357
+                          - 355
+                          - 386
+                          - 388
+                      - index: 6
+                        x: 518
+                        'y': 375
+                        width: 112
+                        height: 71
+                        text: bos
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 518
+                          - 630
+                          - 630
+                          - 518
+                        yPoints:
+                          - 375
+                          - 375
+                          - 446
+                          - 446
+                      - index: 7
+                        x: 271
+                        'y': 392
+                        width: 237
+                        height: 38
+                        text: 경기도포천시장
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 271
+                          - 508
+                          - 508
+                          - 271
+                        yPoints:
+                          - 392
+                          - 392
+                          - 430
+                          - 430
+              examples:
+                결과:
+                  value:
+                    Template: ''
+                    ROI:
+                      - index: 2
+                        x: 81
+                        'y': 189
+                        width: 290
+                        height: 27
+                        text: 111111-2111111
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 81
+                          - 371
+                          - 371
+                          - 81
+                        yPoints:
+                          - 189
+                          - 189
+                          - 216
+                          - 216
+                      - index: 3
+                        x: 64
+                        'y': 247
+                        width: 352
+                        height: 29
+                        text: 경기도포천시신북면중앙로
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 64
+                          - 416
+                          - 416
+                          - 65
+                        yPoints:
+                          - 247
+                          - 243
+                          - 276
+                          - 279
+        '400':
+          description: |-
+            Bad Request
+            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                id_type not given:
+                  value:
+                    message: id_type not provided
+                image not given:
+                  value:
+                    message: image not provided
+                base64 decoding of the image failed:
+                  value:
+                    message: image base64 decode error
+                Non-acceptable ID:
+                  value:
+                    message: Unsupported ID type
+                Image not readable:
+                  value:
+                    message: Image cannot be read
+                Query image is too small to process:
+                  value:
+                    message: Image is too small to process
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: |-
+            Unauthorized
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+            서버에서의 처리 중 에러
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - message
+              examples:
+                Vertex detection error:
+                  value:
+                    message: vertex detection error
+                Text detection error:
+                  value:
+                    message: text detection error
+                OCR error:
+                  value:
+                    message: text recognition error
+                Matching error:
+                  value:
+                    message: matching error
+          headers: {}
+        '500':
+          description: |-
+            Internal Server Error
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: 자격증 ~~~~
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: base64로 인코딩 한 스트링 or http URL
+                is_url:
+                  type: boolean
+                  description: image속성이 url일때 true
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: ''
+      security:
+        - api_key: []
+      x-internal: false
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes:
+    api_key:
+      name: api_key
+      type: apiKey
+      in: query
+      description: api.cometrue.ai에서 발급받은 API key
+  responses:
+    ErrorResponse:
+      description: 신분증 인식 및 OCR에 대한 Error Message
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
