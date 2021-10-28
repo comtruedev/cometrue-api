@@ -61,17 +61,17 @@ paths:
                           description: y좌표
                         width:
                           type: number
-                          description: '번호판 너비 '
+                          description: 번호판 가로길이
                         height:
                           type: number
-                          description: '번호판 높이 '
+                          description: 번호판 세로길이
                         text:
                           type: string
                           description: ' '
                         tag:
                           type: string
                           minLength: 1
-                          description: ' '
+                          description: 번호판
                         language:
                           type: string
                           description: ' '
