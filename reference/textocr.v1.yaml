@@ -168,15 +168,82 @@ paths:
                           items:
                             type: object
               examples:
-                New User Bob Fellow:
+                추출결과:
                   value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
+                    Template: ''
+                    ROI:
+                      - index: 0
+                        x: 414
+                        'y': 302
+                        width: 1230
+                        height: 192
+                        text: 대한민국
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 414
+                          - 1642
+                          - 1644
+                          - 417
+                        yPoints:
+                          - 302
+                          - 291
+                          - 494
+                          - 505
+                      - index: 1
+                        x: 412
+                        'y': 521
+                        width: 1241
+                        height: 134
+                        text: republicofkorea
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 412
+                          - 1651
+                          - 1653
+                          - 414
+                        yPoints:
+                          - 521
+                          - 505
+                          - 655
+                          - 671
+                      - index: 2
+                        x: 792
+                        'y': 2140
+                        width: 547
+                        height: 155
+                        text: 여권
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 792
+                          - 1335
+                          - 1339
+                          - 797
+                        yPoints:
+                          - 2140
+                          - 2129
+                          - 2295
+                          - 2306
+                      - index: 3
+                        x: 730
+                        'y': 2354
+                        width: 657
+                        height: 113
+                        text: passport
+                        tag: ''
+                        language: ''
+                        xPoints:
+                          - 730
+                          - 1378
+                          - 1387
+                          - 739
+                        yPoints:
+                          - 2354
+                          - 2321
+                          - 2467
+                          - 2500
             application/xml:
               schema:
                 type: object
