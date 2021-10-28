@@ -750,6 +750,8 @@ paths:
                       - name
                       - number
                       - title
+                      - mrz1
+                      - mrz2
                     properties:
                       name:
                         type: string
@@ -769,15 +771,6 @@ paths:
                       mrz2:
                         type: string
                         description: 기계판독영역
-                      birth_date:
-                        type: string
-                        description: 생년월일
-                      issue_date:
-                        type: string
-                        description: 발급일
-                      expiry_date:
-                        type: string
-                        description: 기간 만료일
                 required:
                   - quadrilateral
                   - result
@@ -926,10 +919,6 @@ paths:
                       - number
                       - title
                     properties:
-                      date:
-                        type: string
-                        minLength: 1
-                        description: 주민등록증 발급일자
                       name:
                         type: string
                         minLength: 1
@@ -937,27 +926,26 @@ paths:
                       number:
                         type: string
                         minLength: 1
-                        description: |-
-                          주민등록증 - 주민등록번호
-                          운전면허증 - 운전면허번호
+                        description: 주민등록번호 뒷자리
                       title:
                         type: string
                         minLength: 1
                         description: 신분증 종류
-                      code:
-                        type: string
-                        description: 운전면허증 식별코드
                       mrz1:
                         type: string
+                        description: 기계판독영역
                       mrz2:
                         type: string
+                        description: 기계판독영역
                       birth_date:
                         type: string
-                        description: 운전면허증 생년월일
+                        description: 생년월일
                       issue_date:
                         type: string
+                        description: 발급일
                       expiry_date:
                         type: string
+                        description: 기간 만료일
                 required:
                   - quadrilateral
                   - result
