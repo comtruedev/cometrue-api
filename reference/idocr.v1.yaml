@@ -762,7 +762,7 @@ paths:
     parameters: []
   /id-ocr-passport:
     post:
-      summary: Identification Card OCR
+      summary: Passport OCR
       operationId: post-idocrpassport
       responses:
         '200':
@@ -947,7 +947,7 @@ paths:
     parameters: []
   /id-ocr-kpassport:
     post:
-      summary: Identification Card OCR
+      summary: Korea Passport OCR
       operationId: post-idocrkpassport
       responses:
         '200':
