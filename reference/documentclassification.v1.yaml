@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Document Classification
   version: '1.0'
-  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  description: 이미지의 문서종류를 판단하는 API입니다.
   contact:
     email: info@cometrue.ai
     url: 'https://cometrue.ai'
@@ -72,7 +72,7 @@ paths:
               examples:
                 결과:
                   value:
-                    id: '8'
+                    id: '26'
         '400':
           description: |-
             Bad Request
@@ -147,7 +147,46 @@ paths:
           description: |-
             Internal Server Error
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 문서를 분류해서 돌려줍니다.
+      description: |-
+        문서를 분류해서 돌려줍니다.
+        지원하는 문서는 다음과 같습니다.
+
+        주민등록증
+        건강보험증
+        근로소득원천징수영수증
+        주민등록표초본
+        거주자증명서
+        출입국에 관한 사실증명서
+        후견등기사항증명서
+        소득확인증명서(개인종합자산관리계좌가입용)
+        여권
+        은행통장사본
+        법인인감증명서
+        법인등기부등본
+        외국인등록증
+        운전면허증
+        분류 이외의 문서
+
+        개인인감증명서&본인서명확인서
+        관계증명서(후견가족기본혼인입양친양자)
+        사업자등록증&고유번호증
+        사업자등록증명&폐업사실증명&소득금액증명
+
+        개인인감증명서
+        본인서명확인서
+
+        기본증명서
+        관계증명서-가족관계증명서
+        관계증명서-혼인관계증명서
+        관계증명서-친양자입양관계증명서
+        관계증명서-입양관계증명서
+
+        사업자등록증
+        고유번호증
+
+        사업자등록증명
+        폐업사실증명
+        소득금액증명
       parameters: []
       requestBody:
         content:
