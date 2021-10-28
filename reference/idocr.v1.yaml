@@ -247,7 +247,7 @@ paths:
     parameters: []
   /id-ocr-jumin:
     post:
-      summary: Identification Card OCR
+      summary: Identification Card(jumin) OCR
       operationId: post-idocrjumin
       responses:
         '200':
