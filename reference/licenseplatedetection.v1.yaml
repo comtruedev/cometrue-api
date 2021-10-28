@@ -14,7 +14,7 @@ servers:
 paths:
   /license-plate-detection:
     post:
-      summary: Identification Card OCR
+      summary: License Plate Detection OCR
       operationId: post-licenseplatedetection
       responses:
         '200':
