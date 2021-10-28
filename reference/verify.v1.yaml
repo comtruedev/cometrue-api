@@ -548,16 +548,16 @@ paths:
                     PFX: ''
                     Password: ''
                   idcard:
-                    name: 박노현
+                    name: 홍길동
                     birthday:
-                      - '1966'
-                      - '07'
+                      - '1990'
+                      - '02'
                       - '16'
                     number:
-                      - '11'
-                      - '90'
-                      - '041573'
-                      - '11'
+                      - '12'
+                      - '34'
+                      - '567890'
+                      - '12'
                     code: 7w6gen
               URL Example:
                 value:
