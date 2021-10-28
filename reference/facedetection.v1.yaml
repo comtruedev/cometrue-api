@@ -15,7 +15,7 @@ paths:
   /face-detection:
     post:
       summary: FaceDetection OCR
-      operationId: post-idocr
+      operationId: post-facedetection
       responses:
         '200':
           description: |-
@@ -26,53 +26,45 @@ paths:
               schema:
                 description: ''
                 type: object
+                x-examples:
+                  example-1:
+                    Template: ''
+                    ROI:
+                      - index: 0
+                        x: 530
+                        'y': 87
+                        width: 119
+                        height: 152
+                        text: ''
+                        tag: face
+                        language: ''
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형이 검출되었는지 확인
-                  result:
-                    type: object
-                    description: ''
-                    required:
-                      - name
-                      - number
-                      - title
-                    properties:
-                      date:
-                        type: string
-                        minLength: 1
-                        description: 주민등록증 발급일자
-                      name:
-                        type: string
-                        minLength: 1
-                        description: 성명
-                      number:
-                        type: string
-                        minLength: 1
-                        description: |-
-                          주민등록증 - 주민등록번호
-                          운전면허증 - 운전면허번호
-                      title:
-                        type: string
-                        minLength: 1
-                        description: 신분증 종류
-                      code:
-                        type: string
-                        description: 운전면허증 식별코드
-                      mrz1:
-                        type: string
-                      mrz2:
-                        type: string
-                      birth_date:
-                        type: string
-                        description: 운전면허증 생년월일
-                      issue_date:
-                        type: string
-                      expiry_date:
-                        type: string
-                required:
-                  - quadrilateral
-                  - result
+                  Template:
+                    type: string
+                  ROI:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: number
+                        x:
+                          type: number
+                        'y':
+                          type: number
+                        width:
+                          type: number
+                        height:
+                          type: number
+                        text:
+                          type: string
+                        tag:
+                          type: string
+                          minLength: 1
+                        language:
+                          type: string
               examples:
                 주민등록증:
                   value:
@@ -183,7 +175,6 @@ paths:
             examples:
               Base64 Example:
                 value:
-                  id_type: jumin
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
               URL Example:
                 value:
