@@ -154,7 +154,7 @@ paths:
                     message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
@@ -167,6 +167,15 @@ paths:
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                id_type not correct:
+                  value:
+                    message: 'id_type: is not correct.'
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -194,7 +203,7 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
