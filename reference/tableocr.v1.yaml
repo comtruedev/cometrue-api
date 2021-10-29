@@ -14,7 +14,7 @@ servers:
 paths:
   /table-ocr:
     post:
-      summary: Table OCR
+      summary: 표 OCR
       operationId: post-tableocr
       responses:
         '200':
