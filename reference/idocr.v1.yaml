@@ -3,16 +3,18 @@ info:
   title: 신분증 OCR
   version: '1.0'
   description: |-
+    서비스 소개
+
     컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 OCR 서비스 입니다.
     국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행합니다. 
-  contact:
-    email: ask@cometrue.ai
-    url: 'https://cometrue.ai'
-    name: cometrue.ai AI API
-  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+
+    서비스 특징
+
+    자체개발 OCR 신경망을 적용하여 OCR이 필요한 영역에 대해 정확한 인식을 수행합니다.
+    신분증 진위확인 서비스와 연계하여 사용할 수 있습니다.
+  contact: {}
 servers:
   - description: ''
-    url: 'https://api.cometrue.ai/v1/identifcation'
 paths:
   /id-ocr:
     post:
@@ -86,7 +88,6 @@ paths:
 
                           ex) 01JAN1970
                         example: '20211029'
-                        format: date
                       issue_date:
                         type: string
                         description: |-
@@ -319,8 +320,7 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
   /id-ocr-jumin:
@@ -358,7 +358,6 @@ paths:
                           주민등록증 발급일자
 
                           ex) 19700101
-                        format: date
                       name:
                         type: string
                         minLength: 1
@@ -525,8 +524,7 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
   /id-ocr-driver:
@@ -737,8 +735,7 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
   /id-ocr-alien:
@@ -776,7 +773,6 @@ paths:
                           외국인등록증 발급일자
 
                           ex) 19700101
-                        format: date
                       name:
                         type: string
                         minLength: 1
@@ -937,8 +933,7 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
   /id-ocr-passport:
@@ -1143,8 +1138,7 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
   /id-ocr-kpassport:
@@ -1368,18 +1362,12 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
+      security: []
       x-internal: false
     parameters: []
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      name: api_key
-      type: apiKey
-      in: query
-      description: api.cometrue.ai에서 발급받은 API key
+  securitySchemes: {}
   responses:
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
