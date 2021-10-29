@@ -11,7 +11,7 @@ paths:
   /token:
     post:
       operationId: createToken
-      summary: API Token 발급
+      summary: API Access Token 발급
       requestBody:
         content:
           application/json:
