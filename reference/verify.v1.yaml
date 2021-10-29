@@ -44,6 +44,8 @@ paths:
                     description: 주민등록번호
                     items:
                       type: string
+                      minLength: 2
+                      maxLength: 2
                   issue_date:
                     type: string
                     minLength: 1
@@ -203,7 +205,7 @@ paths:
                   birthday:
                     type: array
                     minItems: 3
-                    description: 생년월일
+                    description: '[년, 월, 일]'
                     maxItems: 3
                     items:
                       type: string
