@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Licenseplatedetection
+  title: 차량번호판인식
   version: '1.0'
   description: 자동차 번호판을 인식하여 돌려주는 API입니다.
   contact:
@@ -182,7 +182,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 이미지에서 자동차 번호판을 인식하여 돌려줍니다.
+      description: 자동차 번호판을 인식하여 번호판의 사각형영역의 리스트를 제공합니다.
       parameters: []
       requestBody:
         content:

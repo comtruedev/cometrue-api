@@ -278,7 +278,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 얼굴을 검출하여 돌려줍니다.
+      description: 얼굴을 인식하여 얼굴의 사각형영역의 리스트를 제공합니다.
       parameters: []
       requestBody:
         content:
