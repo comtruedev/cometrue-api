@@ -18,12 +18,11 @@ info:
     name: 인공지능사업부
   termsOfService: 서비스약관
 servers:
-  - url: 'https://api.cometrue.ai/v1'
-    description: Cometrue
+  - description: Cometrue
 paths:
   /jumin/ocr:
     post:
-      summary: Jumin OCR
+      summary: 주민등록증 OCR
       operationId: post-juminocr
       responses:
         '200':
@@ -181,11 +180,11 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: false
+      x-internal: true
     parameters: []
   /driver/ocr:
     post:
-      summary: Driver OCR
+      summary: 운전면허증 OCR
       operationId: post-driverocr
       responses:
         '200':
@@ -359,11 +358,11 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: false
+      x-internal: true
     parameters: []
   /driver/verify:
     post:
-      summary: Driver Verify
+      summary: 운전면허증 진위확인
       operationId: post-driververify
       responses:
         '200':
@@ -588,7 +587,7 @@ paths:
     parameters: []
   /jumin/verify:
     post:
-      summary: Jumin Verify
+      summary: 주민등록증 진위확인
       operationId: post-driververify
       responses:
         '200':
@@ -795,7 +794,7 @@ paths:
     parameters: []
   /alien/verify:
     post:
-      summary: Alien Verify
+      summary: 외국인등록증 진위확인
       operationId: post-alienverify
       responses:
         '200':
@@ -1002,7 +1001,7 @@ paths:
     parameters: []
   /alien/ocr:
     post:
-      summary: Alien OCR
+      summary: 외국인등록증 OCR
       operationId: post-alienocr
       responses:
         '200':
@@ -1156,7 +1155,7 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: false
+      x-internal: true
     parameters: []
 components:
   schemas: {}
