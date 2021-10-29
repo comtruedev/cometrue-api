@@ -70,8 +70,8 @@ paths:
                           description: ''
                         tag:
                           type: string
-                          minLength: 1
-                          description: 'face '
+                          description: ''
+                          pattern: face
                         language:
                           type: string
                           description: ' '
