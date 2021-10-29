@@ -138,7 +138,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 텍스트 검출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
       parameters: []
       requestBody:
         content:
@@ -316,7 +316,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 텍스트 검출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
       parameters: []
       requestBody:
         content:
@@ -749,7 +749,10 @@ paths:
                         type: string
                     issue_date:
                       type: string
-                      description: 발급일자
+                      description: |-
+                        발급일자
+
+                        yyyymmdd
               required:
                 - certs
                 - idcard
@@ -769,11 +772,6 @@ paths:
                       - '660102'
                       - '1235121'
                     issue_date: '20100101'
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: ''
       security:
         - api_key: []
@@ -954,7 +952,10 @@ paths:
                         type: string
                     issue_date:
                       type: string
-                      description: 발급일자
+                      description: |-
+                        발급일자
+
+                        yyyymmdd
               required:
                 - certs
                 - idcard
@@ -1015,10 +1016,15 @@ paths:
                     description: 외국인 등록번호
                     items:
                       type: string
+                      minLength: 2
+                      maxLength: 2
                   issue_date:
                     type: string
                     minLength: 1
-                    description: 발급일자
+                    description: |-
+                      발급일자
+
+                      yyyymmdd
                 required:
                   - number
                   - issue_date
@@ -1107,7 +1113,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 텍스트 검출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
       parameters: []
       requestBody:
         content:
