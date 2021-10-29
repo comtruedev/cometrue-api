@@ -46,7 +46,7 @@ paths:
                     type: array
                     uniqueItems: true
                     minItems: 1
-                    description: '얼굴 영역 리스트 '
+                    description: 얼굴 영역 리스트
                     items:
                       type: object
                       properties:
