@@ -325,7 +325,7 @@ paths:
     parameters: []
   /id-ocr-jumin:
     post:
-      summary: Identification Card(jumin) OCR
+      summary: 주민등록증 OCR
       operationId: post-idocrjumin
       responses:
         '200':
@@ -497,7 +497,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 한국인 주민등록증 인식 후 정보를 추출하여 제공합니다.
+      description: '주민등록증을 인식하여 이름, 주민등록번호, 발급일자를 제공합니다.'
       parameters: []
       requestBody:
         content:
@@ -531,7 +531,7 @@ paths:
     parameters: []
   /id-ocr-driver:
     post:
-      summary: Driver License Card OCR
+      summary: 운전면허증 OCR
       operationId: post-idocrdriver
       responses:
         '200':
@@ -709,7 +709,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 한국인 운전면허증 인식 후 정보를 추출하여 제공합니다.
+      description: '한국인 운전면허증을 인식하여 운전면허번호, 이름, 생년월일, 암호일련번호를 제공합니다.'
       parameters: []
       requestBody:
         content:
@@ -743,7 +743,7 @@ paths:
     parameters: []
   /id-ocr-alien:
     post:
-      summary: Alien Registration Card OCR
+      summary: 외국인등록증 OCR
       operationId: post-idocralien
       responses:
         '200':
@@ -909,7 +909,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 외국인 등록증 인식 후 정보를 추출하여 제공합니다.
+      description: '외국인등록증을 인식하여 이름, 외국인등록번호, 발급일자를 추출하여 제공합니다.'
       parameters: []
       requestBody:
         content:
@@ -943,7 +943,7 @@ paths:
     parameters: []
   /id-ocr-passport:
     post:
-      summary: Passport OCR
+      summary: 여권 OCR
       operationId: post-idocrpassport
       responses:
         '200':
@@ -1115,7 +1115,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 여권 인식 후 정보를 추출하여 제공합니다.
+      description: '여권을 인식 하여 한글 이름, 주민등록번호, 여권번호, 발급일자, 기간만료일을 제공합니다.'
       parameters: []
       requestBody:
         content:
@@ -1149,7 +1149,7 @@ paths:
     parameters: []
   /id-ocr-kpassport:
     post:
-      summary: Korea Passport OCR
+      summary: 한국여권 OCR
       operationId: post-idocrkpassport
       responses:
         '200':
