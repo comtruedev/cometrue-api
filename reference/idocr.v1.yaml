@@ -2,12 +2,14 @@ openapi: 3.0.0
 info:
   title: 신분증 OCR
   version: '1.0'
-  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  description: |-
+    컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 OCR 서비스 입니다.
+    국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행합니다. 
   contact:
-    email: info@cometrue.ai
+    email: ask@cometrue.ai
     url: 'https://cometrue.ai'
-    name: 인공지능사업부
-  termsOfService: 서비스약관
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: ''
     url: 'https://api.cometrue.ai/v1/identifcation'
