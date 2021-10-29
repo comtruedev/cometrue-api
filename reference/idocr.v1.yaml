@@ -9,7 +9,6 @@ info:
     name: 인공지능사업부
   termsOfService: 서비스약관
 servers:
-  - description: ''
     url: 'https://api.cometrue.ai/v1/identifcation'
 paths:
   /id-ocr:
