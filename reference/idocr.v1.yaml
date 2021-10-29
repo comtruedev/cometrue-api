@@ -543,7 +543,10 @@ paths:
                       birth_date:
                         type: string
                         minLength: 1
-                        description: 생년월일
+                        description: |-
+                          생년월일
+
+                          ex) 19700101
                       code:
                         type: string
                         minLength: 1
@@ -558,8 +561,8 @@ paths:
                         description: 면허번호
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
+                        pattern: 자동차운전면허증
                 required:
                   - quadrilateral
                   - result
