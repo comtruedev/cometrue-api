@@ -227,9 +227,6 @@ paths:
                 cvexception:
                   value:
                     message: 'OpenCV error: 100'
-                example-1:
-                  value:
-                    message: string
                 cannot find text:
                   value:
                     message: 'text detection error: 201'
