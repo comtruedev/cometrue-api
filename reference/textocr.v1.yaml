@@ -3,6 +3,11 @@ info:
   title: ExtractText
   version: '1.0'
   description: 사진에서 텍스트를 추출해 주는 API입니다
+  contact:
+    email: ask@cometrue.ai
+    url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - url: 'https://api.cometrue.ai/v1/identifcation'
 paths:
