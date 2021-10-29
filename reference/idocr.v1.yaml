@@ -747,7 +747,7 @@ paths:
                         description: |-
                           외국인등록증 발급일자
 
-                          yyyymmdd
+                          ex) 19700101
                         format: date
                       name:
                         type: string
