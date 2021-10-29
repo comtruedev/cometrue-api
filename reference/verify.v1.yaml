@@ -744,9 +744,9 @@ paths:
                       description: 성명
                     number:
                       type: array
-                      minItems: 5
-                      maxItems: 5
+                      maxItems: 2
                       description: 주민등록번호
+                      minItems: 2
                       items:
                         type: string
                     issue_date:
