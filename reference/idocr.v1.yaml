@@ -1166,15 +1166,24 @@ paths:
                         description: 기계판독영역
                       birth_date:
                         type: string
-                        description: 생년월일
+                        description: |-
+                          생년월일
+
+                          ex) 01JAN1970
                         example: 01JAN1970
                       issue_date:
                         type: string
-                        description: 발급일
+                        description: |-
+                          발급일
+
+                          ex) 01JAN1970
                         example: 01JAN1970
                       expiry_date:
                         type: string
-                        description: 기간 만료일
+                        description: |-
+                          기간 만료일
+
+                          ex) 01JAN1970
                         example: 01JAN1970
                 required:
                   - quadrilateral
