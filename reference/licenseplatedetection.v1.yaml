@@ -4,17 +4,17 @@ info:
   version: '1.0'
   description: 자동차 번호판을 인식하여 돌려주는 API입니다.
   contact:
-    email: info@cometrue.ai
+    email: ask@cometrue.ai
     url: 'https://cometrue.ai'
-    name: 인공지능사업부
-  termsOfService: 서비스약관
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - url: 'https://api.cometrue.ai/v1/identifcation'
     description: Cometrue
 paths:
   /license-plate-detection:
     post:
-      summary: License Plate Detection OCR
+      summary: 차량번호판인식
       operationId: post-licenseplatedetection
       responses:
         '200':
