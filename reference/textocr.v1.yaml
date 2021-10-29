@@ -360,7 +360,7 @@ paths:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
-      description: 문자 영역을 자동으로 검출하여 해당 영역의 리스트를 제공합니다.
+      description: 문자 영역을 자동으로 검출하여 해당 영역의 정보를 리스트로 제공합니다.
     parameters: []
 components:
   schemas: {}
