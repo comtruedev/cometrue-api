@@ -10,7 +10,7 @@ Cometrue.ai의 신분증 검출, 진위여부 API는 여러가지 정보를 리�
 
 
 # API Reference
-## idocr
+## 신분증 OCR
 **Method**
 
 POST
