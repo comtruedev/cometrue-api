@@ -356,6 +356,7 @@ paths:
         '400':
           description: |-
             Bad Request
+
             사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
           content:
             application/json:
@@ -369,16 +370,13 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
+                Unsupported ID:
                   value:
                     message: Unsupported ID type
                 Image not readable:
@@ -387,6 +385,15 @@ paths:
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                id_type not correct:
+                  value:
+                    message: 'id_type: is not correct.'
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -414,16 +421,46 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
@@ -548,24 +585,24 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
                 Image not readable:
                   value:
                     message: Image cannot be read
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -593,16 +630,46 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
@@ -714,24 +781,24 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
                 Image not readable:
                   value:
                     message: Image cannot be read
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -759,16 +826,46 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
@@ -887,24 +984,24 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
                 Image not readable:
                   value:
                     message: Image cannot be read
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -932,16 +1029,46 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
@@ -1067,24 +1194,24 @@ paths:
                 required:
                   - message
               examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
                 image not given:
                   value:
-                    message: image not provided
+                    message: 'image: not provided'
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
                 Image not readable:
                   value:
                     message: Image cannot be read
                 Query image is too small to process:
                   value:
                     message: Image is too small to process
+                image property does not match:
+                  value:
+                    message: 'image: property in this field does not match. base64 or url.'
+                image empty:
+                  value:
+                    message: Image is empty
             application/xml:
               schema:
                 type: object
@@ -1112,16 +1239,46 @@ paths:
               examples:
                 Vertex detection error:
                   value:
-                    message: vertex detection error
+                    message: 'text detection error: 202'
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
