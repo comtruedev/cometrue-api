@@ -42,6 +42,8 @@ paths:
                   number:
                     type: array
                     description: 주민등록번호
+                    minItems: 2
+                    maxItems: 2
                     items:
                       type: string
                       minLength: 2
@@ -49,7 +51,10 @@ paths:
                   issue_date:
                     type: string
                     minLength: 1
-                    description: 발급일자
+                    description: |-
+                      발급일자
+
+                      ex) 19700101
                 required:
                   - name
                   - number
