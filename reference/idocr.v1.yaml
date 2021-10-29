@@ -332,7 +332,7 @@ paths:
                         description: |-
                           주민등록증 발급일자
 
-                          YYYYMMDD
+                          ex) 19700101
                         format: date
                       name:
                         type: string
