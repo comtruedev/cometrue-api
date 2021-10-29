@@ -94,7 +94,7 @@ paths:
                       expiry_date:
                         type: string
                         description: |-
-                          여권 기간만료일
+                          여권 기간 만료일
 
                           ex) 01JAN1970
                 required:
@@ -367,8 +367,8 @@ paths:
                         description: 주민등록번호
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
+                        pattern: 주민등록증
                 required:
                   - quadrilateral
                   - result
@@ -1200,14 +1200,14 @@ paths:
                       issue_date:
                         type: string
                         description: |-
-                          발급일
+                          여권 발급일
 
                           ex) 01JAN1970
                         example: 01JAN1970
                       expiry_date:
                         type: string
                         description: |-
-                          기간 만료일
+                          여권 기간 만료일
 
                           ex) 01JAN1970
                         example: 01JAN1970
