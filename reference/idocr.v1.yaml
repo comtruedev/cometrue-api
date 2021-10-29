@@ -744,7 +744,11 @@ paths:
                       date:
                         type: string
                         minLength: 1
-                        description: 외국인등록증 발급일자
+                        description: |-
+                          외국인등록증 발급일자
+
+                          yyyymmdd
+                        format: date
                       name:
                         type: string
                         minLength: 1
@@ -755,8 +759,8 @@ paths:
                         description: 외국인등록번호
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
+                        pattern: 외국인등록증
                 required:
                   - quadrilateral
                   - result
@@ -948,8 +952,8 @@ paths:
                         description: 주민등록번호 뒷자리
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
+                        pattern: passport
                       mrz1:
                         type: string
                         description: 기계판독영역
@@ -1152,8 +1156,8 @@ paths:
                         description: 주민등록번호 뒷자리
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
+                        pattern: 여권
                       mrz1:
                         type: string
                         description: 기계판독영역
@@ -1163,12 +1167,15 @@ paths:
                       birth_date:
                         type: string
                         description: 생년월일
+                        example: 01JAN1970
                       issue_date:
                         type: string
                         description: 발급일
+                        example: 01JAN1970
                       expiry_date:
                         type: string
                         description: 기간 만료일
+                        example: 01JAN1970
                 required:
                   - quadrilateral
                   - result
