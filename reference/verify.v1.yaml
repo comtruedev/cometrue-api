@@ -138,7 +138,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출합니다.
       parameters: []
       requestBody:
         content:
@@ -316,7 +316,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출합니다.
       parameters: []
       requestBody:
         content:
@@ -1113,7 +1113,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출하여 돌려줍니다.
+      description: 신분증 인식 후 진위 확인에 필요한 텍스트를 추출합니다.
       parameters: []
       requestBody:
         content:
