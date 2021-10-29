@@ -720,7 +720,7 @@ paths:
                     Number:
                       type: array
                       minItems: 2
-                      description: 공동인증서 주민번호
+                      description: 공동인증서 주민등록번호
                       maxItems: 2
                       items:
                         type: string
@@ -929,7 +929,7 @@ paths:
                     Number:
                       type: array
                       minItems: 2
-                      description: 공동인증서 주민번호
+                      description: 공동인증서 외국인등록번호
                       maxItems: 2
                       items:
                         type: string
