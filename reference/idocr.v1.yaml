@@ -267,7 +267,8 @@ paths:
                 id_type:
                   type: string
                   minLength: 1
-                  description: 'jumin, driver, kpassport, alien, passport 을 지원함'
+                  description: 신분증 종류
+                  pattern: jumin|driver|kpassport|alien|passport
                 image:
                   type: string
                   minLength: 1
