@@ -158,7 +158,7 @@ paths:
                 base64 decoding of the image failed:
                   value:
                     message: image base64 decode error
-                Non-acceptable ID:
+                Unsupported ID:
                   value:
                     message: Unsupported ID type
                 Image not readable:
@@ -207,12 +207,45 @@ paths:
                 Text detection error:
                   value:
                     message: text detection error
-                OCR error:
+                //OCR error:
                   value:
                     message: text recognition error
-                Matching error:
+                //Matching error:
                   value:
                     message: matching error
+                onnxexception:
+                  value:
+                    message: 'Onnx runtime error: 100'
+                stdexception:
+                  value:
+                    message: 'Std Exception: 101'
+                cvexception:
+                  value:
+                    message: 'OpenCV error: 100'
+                example-1:
+                  value:
+                    message: string
+                cannot find text:
+                  value:
+                    message: 'text detection error: 201'
+                cannot find squre:
+                  value:
+                    message: 'text detection error: 203'
+                not enough to be square:
+                  value:
+                    message: 'text detection error: 204'
+                not enough contour:
+                  value:
+                    message: 'text detection error: 207'
+                not enough group:
+                  value:
+                    message: 'text detection error: 208'
+                cannot find object:
+                  value:
+                    message: 'object detection error: 209'
+                json decode error:
+                  value:
+                    message: Json decode error
           headers: {}
         '500':
           description: |-
