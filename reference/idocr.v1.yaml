@@ -329,6 +329,7 @@ paths:
                           주민등록증 발급일자
 
                           YYYYMMDD
+                        format: date
                       name:
                         type: string
                         minLength: 1
@@ -1284,7 +1285,7 @@ paths:
                     message: Json decode error
                 cannot find mrz:
                   value:
-                    message: 'text detection error: 205'                    
+                    message: 'text detection error: 205'
           headers: {}
         '500':
           description: |-
