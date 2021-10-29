@@ -522,7 +522,7 @@ paths:
                     birthday:
                       type: array
                       minItems: 3
-                      description: 년 월 일
+                      description: '[년, 월, 일]'
                       maxItems: 3
                       items:
                         type: string
@@ -754,7 +754,7 @@ paths:
                       description: |-
                         발급일자
 
-                        yyyymmdd
+                        ex) 19700101
               required:
                 - certs
                 - idcard
@@ -957,7 +957,7 @@ paths:
                       description: |-
                         발급일자
 
-                        yyyymmdd
+                        ex) 19700101
               required:
                 - certs
                 - idcard
