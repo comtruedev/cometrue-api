@@ -225,7 +225,7 @@ paths:
                                 type: array
                                 description: 텍스트
                                 items:
-                                  type: object
+                                  type: string
                             required:
                               - x
                               - 'y'
@@ -330,7 +330,7 @@ paths:
         '500':
           description: |-
             Internal Server Error
-            
+
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 표를 인식 후 텍스트 검출하여 돌려줍니다.
       parameters: []
