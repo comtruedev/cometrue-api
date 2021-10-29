@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: 차량번호판인식
   version: '1.0'
-  description: 자동차 번호판을 인식하여 돌려주는 API입니다.
+  description: 자동차 번호판을 인식하여 번호판의 사각형영역의 리스트를 제공합니다.
   contact:
     email: ask@cometrue.ai
     url: 'https://cometrue.ai'
