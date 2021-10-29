@@ -127,7 +127,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 한 얼굴과 다른 얼굴간의 얼굴 비교를 통해 유사도 값을 제공합니다.
+      description: 얼굴인식 신경망을 이용하여 한 얼굴과 다른 얼굴간의 얼굴 비교를 통해 유사도 값을 제공합니다.
       parameters: []
       requestBody:
         content:
