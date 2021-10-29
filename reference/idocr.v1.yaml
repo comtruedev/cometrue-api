@@ -62,7 +62,6 @@ paths:
                           외국인등록증 - 외국인등록번호
                       title:
                         type: string
-                        minLength: 1
                         description: 신분증 종류
                         pattern: 주민등록증|자동차운전면허증|외국인등록증|여권|passport
                       code:
