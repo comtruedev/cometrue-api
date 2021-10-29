@@ -266,7 +266,6 @@ paths:
               properties:
                 id_type:
                   type: string
-                  minLength: 1
                   description: 신분증 종류
                   pattern: jumin|driver|kpassport|alien|passport
                 image:
