@@ -573,7 +573,7 @@ paths:
                       code:
                         type: string
                         minLength: 1
-                        description: 운전면허증 식별코드
+                        description: 암호일련번호
                       name:
                         type: string
                         minLength: 1
