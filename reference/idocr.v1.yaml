@@ -2,15 +2,20 @@ openapi: 3.0.0
 info:
   title: 신분증 OCR
   version: '1.0'
-  description: 신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.
+  description: |-
+    신분증 진위여부에 필요한 정보들을 신분증 이미지에서 검출하여 주는 API입니다.asdf
+    asdfasd
+    f
+    sadsf
+    sad
+    f
+    sadf
   contact:
     email: info@cometrue.ai
     url: 'https://cometrue.ai'
     name: 인공지능사업부
   termsOfService: 서비스약관
-servers:
-  - url: 'https://api.cometrue.ai/v1/identifcation'
-    description: Cometrue
+servers: []
 paths:
   /id-ocr:
     post:
