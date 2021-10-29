@@ -1026,7 +1026,7 @@ paths:
                     description: |-
                       발급일자
 
-                      yyyymmdd
+                      ex) 19700101
                 required:
                   - number
                   - issue_date
