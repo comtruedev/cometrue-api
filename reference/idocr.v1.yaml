@@ -75,7 +75,12 @@ paths:
                         description: 여권 - 기계판독영역
                       birth_date:
                         type: string
-                        description: 운전면허증 생년월일
+                        description: |-
+                          운전면허증 생년월일
+
+                          yyyymmdd
+                        example: '20211029'
+                        format: date
                       issue_date:
                         type: string
                         description: 여권 발급일
