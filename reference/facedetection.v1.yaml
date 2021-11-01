@@ -13,7 +13,7 @@ info:
     인식우선 모드 : 저화질의 해상도의 얼굴도 우선적으로 인식합니다.
     분석우선 모드 : 고화질의 얼굴을 인식하여 얼굴 분석 서비스를 연동하여 데이터를 추출할 수 있습니다.
   contact:
-    email: ask@cometrue.ai
+    email: ask@comtrue.com
     url: 'https://cometrue.ai'
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'

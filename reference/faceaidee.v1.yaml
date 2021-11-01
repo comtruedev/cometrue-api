@@ -2,6 +2,11 @@ openapi: 3.0.0
 info:
   title: Face AiDee API
   version: 1.0.0
+  contact:
+    name: cometrue.ai AI API
+    email: ask@comtrue.com
+    url: 'https://cometrue.ai'
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 components:
   schemas:
     CreateKey:

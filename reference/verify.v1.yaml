@@ -13,10 +13,10 @@ info:
     신분증 OCR 값을 바탕으로 진위확인 기관으로부터 받은 진위여부 (일치/불일치)를 제공합니다.
     고객확인제도 (KYC), 자금세탁방지(AML)로 활용이 가능합니다.
   contact:
-    email: info@cometrue.ai
+    email: ask@comtrue.com
     url: 'https://cometrue.ai'
-    name: 인공지능사업부
-  termsOfService: 서비스약관
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: Cometrue
 paths:

@@ -3,8 +3,10 @@ info:
   title: 인증(auth)
   version: '1.0'
   contact:
-    email: info@cometrue.ai
+    email: ask@comtrue.com
     url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - {}
 paths:

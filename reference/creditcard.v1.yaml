@@ -4,10 +4,10 @@ info:
   version: '1.0'
   description: 신용카드 이미지 텍스트 검출 API
   contact:
-    email: info@cometrue.ai
+    email: ask@comtrue.com
     url: 'https://cometrue.ai'
-    name: 인공지능사업부
-  termsOfService: 서비스약관
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - url: 'https://api.cometrue.ai/ocr/v1'
     description: Cometrue
