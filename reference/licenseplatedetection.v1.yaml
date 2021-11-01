@@ -70,8 +70,9 @@ paths:
                           description: ' '
                         tag:
                           type: string
-                          minLength: 1
-                          description: license_plate
+                          description: ''
+                          enum:
+                            - license_plate
                         language:
                           type: string
                           description: ' '
