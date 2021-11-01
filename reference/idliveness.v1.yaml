@@ -147,9 +147,10 @@ paths:
               properties:
                 id_liveness_type:
                   type: integer
-                  description: 1 or 2
-                  maximum: 2
-                  minimum: 1
+                  description: ''
+                  enum:
+                    - 1
+                    - 2
                 image:
                   type: string
                   minLength: 1
