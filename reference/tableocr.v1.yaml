@@ -9,8 +9,7 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.cometrue.ai/v1/identifcation'
-    description: Cometrue
+  - {}
 paths:
   /table-ocr:
     post:
@@ -256,77 +255,14 @@ paths:
                             str:
                               - valuationpercentage
         '400':
-          description: |-
-            Bad Request
-
-            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
-                image not given:
-                  value:
-                    message: image not provided
-                base64 decoding of the image failed:
-                  value:
-                    message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
-                Image not readable:
-                  value:
-                    message: Image cannot be read
-                Query image is too small to process:
-                  value:
-                    message: Image is too small to process
-            application/xml:
-              schema:
-                type: object
-                properties: {}
+          $ref: '#/components/responses/400'
         '401':
           description: |-
             Unauthorized
 
             허가되지 않은 사용자의 접근
         '409':
-          description: |-
-            Conflict
-            서버에서의 처리 중 에러
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                required:
-                  - message
-              examples:
-                Vertex detection error:
-                  value:
-                    message: vertex detection error
-                Text detection error:
-                  value:
-                    message: text detection error
-                OCR error:
-                  value:
-                    message: text recognition error
-                Matching error:
-                  value:
-                    message: matching error
-          headers: {}
+          $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
