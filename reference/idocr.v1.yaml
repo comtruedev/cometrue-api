@@ -58,9 +58,9 @@ paths:
                         type: string
                         minLength: 1
                         description: |-
-                          주민등록증 - 주민등록번호
-                          운전면허증 - 운전면허번호
-                          한국여권 - 주민등록번호 뒷자리
+                          주민등록증 - 주민등록번호<br>
+                          운전면허증 - 운전면허번호<br>
+                          한국여권 - 주민등록번호 뒷자리<br>
                           외국인등록증 - 외국인등록번호
                       title:
                         type: string
