@@ -62,7 +62,7 @@ paths:
                     description: |-
                       발급일자
 
-                      ex) 19700101
+                      ex) `19700101`
                 required:
                   - name
                   - number
@@ -218,7 +218,7 @@ paths:
                   birthday:
                     type: array
                     minItems: 3
-                    description: '[년, 월, 일]'
+                    description: '생년월일 `[년, 월, 일]`'
                     maxItems: 3
                     items:
                       type: string
@@ -400,7 +400,7 @@ paths:
                     description: |-
                       발급일자
 
-                      ex) 19700101
+                      ex) `19700101`
                 required:
                   - number
                   - issue_date
@@ -925,7 +925,7 @@ paths:
                       description: |-
                         발급일자
 
-                        ex) 19700101
+                        ex) `19700101`
               required:
                 - certs
                 - idcard
@@ -1128,7 +1128,7 @@ paths:
                       description: |-
                         발급일자
 
-                        ex) 19700101
+                        ex) `19700101`
               required:
                 - certs
                 - idcard
