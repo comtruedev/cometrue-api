@@ -11,12 +11,20 @@ info:
     **서비스 특징**
 
     자체개발 OCR 신경망을 적용하여 OCR이 필요한 영역에 대해 정확한 인식을 수행합니다.<br>
-    신분증 진위확인 서비스와 연계하여 사용할 수 있습니다.
-  contact:
-    email: ask@comtrue.com
-    url: 'https://cometrue.ai'
-    name: cometrue.ai AI API
-  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+    신분증 진위확인 서비스와 연계하여 사용할 수 있습니다.\
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    [Contact](mailto:ask@comtrue.com) | [cometrue.ai AI API](https://cometrue.ai) | [termsOfService](https://cometrue.ai/index.php/ai-api-terms-of-service/)
 servers:
   - description: ''
 paths:
