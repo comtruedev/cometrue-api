@@ -1049,10 +1049,8 @@ components:
         <summary>에러메세지</summary>
         "image: not provided"<br>
         "image base64 decode error"<br>
-        "Unsupported ID type"<br>
         "Image cannot be read"<br>
         "Image is too small to process"<br>
-        "id_type: is not correct."<br>
         "image: property in this field does not match. base64 or url."<br>
         "Image is empty"<br>
         </details>
@@ -1074,18 +1072,12 @@ components:
             base64 decoding of the image failed:
               value:
                 message: image base64 decode error
-            Unsupported ID:
-              value:
-                message: Unsupported ID type
             Image not readable:
               value:
                 message: Image cannot be read
             Query image is too small to process:
               value:
                 message: Image is too small to process
-            id_type not correct:
-              value:
-                message: 'id_type: is not correct.'
             image property does not match:
               value:
                 message: 'image: property in this field does not match. base64 or url.'
