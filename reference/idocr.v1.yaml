@@ -345,6 +345,7 @@ paths:
                 properties:
                   quadrilateral:
                     type: boolean
+                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     required:
