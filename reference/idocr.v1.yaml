@@ -40,7 +40,7 @@ paths:
                     description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
-                    description: ''
+                    description: 검출한 정보
                     required:
                       - name
                       - number
@@ -352,6 +352,7 @@ paths:
                       - name
                       - number
                       - title
+                    description: 검출한 정보
                     properties:
                       birth_date:
                         type: string
@@ -456,7 +457,7 @@ paths:
                     description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
-                    description: ''
+                    description: 검출한 정보
                     required:
                       - date
                       - name
@@ -561,7 +562,7 @@ paths:
                     description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
-                    description: ''
+                    description: 검출한 정보
                     required:
                       - name
                       - number
@@ -670,7 +671,7 @@ paths:
                     description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
-                    description: ''
+                    description: 검출한 정보
                     required:
                       - name
                       - number
