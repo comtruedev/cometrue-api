@@ -1236,7 +1236,7 @@ components:
                 type: string
             required:
               - message
-    409_id-ocr:
+    400_id-ocr:
       description: |-
         Conflict
 
