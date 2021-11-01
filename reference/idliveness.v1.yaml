@@ -58,78 +58,14 @@ paths:
                     realScore: 0.527431
                     detectSquareErr: 0
         '400':
-          description: |-
-            Bad Request
-
-            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
-                image not given:
-                  value:
-                    message: image not provided
-                base64 decoding of the image failed:
-                  value:
-                    message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
-                Image not readable:
-                  value:
-                    message: Image cannot be read
-                Query image is too small to process:
-                  value:
-                    message: Image is too small to process
-            application/xml:
-              schema:
-                type: object
-                properties: {}
+          $ref: '#/components/responses/400'
         '401':
           description: |-
             Unauthorized
 
             허가되지 않은 사용자의 접근
         '409':
-          description: |-
-            Conflict
-
-            서버에서의 처리 중 에러
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                required:
-                  - message
-              examples:
-                Vertex detection error:
-                  value:
-                    message: vertex detection error
-                Text detection error:
-                  value:
-                    message: text detection error
-                OCR error:
-                  value:
-                    message: text recognition error
-                Matching error:
-                  value:
-                    message: matching error
-          headers: {}
+          $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
@@ -183,8 +119,72 @@ components:
       in: query
       description: api.cometrue.ai에서 발급받은 API key
   responses:
-    ErrorResponse:
-      description: 신분증 인식 및 OCR에 대한 Error Message
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "image: property in this field does not match. base64 or url."<br>
+        "Image is empty"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+            required:
+              - message
+          examples:
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            image property does not match:
+              value:
+                message: 'image: property in this field does not match. base64 or url.'
+            image empty:
+              value:
+                message: Image is empty
+    '409':
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "Onnx runtime error: 100"<br>
+        "Std Exception: 101"<br>
+        "OpenCV error: 100"<br>
+        "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
+        "text detection error: 203": cannot find square<br>
+        "text detection error: 204": not enough to be square<br>
+        "text detection error: 206": not enough similar area<br>
+        "text detection error: 207": not enough contour<br>
+        "text detection error: 208": not enough group<br>
+        "object detection error: 209": cannot find object<br>
+        "Json decode error"
+        </details>
       content:
         application/json:
           schema:
@@ -195,3 +195,49 @@ components:
                 type: string
             required:
               - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //OCR error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+            not enough similar area:
+              value:
+                message: 'text detection error: 206'
