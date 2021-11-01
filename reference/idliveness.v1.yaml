@@ -9,8 +9,7 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.cometrue.ai/v1/identifcation'
-    description: Cometrue
+  - description: Cometrue
 paths:
   /id-liveness:
     post:
