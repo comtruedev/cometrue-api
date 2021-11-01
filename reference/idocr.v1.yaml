@@ -841,12 +841,11 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-        "text detection error: 202": Vertex detection error<br>
-        "text detection error"<br>
         "Onnx runtime error: 100"<br>
         "Std Exception: 101"<br>
         "OpenCV error: 100"<br>
         "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
         "text detection error: 203": cannot find square<br>
         "text detection error: 204": not enough to be square<br>
         "text detection error: 207": not enough contour<br>
