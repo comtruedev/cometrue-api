@@ -570,7 +570,8 @@ paths:
                       title:
                         type: string
                         description: 신분증 종류
-                        pattern: 외국인등록증
+                        enum:
+                          - 외국인등록증
                 required:
                   - quadrilateral
                   - result
@@ -762,7 +763,8 @@ paths:
                       title:
                         type: string
                         description: 신분증 종류
-                        pattern: passport
+                        enum:
+                          - passport
                       mrz1:
                         type: string
                         description: 기계판독영역
@@ -965,7 +967,8 @@ paths:
                       title:
                         type: string
                         description: 신분증 종류
-                        pattern: 여권
+                        enum:
+                          - 여권
                       mrz1:
                         type: string
                         description: 기계판독영역
