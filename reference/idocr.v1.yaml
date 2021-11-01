@@ -176,10 +176,23 @@ paths:
         '201':
           description: Created
         '400':
-          description: |-
+          description: |
             Bad Request
 
             사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+            <details markdown="1">
+            <summary>에러메세지</summary>
+            "id_type not provided"<br>
+            "image: not provided"<br>
+            "image base64 decode error"<br>
+            "Unsupported ID type"<br>
+            "Image cannot be read"<br>
+            "Image is too small to process"<br>
+            "id_type: is not correct."<br>
+            "image: property in this field does not match. base64 or url."<br>
+            "Image is empty"<br>
+            </details>
           content:
             application/json:
               schema:
@@ -233,6 +246,22 @@ paths:
             Conflict
 
             서버에서의 처리 중 에러
+
+            <details markdown="1">
+            <summary>접기/펼치기</summary>
+            "text detection error: 202": Vertex detection error
+            "text detection error"
+            "Onnx runtime error: 100"
+            "Std Exception: 101"
+            "OpenCV error: 100"
+            "text detection error: 201": cannot find text
+            "text detection error: 203": cannot find square
+            "text detection error: 204": not enough to be square
+            "text detection error: 207": not enough contour
+            "text detection error: 208": not enough group
+            "object detection error: 209": cannot find object
+            "Json decode error"
+            </details>
           content:
             application/json:
               schema:
@@ -268,7 +297,7 @@ paths:
                 cannot find text:
                   value:
                     message: 'text detection error: 201'
-                cannot find squre:
+                cannot find square:
                   value:
                     message: 'text detection error: 203'
                 not enough to be square:
