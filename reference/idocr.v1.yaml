@@ -838,7 +838,7 @@ components:
         서버에서의 처리 중 에러
 
         <details markdown="1">
-        <summary>접기/펼치기</summary>
+        <summary>에러메세지</summary>
         "text detection error: 202": Vertex detection error<br>
         "text detection error"<br>
         "Onnx runtime error: 100"<br>
