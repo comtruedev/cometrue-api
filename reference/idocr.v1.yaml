@@ -71,8 +71,6 @@ paths:
 
                           운전면허증 - 운전면허번호
 
-                          여권 -
-
                           한국여권 - 주민등록번호 뒷자리
 
                           외국인등록증 - 외국인등록번호
@@ -94,7 +92,7 @@ paths:
                         description: |-
                           운전면허증 생년월일
 
-                          ex) 19700101
+                          *Example:* 19700101
 
                           한국여권 생년월일
 
@@ -178,6 +176,8 @@ paths:
               schema:
                 type: object
                 properties: {}
+        '201':
+          description: Created
         '400':
           description: |-
             Bad Request

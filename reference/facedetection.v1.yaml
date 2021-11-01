@@ -301,8 +301,15 @@ paths:
                   type: string
                   minLength: 1
                   description: base64로 인코딩 한 스트링 or http URL
+                model_type:
+                  type: integer
+                  description: 모델타입
+                  enum:
+                    - 1
+                    - 2
               required:
                 - image
+                - model_type
             examples:
               Base64 Example:
                 value:
