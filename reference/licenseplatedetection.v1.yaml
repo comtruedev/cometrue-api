@@ -181,7 +181,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 자동차 번호판을 인식하여 번호판의 사각형영역의 리스트를 제공합니다.
+      description: 자동차 번호판을 인식하여 번호판의 사각형영역들의 정보를 리스트로 제공합니다.
       parameters: []
       requestBody:
         content:
