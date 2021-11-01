@@ -693,7 +693,7 @@ paths:
                     birthday:
                       type: array
                       minItems: 3
-                      description: '[년, 월, 일]'
+                      description: '생년월일 `[년, 월, 일]`'
                       maxItems: 3
                       items:
                         type: string
