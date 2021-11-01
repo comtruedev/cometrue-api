@@ -26,153 +26,7 @@ paths:
       operationId: post-idocr
       responses:
         '200':
-          description: |-
-            OK
-
-            정상응답
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
-                  result:
-                    type: object
-                    description: ''
-                    required:
-                      - name
-                      - number
-                      - title
-                    properties:
-                      date:
-                        type: string
-                        minLength: 1
-                        description: 주민등록증 발급일자
-                      name:
-                        type: string
-                        minLength: 1
-                        description: 성명
-                      number:
-                        type: string
-                        minLength: 1
-                        description: |-
-                          주민등록증 - 주민등록번호
-
-                          운전면허증 - 운전면허번호
-
-                          한국여권 - 주민등록번호 뒷자리
-
-                          외국인등록증 - 외국인등록번호
-                      title:
-                        type: string
-                        description: 신분증 종류
-                        enum:
-                          - 주민등록증
-                          - 자동차운전면허증
-                          - 외국인등록증
-                          - 여권
-                          - passport
-                      code:
-                        type: string
-                        description: 운전면허증 식별코드
-                      mrz1:
-                        type: string
-                        description: 여권 - 기계판독영역
-                      mrz2:
-                        type: string
-                        description: 여권 - 기계판독영역
-                      birth_date:
-                        type: string
-                        description: |-
-                          운전면허증 생년월일
-
-                          *Example:* 19700101
-
-                          한국여권 생년월일
-
-                          ex) 01JAN1970
-                        example: '20211029'
-                      issue_date:
-                        type: string
-                        description: |-
-                          여권 발급일
-
-                          ex) 01JAN1970
-                      expiry_date:
-                        type: string
-                        description: |-
-                          여권 기간 만료일
-
-                          ex) 01JAN1970
-                required:
-                  - quadrilateral
-                  - result
-              examples:
-                주민등록증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      date: '20191205'
-                      name: 홍길동
-                      number: 610220-1250511
-                      title: 주민등록증
-                운전면허증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      birth_date: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
-                여권:
-                  value:
-                    quadrilateral: true
-                    result:
-                      name: ''
-                      number: ''
-                      title: passport
-                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
-                      mrz2: D123456785KOR7501012M13031001234567V15788666
-                한국여권:
-                  value:
-                    quadrilateral: true
-                    result:
-                      name: 홍길동
-                      number: '012345678'
-                      title: 여권
-                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
-                      mrz2: D123456785KOR7501012M13031001234567V15788666
-                      birth_date: 01JAN1975
-                      issue_date: 10MAR2008
-                      expiry_date: 10MAR2013
-                외국인등록증:
-                  value:
-                    quadrilateral: true
-                    result:
-                      date: '20110101'
-                      name: HONG KIL DONG
-                      number: 123456-1234567
-                      title: 외국인등록증
-            application/xml:
-              schema:
-                type: object
-                properties: {}
-            multipart/form-data:
-              schema:
-                type: object
-                properties: {}
-            application/zip:
-              schema:
-                type: object
-                properties: {}
-            text/plain:
-              schema:
-                type: object
-                properties: {}
+          $ref: '#/components/responses/ErrorResponse'
         '201':
           description: Created
         '400':
@@ -232,10 +86,6 @@ paths:
                 image empty:
                   value:
                     message: Image is empty
-            application/xml:
-              schema:
-                type: object
-                properties: {}
         '401':
           description: |-
             Unauthorized
@@ -1417,6 +1267,63 @@ components:
       in: query
       description: api.cometrue.ai에서 발급받은 API key
   responses:
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "id_type not provided"<br>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Unsupported ID type"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "id_type: is not correct."<br>
+        "image: property in this field does not match. base64 or url."<br>
+        "Image is empty"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+            required:
+              - message
+          examples:
+            id_type not given:
+              value:
+                message: id_type not provided
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Unsupported ID:
+              value:
+                message: Unsupported ID type
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            id_type not correct:
+              value:
+                message: 'id_type: is not correct.'
+            image property does not match:
+              value:
+                message: 'image: property in this field does not match. base64 or url.'
+            image empty:
+              value:
+                message: Image is empty
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
       content:
