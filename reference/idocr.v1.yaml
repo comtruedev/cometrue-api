@@ -259,7 +259,8 @@ paths:
                       title:
                         type: string
                         description: 신분증 종류
-                        pattern: 주민등록증
+                        enum:
+                          - 주민등록증
                 required:
                   - quadrilateral
                   - result
