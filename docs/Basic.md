@@ -1,13 +1,15 @@
-# Basic
+# cometrue.ai AI API
+
 ## Introduction
 ### API Integration
 Cometrue.ai는 REST API를 통해 다양한 환경 및 프로그래밍 언어와 통합 될 수 있습니다. 다양한 프로그래밍 언어로 API래퍼를 제공하고 있습니다. 래퍼 및 사용가능한 코드 샘플에 대한 소개는 **API코드개요** 문서를 확인하세요
+관련 문의는 `ask@comtrue.com`로 접수해주시면 순차적으로 답변을 드리겠습니다.
 
 ### API Overview
-Cometrue.ai API를 사용하면 자신의 애플리케이션에서 얼굴인식, 신분증 인식, 신분증 진위여부 등을 구현할 수 있습니다.
+Cometrue.ai API를 사용하면 자신의 애플리케이션에서 얼굴인식, 신분증 OCR 등을 구현할 수 있습니다.
 
 ### Authentication
-인증은 HTTP를 기반으로 한 TLS 1.2이상에서 지원됩니다.
+인증은 HTTP프로토콜을 기반으로 한 TLS 1.2이상에서 지원됩니다.
 
 ### URL
 API 호출을 위한 URL은 다음과 같이 지원됩니다.
