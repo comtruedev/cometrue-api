@@ -1376,7 +1376,12 @@ paths:
     parameters: []
 components:
   schemas: {}
-  securitySchemes: {}
+  securitySchemes:
+    api_key:
+      name: api_key
+      type: apiKey
+      in: query
+      description: api.cometrue.ai에서 발급받은 API key
   responses:
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
