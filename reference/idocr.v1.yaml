@@ -30,62 +30,7 @@ paths:
         '201':
           description: Created
         '400':
-          description: |
-            Bad Request
-
-            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
-
-            <details markdown="1">
-            <summary>에러메세지</summary>
-            "id_type not provided"<br>
-            "image: not provided"<br>
-            "image base64 decode error"<br>
-            "Unsupported ID type"<br>
-            "Image cannot be read"<br>
-            "Image is too small to process"<br>
-            "id_type: is not correct."<br>
-            "image: property in this field does not match. base64 or url."<br>
-            "Image is empty"<br>
-            </details>
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
-                image not given:
-                  value:
-                    message: 'image: not provided'
-                base64 decoding of the image failed:
-                  value:
-                    message: image base64 decode error
-                Unsupported ID:
-                  value:
-                    message: Unsupported ID type
-                Image not readable:
-                  value:
-                    message: Image cannot be read
-                Query image is too small to process:
-                  value:
-                    message: Image is too small to process
-                id_type not correct:
-                  value:
-                    message: 'id_type: is not correct.'
-                image property does not match:
-                  value:
-                    message: 'image: property in this field does not match. base64 or url.'
-                image empty:
-                  value:
-                    message: Image is empty
+          $ref: '#/components/responses/400_id-ocr'
         '401':
           description: |-
             Unauthorized
@@ -1123,9 +1068,6 @@ components:
             required:
               - message
           examples:
-            id_type not given:
-              value:
-                message: id_type not provided
             image not given:
               value:
                 message: 'image: not provided'
@@ -1237,26 +1179,22 @@ components:
             required:
               - message
     400_id-ocr:
-      description: |-
-        Conflict
+      description: |
+        Bad Request
 
-        서버에서의 처리 중 에러
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
 
         <details markdown="1">
-        <summary>접기/펼치기</summary>
+        <summary>에러메세지</summary>
         "id_type not provided"<br>
-        "text detection error: 202": Vertex detection error<br>
-        "text detection error"<br>
-        "Onnx runtime error: 100"<br>
-        "Std Exception: 101"<br>
-        "OpenCV error: 100"<br>
-        "text detection error: 201": cannot find text<br>
-        "text detection error: 203": cannot find square<br>
-        "text detection error: 204": not enough to be square<br>
-        "text detection error: 207": not enough contour<br>
-        "text detection error: 208": not enough group<br>
-        "object detection error: 209": cannot find object<br>
-        "Json decode error"
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Unsupported ID type"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "id_type: is not correct."<br>
+        "image: property in this field does not match. base64 or url."<br>
+        "Image is empty"<br>
         </details>
       content:
         application/json:
@@ -1266,51 +1204,34 @@ components:
             properties:
               message:
                 type: string
+                minLength: 1
             required:
               - message
           examples:
             id_type not given:
               value:
                 message: id_type not provided
-            Vertex detection error:
+            image not given:
               value:
-                message: 'text detection error: 202'
-            Text detection error:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
               value:
-                message: text detection error
-            //OCR error:
+                message: image base64 decode error
+            Unsupported ID:
               value:
-                message: text recognition error
-            //Matching error:
+                message: Unsupported ID type
+            Image not readable:
               value:
-                message: matching error
-            onnxexception:
+                message: Image cannot be read
+            Query image is too small to process:
               value:
-                message: 'Onnx runtime error: 100'
-            stdexception:
+                message: Image is too small to process
+            id_type not correct:
               value:
-                message: 'Std Exception: 101'
-            cvexception:
+                message: 'id_type: is not correct.'
+            image property does not match:
               value:
-                message: 'OpenCV error: 100'
-            cannot find text:
+                message: 'image: property in this field does not match. base64 or url.'
+            image empty:
               value:
-                message: 'text detection error: 201'
-            cannot find square:
-              value:
-                message: 'text detection error: 203'
-            not enough to be square:
-              value:
-                message: 'text detection error: 204'
-            not enough contour:
-              value:
-                message: 'text detection error: 207'
-            not enough group:
-              value:
-                message: 'text detection error: 208'
-            cannot find object:
-              value:
-                message: 'object detection error: 209'
-            json decode error:
-              value:
-                message: Json decode error
+                message: Image is empty
