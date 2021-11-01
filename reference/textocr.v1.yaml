@@ -353,6 +353,7 @@ paths:
               properties:
                 image:
                   type: string
+                  description: base64로 인코딩 한 스트링
               required:
                 - image
             examples:
