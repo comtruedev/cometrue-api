@@ -69,7 +69,12 @@ paths:
                       title:
                         type: string
                         description: 신분증 종류
-                        pattern: 주민등록증|자동차운전면허증|외국인등록증|여권|passport
+                        enum:
+                          - 주민등록증
+                          - 자동차운전면허증
+                          - 외국인등록증
+                          - 여권
+                          - passport
                       code:
                         type: string
                         description: 운전면허증 식별코드
@@ -302,7 +307,12 @@ paths:
                 id_type:
                   type: string
                   description: 신분증 종류
-                  pattern: jumin|driver|kpassport|alien|passport
+                  enum:
+                    - jumin
+                    - driver
+                    - kpassport
+                    - alien
+                    - passport
                 image:
                   type: string
                   minLength: 1
