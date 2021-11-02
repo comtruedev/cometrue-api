@@ -1166,6 +1166,39 @@ components:
       in: query
       description: api.cometrue.ai에서 발급받은 API key
   responses:
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "incorrect image data": 잘못된 이미지 파일<br>
+        "not supported idcard type": 지원하지 않는 신분증 형식<br>
+        "incorrect certificates pfx data": 잘못된 공인인증서 파일<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    '409':
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        자세한 Error 내용을 포함하는 응답
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
       content:
