@@ -1136,7 +1136,7 @@ components:
 
         자세한 Error 내용을 포함하는 응답
         <details markdown="1">
-        <summary>예시</summary>
+        <summary>에러메세지</summary>
         "본인 확인: 주민등록번호 앞자리가 올바르지 않습니다."<br>
         </details>
       content:
