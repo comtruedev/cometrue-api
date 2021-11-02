@@ -80,7 +80,8 @@ paths:
                         tag:
                           type: string
                           description: ''
-                          pattern: face
+                          enum:
+                            - face
                         language:
                           type: string
                           description: ' '
