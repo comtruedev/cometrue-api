@@ -55,6 +55,7 @@ paths:
         '200':
           description: |-
             OK
+
             정상응답
           content:
             application/json:
@@ -140,12 +141,14 @@ paths:
         '401':
           description: |-
             Unauthorized
+
             허가되지 않은 사용자의 접근
         '409':
           $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
+
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         가족관계증명서, 기본증명서, 주민등록 등·초본 등 개인을 증명하는 문서종류에 대해 분류를 수행합니다.
