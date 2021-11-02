@@ -190,78 +190,14 @@ paths:
                       - '01'
                     code: deuors
         '400':
-          description: |-
-            Bad Request
-
-            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
-                image not given:
-                  value:
-                    message: image not provided
-                base64 decoding of the image failed:
-                  value:
-                    message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
-                Image not readable:
-                  value:
-                    message: Image cannot be read
-                Query image is too small to process:
-                  value:
-                    message: Image is too small to process
-            application/xml:
-              schema:
-                type: object
-                properties: {}
+          $ref: '#/components/responses/400'
         '401':
           description: |-
             Unauthorized
 
             허가되지 않은 사용자의 접근
         '409':
-          description: |-
-            Conflict
-
-            서버에서의 처리 중 에러
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                required:
-                  - message
-              examples:
-                Vertex detection error:
-                  value:
-                    message: vertex detection error
-                Text detection error:
-                  value:
-                    message: text detection error
-                OCR error:
-                  value:
-                    message: text recognition error
-                Matching error:
-                  value:
-                    message: matching error
-          headers: {}
+          $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
@@ -348,78 +284,14 @@ paths:
                       - '1234567'
                     issue_date: '20110101'
         '400':
-          description: |-
-            Bad Request
-
-            사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              examples:
-                id_type not given:
-                  value:
-                    message: id_type not provided
-                image not given:
-                  value:
-                    message: image not provided
-                base64 decoding of the image failed:
-                  value:
-                    message: image base64 decode error
-                Non-acceptable ID:
-                  value:
-                    message: Unsupported ID type
-                Image not readable:
-                  value:
-                    message: Image cannot be read
-                Query image is too small to process:
-                  value:
-                    message: Image is too small to process
-            application/xml:
-              schema:
-                type: object
-                properties: {}
+          $ref: '#/components/responses/400'
         '401':
           description: |-
             Unauthorized
 
             허가되지 않은 사용자의 접근
         '409':
-          description: |-
-            Conflict
-
-            서버에서의 처리 중 에러
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                properties:
-                  message:
-                    type: string
-                required:
-                  - message
-              examples:
-                Vertex detection error:
-                  value:
-                    message: vertex detection error
-                Text detection error:
-                  value:
-                    message: text detection error
-                OCR error:
-                  value:
-                    message: text recognition error
-                Matching error:
-                  value:
-                    message: matching error
-          headers: {}
+          $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
@@ -930,12 +802,15 @@ components:
               error:
                 type: string
           examples:
-            잘못된 이미지 파일:
-              error: incorrect image data
-            지원하지 않는 신분증 형식:
-              error: not supported idcard type
-            잘못된 공인인증서 파일:
-              error: incorrect certificates pfx data
+            incorrect image data:
+              value:
+                error: incorrect image data
+            not supported idcard type:
+              value:
+                error: not supported idcard type
+            incorrect certificates:
+              value:
+                error: incorrect certificates pfx data
     '409':
       description: |-
         Conflict
