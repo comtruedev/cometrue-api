@@ -109,7 +109,7 @@ paths:
                     result:
                       date: '20191205'
                       name: 홍길동
-                      number: 610220-1250511
+                      number: 123456-1234567
                       title: 주민등록증
                 운전면허증:
                   value:
@@ -269,7 +269,7 @@ paths:
                     result:
                       date: '20191205'
                       name: 홍길동
-                      number: 610220-1250511
+                      number: 123456-1234567
                       title: 주민등록증
         '400':
           $ref: '#/components/responses/400'

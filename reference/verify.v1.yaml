@@ -72,8 +72,8 @@ paths:
                   value:
                     name: 홍길동
                     number:
-                      - '610220'
-                      - '1250511'
+                      - '123456'
+                      - '1234567'
                     issue_date: '20090813'
         '400':
           description: |-
