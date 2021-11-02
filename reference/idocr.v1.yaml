@@ -812,7 +812,6 @@ components:
             properties:
               message:
                 type: string
-                minLength: 1
             required:
               - message
           examples:
@@ -945,7 +944,6 @@ components:
             properties:
               message:
                 type: string
-                minLength: 1
             required:
               - message
           examples:
