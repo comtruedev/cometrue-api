@@ -10,7 +10,7 @@ info:
 servers:
   - {}
 paths:
-  /token:
+  /auth/token:
     post:
       operationId: createToken
       summary: API Access Token 발급
@@ -69,7 +69,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  reason:
+                  code:
+                    type: integer
+                    description: HTTP 상태 코드
+                  message:
                     type: string
               examples:
                 unauthorized:
