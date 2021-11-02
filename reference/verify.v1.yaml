@@ -1185,6 +1185,13 @@ components:
             properties:
               error:
                 type: string
+          examples:
+            잘못된 이미지 파일:
+              error: incorrect image data
+            지원하지 않는 신분증 형식:
+              error: not supported idcard type
+            잘못된 공인인증서 파일:
+              error: incorrect certificates pfx data
     '409':
       description: |-
         Conflict
@@ -1199,6 +1206,9 @@ components:
             properties:
               error:
                 type: string
+          examples:
+            주민등록번호 앞자리:
+              error: '"본인 확인: 주민등록번호 앞자리가 올바르지 않습니다."'
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
       content:
