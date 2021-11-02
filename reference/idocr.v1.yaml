@@ -149,8 +149,6 @@ paths:
                       name: HONG KIL DONG
                       number: 123456-1234567
                       title: 외국인등록증
-        '201':
-          description: Created
         '400':
           $ref: '#/components/responses/400_id-ocr'
         '401':
