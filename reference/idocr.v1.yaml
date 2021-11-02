@@ -190,10 +190,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - id_type
                 - image
@@ -297,10 +297,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -417,10 +417,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -522,10 +522,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -631,10 +631,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -760,9 +760,6 @@ paths:
                   type: string
                   minLength: 1
                   description: base64로 인코딩 한 스트링 or http URL
-                is_url:
-                  type: boolean
-                  description: image속성이 url일때 true
               required:
                 - image
             examples:
