@@ -763,11 +763,6 @@ paths:
                       - '870412'
                       - '5101297'
                     issue_date: '20100101'
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: ''
       security:
         - api_key: []
@@ -831,7 +826,8 @@ components:
                 type: string
           examples:
             주민등록번호 앞자리:
-              error: '본인 확인: 주민등록번호 앞자리가 올바르지 않습니다.'
+              value:
+                error: '본인 확인: 주민등록번호 앞자리가 올바르지 않습니다.'
     ErrorResponse:
       description: 신분증 인식 및 OCR에 대한 Error Message
       content:
