@@ -118,3 +118,22 @@ components:
       name: API Key(JWT)
       type: apiKey
       in: query
+  responses:
+    '401':
+      description: |
+        허가 되지 않은 인증정보
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "incorrect Username or Password"<br>
+        "missing Username or Password"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
