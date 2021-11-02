@@ -22,10 +22,10 @@ paths:
             examples:
               request:
                 value:
-                  username: 00000000-0000-0000-0000-000000000000
-                  password: 6E686506B4B2516CDFBC
+                  username: test
+                  password: f95a5317-66a9-4e19-88b8-f99dd5c667ed
       responses:
-        '201':
+        '200':
           description: 올바른 요청 처리
           content:
             application/json:
@@ -34,12 +34,15 @@ paths:
                 properties:
                   code:
                     type: integer
+                    description: HTTP 상태 코드
                   expire:
                     type: string
                     format: datetime
+                    description: 토큰만료일
                   token:
                     type: string
                     format: jwt
+                    description: access token
               examples:
                 preview:
                   value:
