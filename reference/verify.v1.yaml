@@ -622,8 +622,8 @@ paths:
                   idcard:
                     name: 홍길동
                     number:
-                      - '660102'
-                      - '1235121'
+                      - '123456'
+                      - '1234567'
                     issue_date: '20100101'
         description: ''
       security:
