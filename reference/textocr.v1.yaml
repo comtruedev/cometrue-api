@@ -178,12 +178,12 @@ paths:
                           description: 검출된 텍스트
                         xPoints:
                           type: array
-                          description: '텍스트 영역을 이루는 x 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
+                          description: '텍스트 영역 꼭짓점 x 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
                           items:
                             type: integer
                         yPoints:
                           type: array
-                          description: '텍스트 영역을 이루는 y 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
+                          description: '텍스트 영역을 꼭짓점 y 좌표 리스트(왼쪽 상단, 오른쪽 상단, 오른쪽 하단, 왼쪽 하단 순서)'
                           items:
                             type: integer
               examples:
