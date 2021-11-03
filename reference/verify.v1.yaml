@@ -101,7 +101,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -215,7 +218,10 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
@@ -309,18 +315,16 @@ paths:
                 image:
                   type: string
                   minLength: 1
-                  description: base64로 인코딩 한 스트링
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
             examples:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: ''
       security:
         - api_key: []
@@ -443,8 +447,8 @@ paths:
                         type: string
                     number:
                       type: array
-                      minItems: 5
-                      maxItems: 5
+                      minItems: 4
+                      maxItems: 4
                       description: 운전면허번호
                       items:
                         type: string
@@ -490,7 +494,7 @@ paths:
   /jumin/verify:
     post:
       summary: 주민등록증 진위확인
-      operationId: post-driververify
+      operationId: post-juminrverify
       responses:
         '200':
           description: |-
