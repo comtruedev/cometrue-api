@@ -216,10 +216,10 @@ paths:
                             properties:
                               x:
                                 type: number
-                                description: x좌표
+                                description: 셀의 행번호
                               'y':
                                 type: number
-                                description: y좌표
+                                description: 셀의 열번호
                               str:
                                 type: array
                                 description: 텍스트
