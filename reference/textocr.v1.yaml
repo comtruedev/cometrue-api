@@ -19,9 +19,9 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - {}
+  - url: /v1
 paths:
-  /text-ocr:
+  /texts/ocr:
     post:
       summary: 일반 OCR
       operationId: post-textocr

@@ -19,8 +19,9 @@ info:
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: Cometrue
+    url: /v1
 paths:
-  /license-plate-detection:
+  /license-plates/detect:
     post:
       summary: 차량번호판인식
       operationId: post-licenseplatedetection
