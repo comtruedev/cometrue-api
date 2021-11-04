@@ -10,7 +10,7 @@ info:
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: Cometrue
-    url: /v1
+    url: /api/v1
 paths:
   /id/liveness:
     post:
