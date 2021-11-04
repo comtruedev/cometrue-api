@@ -70,10 +70,10 @@ paths:
                           description: 얼굴 영역의 왼쪽 상단 y 좌표
                         width:
                           type: number
-                          description: 얼굴 영역 너비
+                          description: 얼굴 영역 가로길이
                         height:
                           type: number
-                          description: 얼굴 영역 높이
+                          description: 얼굴 영역 세로길이
                         text:
                           type: string
                           description: ''
@@ -85,6 +85,8 @@ paths:
                         language:
                           type: string
                           description: ' '
+                      required:
+                        - height
               examples:
                 결과:
                   value:
@@ -224,7 +226,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 얼굴을 인식하여 인식한 사각형 영역의 리스트를 제공합니다.
+      description: 얼굴을 인식하여 인식한 얼굴 영역의 리스트를 제공합니다.
       parameters: []
       requestBody:
         content:
