@@ -49,9 +49,6 @@ paths:
                         tag: license_plate
                         language: ''
                 properties:
-                  Template:
-                    type: string
-                    description: ' '
                   ROI:
                     type: array
                     uniqueItems: true
@@ -75,28 +72,19 @@ paths:
                         height:
                           type: number
                           description: 번호판 영역 세로길이
-                        text:
-                          type: string
-                          description: ' '
                         tag:
                           type: string
                           description: ''
                           enum:
                             - license_plate
-                        language:
-                          type: string
-                          description: ' '
                       required:
                         - index
                         - x
                         - 'y'
                         - width
                         - height
-                        - text
                         - tag
-                        - language
                 required:
-                  - Template
                   - ROI
               examples:
                 결과:
