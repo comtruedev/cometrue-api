@@ -74,144 +74,107 @@ paths:
                         height:
                           type: number
                           description: 얼굴 영역 세로길이
-                        text:
-                          type: string
-                          description: ''
                         tag:
                           type: string
                           description: ''
                           enum:
                             - face
-                        language:
-                          type: string
-                          description: ' '
                       required:
                         - height
               examples:
                 결과:
                   value:
-                    Template: ''
                     ROI:
                       - index: 0
                         x: 482
                         'y': 120
                         width: 223
                         height: 317
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 1
                         x: 885
                         'y': 132
                         width: 216
                         height: 293
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 2
                         x: 1292
                         'y': 131
                         width: 203
                         height: 294
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 3
                         x: 1694
                         'y': 109
                         width: 225
                         height: 338
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 4
                         x: 99
                         'y': 132
                         width: 215
                         height: 311
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 5
                         x: 496
                         'y': 524
                         width: 221
                         height: 306
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 6
                         x: 867
                         'y': 523
                         width: 229
                         height: 310
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 7
                         x: 1680
                         'y': 532
                         width: 226
                         height: 293
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 8
                         x: 67
                         'y': 535
                         width: 229
                         height: 303
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 9
                         x: 1284
                         'y': 524
                         width: 218
                         height: 324
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 10
                         x: 478
                         'y': 919
                         width: 231
                         height: 316
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 11
                         x: 1285
                         'y': 931
                         width: 217
                         height: 308
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 12
                         x: 1695
                         'y': 925
                         width: 223
                         height: 320
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 13
                         x: 87
                         'y': 935
                         width: 213
                         height: 301
-                        text: ''
                         tag: face
-                        language: ''
                       - index: 14
                         x: 871
                         'y': 937
                         width: 220
                         height: 296
-                        text: ''
                         tag: face
-                        language: ''
         '400':
           $ref: '#/components/responses/400'
         '401':
