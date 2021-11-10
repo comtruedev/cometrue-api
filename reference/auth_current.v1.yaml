@@ -7,6 +7,7 @@ info:
     url: 'https://cometrue.ai'
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+  description: Access Token 발급 과정
 servers:
   - {}
 paths:
@@ -69,6 +70,7 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
+      description: 올바른 username과 passsword로 요청하면 access token을 제공합니다.
     parameters: []
 components:
   schemas:

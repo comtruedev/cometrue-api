@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: auth
+  title: auth(정해지지않음)
   version: '1.0'
   contact:
     email: ask@comtrue.com
