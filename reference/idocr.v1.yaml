@@ -768,6 +768,10 @@ components:
       type: apiKey
       in: query
       description: api.cometrue.ai에서 발급받은 API key
+    access_token(jwt):
+      type: http
+      scheme: bearer
+      description: ''
   responses:
     '400':
       description: |
