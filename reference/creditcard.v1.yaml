@@ -14,7 +14,7 @@ servers:
 paths:
   /creditcard:
     post:
-      summary: 신용카드 OCR
+      summary: 신용카드 OCR (기존문서)
       operationId: post-idocr
       responses:
         '200':

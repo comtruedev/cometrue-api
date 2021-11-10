@@ -20,9 +20,9 @@ info:
 servers:
   - description: Cometrue
 paths:
-  /jumin/ocr:
+  /jumin/_ocr:
     post:
-      summary: 주민등록증 OCR
+      summary: 주민등록증 OCR (내부api)
       operationId: post-juminocr
       responses:
         '200':
@@ -121,9 +121,9 @@ paths:
         - api_key: []
       x-internal: true
     parameters: []
-  /driver/ocr:
+  /driver/_ocr:
     post:
-      summary: 운전면허증 OCR
+      summary: 운전면허증 OCR (내부api)
       operationId: post-driverocr
       responses:
         '200':
@@ -238,9 +238,9 @@ paths:
         - api_key: []
       x-internal: true
     parameters: []
-  /alien/ocr:
+  /alien/_ocr:
     post:
-      summary: 외국인등록증 OCR
+      summary: 외국인등록증 OCR (내부api)
       operationId: post-alienocr
       responses:
         '200':
