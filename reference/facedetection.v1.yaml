@@ -192,7 +192,7 @@ paths:
       description: |-
         얼굴을 인식하여 인식한 얼굴 영역의 리스트를 제공합니다.
 
-        model_type이 1이라면 복수의 얼굴 영역을, 2의 경우에는 하나의 얼굴 영역을 찾습니다.
+        model_type이 1이라면 다수의 얼굴 영역을, 2의 경우에는 하나의 얼굴 영역을 찾습니다.
       parameters: []
       requestBody:
         content:
