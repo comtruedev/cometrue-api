@@ -11,7 +11,7 @@ info:
 servers:
   - url: /api/v1
 paths:
-  /tables/ocr:
+  /table/ocr:
     post:
       summary: 표 OCR
       operationId: post-tableocr

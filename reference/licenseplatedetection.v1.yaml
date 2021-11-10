@@ -21,7 +21,7 @@ servers:
   - description: Cometrue
     url: /api/v1
 paths:
-  /license-plates/detect:
+  /license-plate/detect:
     post:
       summary: 차량번호판인식
       operationId: post-licenseplatedetection

@@ -48,7 +48,7 @@ servers:
   - description: Cometrue
     url: /api/v1
 paths:
-  /documents/classify:
+  /document/classify:
     post:
       summary: 개인 증명서 분류(스캔)
       operationId: post-documentclassification

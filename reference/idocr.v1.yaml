@@ -208,7 +208,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /jumins/ocr:
+  /jumin/ocr:
     post:
       summary: 주민등록증 OCR
       operationId: post-idocrjumin
@@ -313,7 +313,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /drivers/ocr:
+  /driver/ocr:
     post:
       summary: 운전면허증 OCR
       operationId: post-idocrdriver
@@ -433,7 +433,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /aliens/ocr:
+  /alien/ocr:
     post:
       summary: 외국인등록증 OCR
       operationId: post-idocralien
@@ -538,7 +538,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /passports/ocr:
+  /passport/ocr:
     post:
       summary: 여권 OCR
       operationId: post-idocrpassport
@@ -632,7 +632,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /kpassports/ocr:
+  /kpassport/ocr:
     post:
       summary: 한국여권 OCR
       operationId: post-idocrkpassport

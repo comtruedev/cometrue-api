@@ -21,7 +21,7 @@ info:
 servers:
   - url: /api/v1
 paths:
-  /texts/ocr:
+  /text/ocr:
     post:
       summary: 일반 OCR
       operationId: post-textocr

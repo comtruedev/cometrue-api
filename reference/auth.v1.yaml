@@ -1,12 +1,15 @@
 openapi: 3.0.0
 info:
-  title: auth(정해지지않음)
+  title: auth
   version: '1.0'
   contact:
     email: ask@comtrue.com
     url: 'https://cometrue.ai'
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+  description: |-
+    기존 문서에 존재했던 방식
+    실제로 구현되지 않았고, 정해지지도 않았음
 servers:
   - url: 'https://api.cometrue.ai/auth/v1'
 paths:
