@@ -206,8 +206,6 @@ paths:
                   is_url: true
         description: ''
       x-internal: false
-      security:
-        - access_token(jwt): []
     parameters: []
   /jumin/ocr:
     post:
@@ -769,10 +767,6 @@ components:
       type: apiKey
       in: query
       description: api.cometrue.ai에서 발급받은 API key
-    access_token(jwt):
-      type: http
-      scheme: bearer
-      description: ''
   responses:
     '400':
       description: |
