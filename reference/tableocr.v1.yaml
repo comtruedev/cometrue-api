@@ -268,7 +268,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: '이미지에서 표를 인식하여 텍스트를 검출하고, 좌표와 함께 리스트로 제공합니다.'
+      description: '이미지에서 표를 인식하여 텍스트를 검출하고, 표 번호와 셀의 행과 열 번호를 포함하여 리스트로 제공합니다.'
       parameters: []
       requestBody:
         content:

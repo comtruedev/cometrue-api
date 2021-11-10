@@ -291,7 +291,7 @@ paths:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
-      description: 문자 영역을 자동으로 검출하여 해당 영역의 텍스트를 좌표와 함께 리스트로 제공합니다.
+      description: '이미지에서 표를 인식하여 텍스트를 검출하고, 좌표와 함께 리스트로 제공합니다.'
     parameters: []
 components:
   schemas: {}
