@@ -205,8 +205,9 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security: []
       x-internal: false
+      security:
+        - access_token(jwt): []
     parameters: []
   /jumin/ocr:
     post:
