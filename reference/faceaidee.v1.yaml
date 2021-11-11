@@ -79,8 +79,14 @@ components:
       properties:
         condition:
           type: object
+          description: '{검색할 컬럼이름:값}'
+          properties:
+            email:
+              type: string
+              description: ''
         option:
           type: integer
+          description: ''
         image:
           type: string
           format: base64
