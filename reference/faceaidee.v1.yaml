@@ -41,12 +41,16 @@ components:
         registrant:
           type: string
           description: '사용자, 관리자'
+          enum:
+            - '"USER"'
+            - '"ACCOUNT"'
         status:
           type: string
           enum:
             - '"UNAPPROVED"'
             - '"APPROVED"'
             - '"REJECTED"'
+          description: 승인여부
         properties:
           type: object
           properties:
