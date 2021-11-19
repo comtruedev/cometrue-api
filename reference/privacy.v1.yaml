@@ -465,28 +465,40 @@ paths:
                         properties:
                           social:
                             type: number
+                            description: 주민등록번호가 검출된 건수
                           foreign:
                             type: number
+                            description: 외국인번호가 검출된 건수
                           passport:
                             type: number
+                            description: 여권번호가 검출된 건수
                           license:
                             type: number
+                            description: 운전면허번호가 검출된 건수
                           credit:
                             type: number
+                            description: 카드번호가 검출된 건수
                           account:
                             type: number
+                            description: 계좌번호가 검출된 건수
                           phone:
                             type: number
+                            description: 전화번호가 검출된 건수
                           mobile:
                             type: number
+                            description: 휴대전화번호가 검출된 건수
                           email:
                             type: number
+                            description: 메일주소가 검출된 건수
                           corp:
                             type: number
+                            description: 법인번호가 검출된 건수
                           business:
                             type: number
+                            description: 사업자번호가 검출된 건수
                           insurance:
                             type: number
+                            description: 건강보험번호가 검출된 건수
                   content:
                     type: string
                     minLength: 1
@@ -901,7 +913,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 개인정보를 검출하여 검출 횟수와 비식별화된 문자열을 제공합니다.
+      description: 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
       parameters: []
       requestBody:
         content:
@@ -1322,7 +1334,7 @@ paths:
                   properties:
                     social:
                       type: object
-                      description: 주민등록번호가 검출된 건수
+                      description: 주민등록번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1336,7 +1348,7 @@ paths:
                         - delimiter
                     foreign:
                       type: object
-                      description: 외국인번호가 검출된 건수
+                      description: 외국인번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1350,7 +1362,7 @@ paths:
                         - delimiter
                     passport:
                       type: object
-                      description: 여권번호가 검출된 건수
+                      description: 여권번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1364,7 +1376,7 @@ paths:
                         - delimiter
                     license:
                       type: object
-                      description: 운전면허번호가 검출된 건수
+                      description: 운전면허번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1378,7 +1390,7 @@ paths:
                         - delimiter
                     credit:
                       type: object
-                      description: 카드번호가 검출된 건수
+                      description: 카드번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1392,7 +1404,7 @@ paths:
                         - delimiter
                     account:
                       type: object
-                      description: 계좌번호가 검출된 건수
+                      description: 계좌번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1406,6 +1418,7 @@ paths:
                         - delimiter
                     phone:
                       type: object
+                      description: 전화번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1419,7 +1432,7 @@ paths:
                         - delimiter
                     mobile:
                       type: object
-                      description: 전화번호가 검출된 건수
+                      description: 휴대전화번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1433,7 +1446,7 @@ paths:
                         - delimiter
                     email:
                       type: object
-                      description: 메일주소가 검출된 건수
+                      description: 메일주소 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1447,7 +1460,7 @@ paths:
                         - delimiter
                     corp:
                       type: object
-                      description: 법인번호가 검출된 건수
+                      description: 법인번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1461,7 +1474,7 @@ paths:
                         - delimiter
                     business:
                       type: object
-                      description: 사업자번호가 검출된 건수
+                      description: 사업자번호 검출 정책
                       properties:
                         degree:
                           type: number
@@ -1475,7 +1488,7 @@ paths:
                         - delimiter
                     insurance:
                       type: object
-                      description: 건강보험번호가 검출된 건수
+                      description: 건강보험번호 검출 정책
                       properties:
                         degree:
                           type: number
