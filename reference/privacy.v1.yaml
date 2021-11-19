@@ -26,38 +26,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                properties:
-                  result:
-                    type: object
-                    properties:
-                      message:
-                        type: string
-                        minLength: 1
-                      detail:
-                        type: object
-                        properties:
-                          email:
-                            type: number
-                          foreign:
-                            type: number
-                          mobile:
-                            type: number
-                          social:
-                            type: number
-                        required:
-                          - email
-                          - foreign
-                          - mobile
-                          - social
-                    required:
-                      - message
-                      - detail
-                  content:
-                    type: string
-                    minLength: 1
-                required:
-                  - result
-                  - content
                 x-examples:
                   example-1:
                     result:
@@ -451,6 +419,62 @@ paths:
                       2-1234567926
                       2-1234567927
                       2-1234567928
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - message
+                      - detail
+                    properties:
+                      message:
+                        type: string
+                        minLength: 1
+                      detail:
+                        type: object
+                        required:
+                          - social
+                          - foreign
+                          - passport
+                          - license
+                          - credit
+                          - account
+                          - phone
+                          - mobile
+                          - email
+                          - corp
+                          - business
+                          - insurance
+                        properties:
+                          social:
+                            type: number
+                          foreign:
+                            type: number
+                          passport:
+                            type: number
+                          license:
+                            type: number
+                          credit:
+                            type: number
+                          account:
+                            type: number
+                          phone:
+                            type: number
+                          mobile:
+                            type: number
+                          email:
+                            type: number
+                          corp:
+                            type: number
+                          business:
+                            type: number
+                          insurance:
+                            type: number
+                  content:
+                    type: string
+                    minLength: 1
+                required:
+                  - result
+                  - content
               examples:
                 결과:
                   value:
@@ -867,87 +891,6 @@ paths:
             schema:
               description: ''
               type: object
-              properties:
-                rule:
-                  type: object
-                  properties:
-                    social:
-                      type: object
-                      properties:
-                        degree:
-                          type: number
-                        space:
-                          type: number
-                        delimiter:
-                          type: number
-                      required:
-                        - degree
-                        - space
-                        - delimiter
-                    foreign:
-                      type: object
-                      properties:
-                        degree:
-                          type: number
-                        space:
-                          type: number
-                        delimiter:
-                          type: number
-                      required:
-                        - degree
-                        - space
-                        - delimiter
-                    email:
-                      type: object
-                      properties:
-                        degree:
-                          type: number
-                        space:
-                          type: number
-                        delimiter:
-                          type: number
-                      required:
-                        - degree
-                        - space
-                        - delimiter
-                    erase_me:
-                      type: object
-                      properties:
-                        degree:
-                          type: number
-                        space:
-                          type: number
-                        delimiter:
-                          type: number
-                      required:
-                        - degree
-                        - space
-                        - delimiter
-                    mobile:
-                      type: object
-                      properties:
-                        degree:
-                          type: number
-                        space:
-                          type: number
-                        delimiter:
-                          type: number
-                      required:
-                        - degree
-                        - space
-                        - delimiter
-                  required:
-                    - social
-                    - foreign
-                    - email
-                    - erase_me
-                    - mobile
-                content:
-                  type: string
-                  minLength: 1
-              required:
-                - rule
-                - content
               x-examples:
                 example-1:
                   rule:
@@ -1355,6 +1298,184 @@ paths:
                     2-1234567926
                     2-1234567927
                     2-1234567928
+              properties:
+                rule:
+                  type: object
+                  properties:
+                    social:
+                      type: object
+                      description: 주민등록번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    foreign:
+                      type: object
+                      description: 외국인번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    passport:
+                      type: object
+                      description: 여권번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    license:
+                      type: object
+                      description: 운전면허번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    credit:
+                      type: object
+                      description: 카드번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    account:
+                      type: object
+                      description: 계좌번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    phone:
+                      type: object
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    mobile:
+                      type: object
+                      description: 전화번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    email:
+                      type: object
+                      description: 메일주소가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    corp:
+                      type: object
+                      description: 법인번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    business:
+                      type: object
+                      description: 사업자번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                    insurance:
+                      type: object
+                      description: 건강보험번호가 검출된 건수
+                      properties:
+                        degree:
+                          type: number
+                        space:
+                          type: number
+                        delimiter:
+                          type: number
+                      required:
+                        - degree
+                        - space
+                        - delimiter
+                content:
+                  type: string
+                  minLength: 1
+                  description: UTF-8로 URL 인코딩 한 치환된 문자열
+              required:
+                - rule
+                - content
             examples:
               요청:
                 value:
