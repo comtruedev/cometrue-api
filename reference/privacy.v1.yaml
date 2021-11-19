@@ -2,7 +2,25 @@ openapi: 3.0.0
 info:
   title: 개인정보 검출
   version: '1.0'
-  description: 이미지에서 표를 검출하여 텍스트로 제공합니다.
+  description: |-
+    **서비스 소개**
+
+    컴트루테크놀로지의 개인정보 필터를 통해 텍스트 내 개인정보를 검출합니다.
+    다양한 텍스트 영역 내 개인정보의 존재 여부를 확인할 수 있습니다.
+    다양한 패턴의 개인정보를 인식합니다.
+
+    **서비스 특징**
+
+    주민등록번호를 포함하여 약 12여 종의 개인정보 패턴을 지원합니다. (국내 최다)
+    후처리 관련 서비스와 연동 시 개인정보를 검출하여 다양하게 후처리 할 수 있습니다.
+
+    **적용 부분**
+
+    공공기관 및 일반 기업 : 개인정보보호 솔루션
+
+    PC : 파일 내 텍스트
+    웹 서버 : 게시글 본문
+    DB 서버 이메일 서버 등 다양한 위치의 텍스트에 대한 개인정보 검출이 필요한 경우
   contact:
     email: ask@comtrue.com
     url: 'https://cometrue.ai'
@@ -1911,12 +1929,7 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-        "image: not provided"<br>
-        "image base64 decode error"<br>
-        "Image cannot be read"<br>
-        "Image is too small to process"<br>
-        "image: property in this field does not match. base64 or url."<br>
-        "Image is empty"<br>
+
         </details>
       content:
         application/json:
@@ -1956,18 +1969,7 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-        "Onnx runtime error: 100"<br>
-        "Std Exception: 101"<br>
-        "OpenCV error: 100"<br>
-        "text detection error: 201": cannot find text<br>
-        "text detection error: 202": Vertex detection error<br>
-        "text detection error: 203": cannot find square<br>
-        "text detection error: 204": not enough to be square<br>
-        "text detection error: 206": not enough similar area<br>
-        "text detection error: 207": not enough contour<br>
-        "text detection error: 208": not enough group<br>
-        "object detection error: 209": cannot find object<br>
-        "Json decode error"
+
         </details>
       content:
         application/json:
