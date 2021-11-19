@@ -447,6 +447,9 @@ paths:
                       message:
                         type: string
                         minLength: 1
+                        enum:
+                          - '"success"'
+                          - '"fail"'
                       detail:
                         type: object
                         required:
@@ -502,6 +505,7 @@ paths:
                   content:
                     type: string
                     minLength: 1
+                    description: UTF-8로 URL 인코딩 한 치환된 문자열
                 required:
                   - result
                   - content
@@ -1503,7 +1507,7 @@ paths:
                 content:
                   type: string
                   minLength: 1
-                  description: UTF-8로 URL 인코딩 한 치환된 문자열
+                  description: UTF-8로 URL 인코딩 한 문자열
               required:
                 - rule
                 - content
