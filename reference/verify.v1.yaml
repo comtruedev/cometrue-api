@@ -20,7 +20,7 @@ info:
 servers:
   - description: Cometrue
 paths:
-  /jumin/_ocr:
+  /api/v1/jumin/_ocr:
     post:
       summary: 주민등록증 OCR (내부api)
       operationId: post-juminocr
@@ -121,7 +121,7 @@ paths:
         - api_key: []
       x-internal: true
     parameters: []
-  /driver/_ocr:
+  /api/v1/driver/_ocr:
     post:
       summary: 운전면허증 OCR (내부api)
       operationId: post-driverocr
@@ -238,7 +238,7 @@ paths:
         - api_key: []
       x-internal: true
     parameters: []
-  /alien/_ocr:
+  /api/v1/alien/_ocr:
     post:
       summary: 외국인등록증 OCR (내부api)
       operationId: post-alienocr
@@ -326,7 +326,7 @@ paths:
         - api_key: []
       x-internal: true
     parameters: []
-  /driver/verify:
+  /api/v1/driver/verify:
     post:
       summary: 운전면허증 진위확인
       operationId: post-driververify
@@ -485,9 +485,9 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: false
+      x-internal: true
     parameters: []
-  /jumin/verify:
+  /api/v1/jumin/verify:
     post:
       summary: 주민등록증 진위확인
       operationId: post-juminrverify
@@ -628,9 +628,9 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: false
+      x-internal: true
     parameters: []
-  /alien/verify:
+  /api/v1/alien/verify:
     post:
       summary: 외국인등록증 진위확인
       operationId: post-alienverify

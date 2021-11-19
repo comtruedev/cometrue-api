@@ -19,9 +19,8 @@ info:
     [Contact](mailto:ask@comtrue.com) | [cometrue.ai AI API](https://cometrue.ai) | [Terms of Service](https://cometrue.ai/index.php/ai-api-terms-of-service/)
 servers:
   - description: ''
-    url: /api/v1
 paths:
-  /id/ocr:
+  /api/v1/id/ocr:
     post:
       summary: 신분증 OCR
       operationId: post-idocr
@@ -207,7 +206,7 @@ paths:
         description: ''
       x-internal: false
     parameters: []
-  /jumin/ocr:
+  /api/v1/jumin/ocr:
     post:
       summary: 주민등록증 OCR
       operationId: post-idocrjumin
@@ -312,7 +311,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /driver/ocr:
+  /api/v1/driver/ocr:
     post:
       summary: 운전면허증 OCR
       operationId: post-idocrdriver
@@ -432,7 +431,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /alien/ocr:
+  /api/v1/alien/ocr:
     post:
       summary: 외국인등록증 OCR
       operationId: post-idocralien
@@ -537,7 +536,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /passport/ocr:
+  /api/v1/passport/ocr:
     post:
       summary: 여권 OCR
       operationId: post-idocrpassport
@@ -631,7 +630,7 @@ paths:
       security: []
       x-internal: false
     parameters: []
-  /kpassport/ocr:
+  /api/v1/kpassport/ocr:
     post:
       summary: 한국여권 OCR
       operationId: post-idocrkpassport

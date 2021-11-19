@@ -19,9 +19,9 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: /api/v1
+  - {}
 paths:
-  /face/detect:
+  /api/v1/face/detect:
     post:
       summary: 얼굴검출
       operationId: post-facedetection
