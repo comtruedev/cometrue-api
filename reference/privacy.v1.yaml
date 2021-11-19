@@ -465,6 +465,7 @@ paths:
                           - corp
                           - business
                           - insurance
+                        description: 개인정보 검출된 건수
                         properties:
                           social:
                             type: number
