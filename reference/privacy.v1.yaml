@@ -32,7 +32,7 @@ paths:
   /api/v1/text/privacy-check:
     post:
       summary: 개인정보 검출
-      operationId: post-tableocr
+      operationId: post-privacy-check
       responses:
         '200':
           description: |-
