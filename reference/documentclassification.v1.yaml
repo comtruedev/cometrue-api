@@ -46,9 +46,8 @@ info:
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: Cometrue
-    url: /api/v1
 paths:
-  /document/classify:
+  /api/v1/document/classify:
     post:
       summary: 개인 증명서 분류(스캔)
       operationId: post-documentclassification
