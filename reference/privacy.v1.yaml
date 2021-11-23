@@ -5310,7 +5310,7 @@ paths:
                 document:
                   type: string
                   minLength: 1
-                  description: 이미지를 base64로 인코딩 한 스트링
+                  description: '문서, ole base64로 인코딩 한 스트링'
               required:
                 - rule
                 - document
