@@ -291,7 +291,10 @@ paths:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
-      description: '이미지에서 표를 인식하여 텍스트를 검출하고, 좌표와 함께 리스트로 제공합니다.'
+      description: |-
+        이미지에서 표를 인식하여 텍스트를 검출하고, 좌표와 함께 리스트로 제공합니다.
+
+        (이미지는 회전되지 않은 상태이어야 합니다.)
     parameters: []
 components:
   schemas: {}
