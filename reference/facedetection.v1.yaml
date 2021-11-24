@@ -74,11 +74,6 @@ paths:
                         height:
                           type: number
                           description: 얼굴 영역 세로길이
-                        tag:
-                          type: string
-                          description: ''
-                          enum:
-                            - face
                       required:
                         - height
               examples:
