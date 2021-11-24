@@ -7,7 +7,7 @@ info:
     url: 'https://cometrue.ai'
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
-  description: Access Token 발급 과정
+  description: API 게이트웨이로부터 Access Token 발급 과정
 servers:
   - {}
 paths:
