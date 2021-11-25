@@ -202,7 +202,7 @@ paths:
                   description: |-
                     이미지를 base64로 인코딩 한 스트링
 
-                    지원포맷: jpg(jpeg), png, tif(tiff), bmp, gif
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 model_type:
                   type: integer
                   description: 모델타입
