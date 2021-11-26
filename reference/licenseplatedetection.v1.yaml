@@ -71,33 +71,23 @@ paths:
                         height:
                           type: number
                           description: 번호판 영역 세로길이
-                        tag:
-                          type: string
-                          description: ''
-                          enum:
-                            - license_plate
                       required:
                         - index
                         - x
                         - 'y'
                         - width
                         - height
-                        - tag
                 required:
                   - ROI
               examples:
                 결과:
                   value:
-                    Template: ''
                     ROI:
                       - index: 0
                         x: 277
                         'y': 421
                         width: 128
                         height: 36
-                        text: ''
-                        tag: license_plate
-                        language: ''
         '400':
           $ref: '#/components/responses/400'
         '401':

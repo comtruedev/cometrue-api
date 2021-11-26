@@ -21,7 +21,7 @@ info:
 servers:
   - {}
 paths:
-  /api/v1/faces/similarity:
+  /api/v1/face/similarity:
     post:
       summary: 얼굴비교
       operationId: post-facesimilarity
@@ -76,13 +76,13 @@ paths:
                   description: |-
                     이미지를 base64로 인코딩 한 스트링
 
-                    지원포맷: jpg(jpeg), png, tif(tiff), bmp, gif
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 image2:
                   type: string
                   description: |-
                     이미지를 base64로 인코딩 한 스트링
 
-                    지원포맷: jpg(jpeg), png, tif(tiff), bmp, gif
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
               required:
                 - image
                 - image2
