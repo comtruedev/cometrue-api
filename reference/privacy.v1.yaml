@@ -4720,7 +4720,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 파일에서 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
+      description: 파일에서 개인정보를 검출하여 검출 횟수와 검출된 문자열을 제공합니다.
       parameters: []
       requestBody:
         content:
