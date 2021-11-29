@@ -1508,7 +1508,7 @@ paths:
                 content:
                   type: string
                   minLength: 1
-                  description: UTF-8로 URL 인코딩 한 문자열
+                  description: 개인정보 검출할 문자열
               required:
                 - rule
                 - content
