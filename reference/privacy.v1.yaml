@@ -1505,13 +1505,13 @@ paths:
                         - degree
                         - space
                         - delimiter
-                content:
+                data:
                   type: string
                   minLength: 1
                   description: 개인정보 검출할 문자열
               required:
                 - rule
-                - content
+                - data
             examples:
               요청:
                 value:
