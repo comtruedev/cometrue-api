@@ -324,7 +324,6 @@ components:
         "image base64 decode error"<br>
         "Image cannot be read"<br>
         "Image is too small to process"<br>
-        "image: property in this field does not match. base64 or url."<br>
         "Image is empty"<br>
         </details>
       content:
