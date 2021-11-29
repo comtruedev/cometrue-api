@@ -1536,7 +1536,7 @@ paths:
                       degree: 3
                       space: 0
                       delimiter: 3
-                  content: |
+                  data: |
                     주민등록번호
                     940222-1080516
                     840516-1094943
