@@ -2335,7 +2335,7 @@ paths:
               properties:
                 rule:
                   type: string
-                  description: "json string\n\nex) \n<br>\n{\n        \"social\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n        \"foreign\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n\t    \"email\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":2\n\t    },\n        \"mobile\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    },\n          \"phone\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    }\n    }"
+                  description: "검출정책(json string)\n\nex) \n<br>\n{\n        \"social\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n        \"foreign\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n\t    \"email\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":2\n\t    },\n        \"mobile\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    },\n          \"phone\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    }\n    }"
                 data:
                   type: string
                   minLength: 1
