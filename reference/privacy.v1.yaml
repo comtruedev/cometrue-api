@@ -452,6 +452,7 @@ paths:
                           - '"fail"'
                       detail:
                         type: object
+                        description: 개인정보 검출된 건수
                         required:
                           - social
                           - foreign
@@ -465,7 +466,6 @@ paths:
                           - corp
                           - business
                           - insurance
-                        description: 개인정보 검출된 건수
                         properties:
                           social:
                             type: number
@@ -506,7 +506,7 @@ paths:
                   content:
                     type: string
                     minLength: 1
-                    description: UTF-8로 URL 인코딩 한 치환된 문자열
+                    description: 비식별화 문자열
                 required:
                   - result
                   - content
