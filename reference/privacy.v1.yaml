@@ -1505,6 +1505,9 @@ paths:
                         - degree
                         - space
                         - delimiter
+                rst_masked:
+                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
+                  type: boolean
                 data:
                   type: string
                   minLength: 1
@@ -1528,15 +1531,12 @@ paths:
                       degree: 3
                       space: 0
                       delimiter: 2
-                    erase_me:
-                      degree: 3
-                      space: 3
-                      delimiter: 3
                     mobile:
                       degree: 3
                       space: 0
                       delimiter: 3
-                  data: |
+                  rst_masked: true
+                  data: |+
                     주민등록번호
                     940222-1080516
                     840516-1094943
@@ -1920,6 +1920,7 @@ paths:
                     2-1234567926
                     2-1234567927
                     2-1234567928
+
               URL Example:
                 value:
                   id_type: jumin
@@ -3510,8 +3511,8 @@ paths:
                         - space
                         - delimiter
                 rst_masked:
-                  type: string
                   description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
+                  type: boolean
                 data:
                   type: string
                   minLength: 1
