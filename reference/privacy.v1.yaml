@@ -1536,7 +1536,7 @@ paths:
                       space: 0
                       delimiter: 3
                   rst_masked: true
-                  data: |+
+                  data: |
                     주민등록번호
                     940222-1080516
                     840516-1094943
@@ -1920,7 +1920,6 @@ paths:
                     2-1234567926
                     2-1234567927
                     2-1234567928
-
               URL Example:
                 value:
                   id_type: jumin
@@ -4781,9 +4780,6 @@ components:
             Query image is too small to process:
               value:
                 message: Image is too small to process
-            image property does not match:
-              value:
-                message: 'image: property in this field does not match. base64 or url.'
             image empty:
               value:
                 message: Image is empty

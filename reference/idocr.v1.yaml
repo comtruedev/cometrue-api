@@ -797,6 +797,7 @@ components:
         "Image cannot be read"<br>
         "Image is too small to process"<br>
         "Image is empty"<br>
+        "request format or type is not valid"<br>
         </details>
       content:
         application/json:
@@ -821,9 +822,9 @@ components:
             Query image is too small to process:
               value:
                 message: Image is too small to process
-            image property does not match:
+            request format or type is not valid:
               value:
-                message: 'image: property in this field does not match. base64 or url.'
+                message: request format or type is not valid
             image empty:
               value:
                 message: Image is empty
@@ -928,6 +929,7 @@ components:
         "Image is too small to process"<br>
         "id_type: is not correct."<br>
         "Image is empty"<br>
+        "request format or type is not valid"<br>
         </details>
       content:
         application/json:
@@ -961,9 +963,9 @@ components:
             id_type not correct:
               value:
                 message: 'id_type: is not correct.'
-            image property does not match:
+            request format or type is not valid:
               value:
-                message: 'image: property in this field does not match. base64 or url.'
+                message: request format or type is not valid
             image empty:
               value:
                 message: Image is empty

@@ -232,9 +232,11 @@ components:
         "image base64 decode error"<br>
         "Image cannot be read"<br>
         "Image is too small to process"<br>
-        "image: property in this field does not match. base64 or url."<br>
+        "request format or type is not valid"<br>
         "Image is empty"<br>
         "model_type: not provided."<br>
+        "model_type: is not correct."<br>
+        "request format or type is not valid"<br>
         </details>
       content:
         application/json:
@@ -260,15 +262,18 @@ components:
             Query image is too small to process:
               value:
                 message: Image is too small to process
-            image property does not match:
+            request format or type is not valid:
               value:
-                message: 'image: property in this field does not match. base64 or url.'
+                message: request format or type is not valid
             image empty:
               value:
                 message: Image is empty
             model_type not provided:
               value:
                 message: 'model_type: not provided.'
+            model_type is not correct:
+              value:
+                message: 'model_type: is not correct.'
     '409':
       description: |-
         Conflict
