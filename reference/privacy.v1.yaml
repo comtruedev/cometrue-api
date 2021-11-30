@@ -2843,13 +2843,61 @@ paths:
                           insurance:
                             type: number
                             description: 건강보험번호가 검출된 건수
-                  image:
-                    type: string
-                    minLength: 1
-                    description: UTF-8로 URL 인코딩 한 치환된 문자열
+                  match:
+                    type: object
+                    description: 검출된 정책과 마스킹된 문자열
+                    properties:
+                      social:
+                        type: array
+                        items:
+                          type: string
+                      foreign:
+                        type: array
+                        items:
+                          type: string
+                      passport:
+                        type: array
+                        items:
+                          type: string
+                      license:
+                        type: array
+                        items:
+                          type: string
+                      credit:
+                        type: array
+                        items:
+                          type: string
+                      account:
+                        type: array
+                        items:
+                          type: string
+                      phone:
+                        type: array
+                        items:
+                          type: string
+                      mobile:
+                        type: array
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        items:
+                          type: string
+                      corp:
+                        type: array
+                        items:
+                          type: string
+                      business:
+                        type: array
+                        items:
+                          type: string
+                      insurance:
+                        type: array
+                        items:
+                          type: string
                 required:
                   - result
-                  - image
+                  - match
               examples:
                 결과:
                   value:
@@ -3845,13 +3893,13 @@ paths:
                         - degree
                         - space
                         - delimiter
-                image:
+                data:
                   type: string
                   minLength: 1
                   description: 이미지를 base64로 인코딩 한 스트링
               required:
                 - rule
-                - image
+                - data
             examples:
               요청:
                 value:
@@ -4270,7 +4318,7 @@ paths:
         - api_key: []
       x-internal: false
     parameters: []
-  /api/v1/subfile/privacy-check:
+  /api/v1/document/privacy-check:
     post:
       summary: 개인정보 검출(파일)
       operationId: post-privacy-check
@@ -4744,13 +4792,61 @@ paths:
                           insurance:
                             type: number
                             description: 건강보험번호가 검출된 건수
-                  document:
-                    type: string
-                    minLength: 1
-                    description: UTF-8로 URL 인코딩 한 치환된 문자열
+                  match:
+                    type: object
+                    description: 검출된 정책과 마스킹된 문자열
+                    properties:
+                      social:
+                        type: array
+                        items:
+                          type: string
+                      foreign:
+                        type: array
+                        items:
+                          type: string
+                      passport:
+                        type: array
+                        items:
+                          type: string
+                      license:
+                        type: array
+                        items:
+                          type: string
+                      credit:
+                        type: array
+                        items:
+                          type: string
+                      account:
+                        type: array
+                        items:
+                          type: string
+                      phone:
+                        type: array
+                        items:
+                          type: string
+                      mobile:
+                        type: array
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        items:
+                          type: string
+                      corp:
+                        type: array
+                        items:
+                          type: string
+                      business:
+                        type: array
+                        items:
+                          type: string
+                      insurance:
+                        type: array
+                        items:
+                          type: string
                 required:
                   - result
-                  - document
+                  - match
               examples:
                 결과:
                   value:
@@ -5746,13 +5842,17 @@ paths:
                         - degree
                         - space
                         - delimiter
-                document:
+                data:
                   type: string
                   minLength: 1
-                  description: '문서, ole base64로 인코딩 한 스트링'
+                  description: '문서, ole파일을 base64로 인코딩 한 스트링'
+                rst_masked:
+                  type: boolean
+                  default: false
+                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
               required:
                 - rule
-                - document
+                - data
             examples:
               요청:
                 value:
