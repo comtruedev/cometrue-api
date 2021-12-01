@@ -1348,6 +1348,12 @@ paths:
                       properties:
                         degree:
                           type: number
+                          description: |-
+                            강도
+
+                            `1`-생년월일
+                            `2`-생년월일+성별
+                            `3`-주민등록번호
                         space:
                           type: number
                         delimiter:
@@ -1362,6 +1368,12 @@ paths:
                       properties:
                         degree:
                           type: number
+                          description: |-
+                            강도
+
+                            `1`-생년월일
+                            `2`-생년월일+성별
+                            `3`- 외국인등록번호
                         space:
                           type: number
                         delimiter:
@@ -1432,6 +1444,12 @@ paths:
                       properties:
                         degree:
                           type: number
+                          description: |-
+                            강도
+
+                            `1`-전화번호(02)
+                            `2`-국제전화번호(82)
+                            `3`-전화번호(02) + 국제전화번호(82)
                         space:
                           type: number
                         delimiter:
@@ -1446,6 +1464,12 @@ paths:
                       properties:
                         degree:
                           type: number
+                          description: |-
+                            강도
+
+                            `1`-핸드폰번호(010)
+                            `2`-국제전화번호(82)
+                            `3`-핸드폰번호(010) + 국제전화번호(82)
                         space:
                           type: number
                         delimiter:
@@ -2371,7 +2395,12 @@ paths:
                       space: 0
                       delimiter: 0
                   data: string
-        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+        description: |-
+          요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+
+          degree: 강도
+          space: 패턴공백(1,2,3,4)
+          delimiter: 구분자(1,2,3,4)
       security:
         - api_key: []
       x-internal: false
