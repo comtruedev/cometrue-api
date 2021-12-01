@@ -923,7 +923,7 @@ paths:
 
         **주의사항**
         - 같은 정책을 중복하여 입력한 경우 마지막에 입력된 정책으로 수행합니다.
-        - 허용된 degree, space, delmiter 값을 벗어날 경우 기본값으로 변경되어 수행합니다.
+        - space, delimiter가 누락되거나 허용된 값을 벗어날 경우 기본값으로 수행하고, degree가 누락되거나 허용된 값을 벗어 날 경우 수행하지 않습니다.
       parameters: []
       requestBody:
         content:
@@ -2341,10 +2341,11 @@ paths:
                 rule:
                   type: string
                   description: "검출정책(json string)\n\nex) \n<br>\n{\n        \"social\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n        \"foreign\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n\t    \"email\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":2\n\t    },\n        \"mobile\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    },\n          \"phone\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    }\n    }"
+                rst_masked:
+                  type: boolean
                 data:
-                  type: string
-                  minLength: 1
                   description: 개인정보 검출할 문자열
+                  type: string
               required:
                 - rule
                 - data
