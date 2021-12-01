@@ -918,7 +918,12 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
+      description: |-
+        텍스트에서 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
+
+        **주의사항**
+        - 같은 정책을 중복하여 입력한 경우 마지막에 입력된 정책으로 수행합니다.
+        - 허용된 degree, space, delmiter 값을 벗어날 경우 기본값으로 변경되어 수행합니다.
       parameters: []
       requestBody:
         content:
@@ -2364,7 +2369,7 @@ paths:
                       space: 0
                       delimiter: 0
                   data: string
-        description: ''
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security:
         - api_key: []
       x-internal: false
@@ -2922,7 +2927,12 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 이미지에서 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
+      description: |-
+        이미지에서 개인정보를 검출하여 검출 횟수와 비식별화 문자열을 제공합니다.
+
+        **주의사항**
+        - 같은 정책을 중복하여 입력한 경우 마지막에 입력된 정책으로 수행합니다.
+        - 허용된 degree, space, delmiter 값을 벗어날 경우 기본값으로 변경되어 수행합니다.
       parameters: []
       requestBody:
         content:
@@ -3546,7 +3556,7 @@ paths:
                   id_type: jumin
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
-        description: ''
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security:
         - api_key: []
       x-internal: false
@@ -4107,7 +4117,12 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: 파일에서 개인정보를 검출하여 검출 횟수와 검출된 문자열을 제공합니다.
+      description: |-
+        파일에서 개인정보를 검출하여 검출 횟수와 검출된 문자열을 제공합니다.
+
+        **주의사항**
+        - 같은 정책을 중복하여 입력한 경우 마지막에 입력된 정책으로 수행합니다.
+        - 허용된 degree, space, delmiter 값을 벗어날 경우 기본값으로 변경되어 수행합니다.
       parameters: []
       requestBody:
         content:
@@ -4732,7 +4747,7 @@ paths:
                   id_type: jumin
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
-        description: ''
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security:
         - api_key: []
       x-internal: false
