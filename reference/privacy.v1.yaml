@@ -2378,7 +2378,38 @@ paths:
               properties:
                 rule:
                   type: string
-                  description: "검출정책(json string)\n\nex) \n<br>\n{\n        \"social\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n        \"foreign\":{\n\t\t    \"degree\":3,\n\t\t    \"space\":3,\n\t\t    \"delimiter\":3\n\t    },\n\t    \"email\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":2\n\t    },\n        \"mobile\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    },\n          \"phone\":{\n            \"degree\":3,\n            \"space\":0,\n            \"delimiter\":3\n\t    }\n    }"
+                  description: |-
+                    검출정책(json string)
+
+                    ex) 
+                    <br>
+                    {
+                        "social": {
+                            "degree": 3,
+                            "space": 3,
+                            "delimiter": 3
+                        },
+                        "foreign": {
+                            "degree": 3,
+                            "space": 3,
+                            "delimiter": 3
+                        },
+                        "email": {
+                            "degree": 3,
+                            "space": 0,
+                            "delimiter": 2
+                        },
+                        "mobile": {
+                            "degree": 3,
+                            "space": 0,
+                            "delimiter": 3
+                        },
+                        "phone": {
+                            "degree": 3,
+                            "space": 0,
+                            "delimiter": 3
+                        }
+                    }
                 rst_masked:
                   type: boolean
                   description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
