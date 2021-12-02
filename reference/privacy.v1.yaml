@@ -4849,7 +4849,11 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-
+        "error": "empty data"<br>
+        "error": "invalid request format"<br>
+        "error": "ocr server failed"<br>
+        "error": "invalid file format"<br>
+        "error": "invalid base64 string"
         </details>
       content:
         application/json:
@@ -4969,10 +4973,45 @@ components:
               value:
                 message: 'text detection error: 206'
     '415':
-      description: Unsupported Media Type
+      description: |-
+        Unsupported Media Type
+
+        "error": "invalid Content-Type"
       content:
         application/json:
           schema:
+            description: ''
+            type: object
             properties:
-              id:
+              result:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              error:
                 type: string
+                minLength: 1
+            required:
+              - result
+              - error
+            x-examples:
+              example-1:
+                result:
+                  message: fail
+                error: empty data
+          examples:
+            invalid Content-Type:
+              value:
+                result:
+                  message: fail
+                error: invalid Content-Type
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+          examples:
+            example-1:
+              value: {}
