@@ -4855,27 +4855,51 @@ components:
             description: ''
             type: object
             properties:
-              message:
+              result:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              error:
                 type: string
                 minLength: 1
             required:
-              - message
+              - result
+              - error
+            x-examples:
+              example-1:
+                result:
+                  message: fail
+                error: is empty file
           examples:
-            image not given:
+            empty data:
               value:
-                message: 'image: not provided'
-            base64 decoding of the image failed:
+                result:
+                  message: fail
+                error: empty data
+            invalid request:
               value:
-                message: image base64 decode error
-            Image not readable:
+                result:
+                  message: fail
+                error: invalid request format
+            ocr server failed:
               value:
-                message: Image cannot be read
-            Query image is too small to process:
+                result:
+                  message: fail
+                error: ocr server failed
+            invalid file format:
               value:
-                message: Image is too small to process
-            image empty:
+                result:
+                  message: fail
+                error: invalid file format
+            invalid base64 string:
               value:
-                message: Image is empty
+                result:
+                  message: fail
+                error: invalid base64 string
     '409':
       description: |-
         Conflict
@@ -4942,3 +4966,11 @@ components:
             not enough similar area:
               value:
                 message: 'text detection error: 206'
+    '415':
+      description: Unsupported Media Type
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
