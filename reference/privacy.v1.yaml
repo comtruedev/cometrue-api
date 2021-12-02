@@ -913,6 +913,8 @@ paths:
             허가되지 않은 사용자의 접근
         '409':
           $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
         '500':
           description: |-
             Internal Server Error
