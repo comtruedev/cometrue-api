@@ -1551,12 +1551,13 @@ paths:
                         - space
                         - delimiter
                 rst_masked:
-                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
                   type: boolean
+                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
+                  default: false
                 data:
                   type: string
                   minLength: 1
-                  description: 개인정보 검출할 문자열
+                  description: 개인정보 검출할 문자열(평문 또는 url encoding된 평문
               required:
                 - rule
                 - data
@@ -3599,8 +3600,9 @@ paths:
                         - space
                         - delimiter
                 rst_masked:
-                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
                   type: boolean
+                  description: true일경우 검출한 문자열을 마스킹해서 결과로 제공
+                  default: false
                 data:
                   type: string
                   minLength: 1
