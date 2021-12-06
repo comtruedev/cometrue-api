@@ -1557,7 +1557,7 @@ paths:
                 data:
                   type: string
                   minLength: 1
-                  description: 개인정보 검출할 문자열(평문 또는 url encoding된 평문
+                  description: 개인정보 검출할 문자열(평문 또는 url encoding된 평문)
               required:
                 - rule
                 - data
