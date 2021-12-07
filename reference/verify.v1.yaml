@@ -485,7 +485,7 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: true
+      x-internal: false
     parameters: []
   /api/v1/jumin/verify:
     post:
@@ -628,7 +628,7 @@ paths:
         description: ''
       security:
         - api_key: []
-      x-internal: true
+      x-internal: false
     parameters: []
   /api/v1/alien/verify:
     post:
