@@ -433,13 +433,6 @@ paths:
             examples:
               운전면허증 검증:
                 value:
-                  certs:
-                    Name: ''
-                    Number:
-                      - ''
-                      - ''
-                    PFX: ''
-                    Password: ''
                   idcard:
                     name: 홍길동
                     birthday:
@@ -592,17 +585,18 @@ paths:
               주민등록증 검증:
                 value:
                   certs:
-                    Name: ''
-                    Number:
-                      - ''
-                      - ''
-                    PFX: ''
-                    Password: ''
+                    name: ''
+                    number:
+                      - '111111'
+                      - '211111'
+                    key: .key (base64)
+                    cert: .cert or .der (base64)
+                    password: ''
                   idcard:
                     name: 홍길동
                     number:
-                      - '123456'
-                      - '1234567'
+                      - '111111'
+                      - '211111'
                     issue_date: '20100101'
         description: ''
       security:
