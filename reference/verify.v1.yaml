@@ -398,30 +398,6 @@ paths:
                       - '11'
                     code: 7w6gen
               properties:
-                certs:
-                  type: object
-                  required:
-                    - Name
-                    - Number
-                    - PFX
-                    - Password
-                  properties:
-                    Name:
-                      type: string
-                      description: 성명
-                    Number:
-                      type: array
-                      minItems: 2
-                      description: 공동인증서 주민번호
-                      maxItems: 2
-                      items:
-                        type: string
-                    PFX:
-                      type: string
-                      description: 공동인증서
-                    Password:
-                      type: string
-                      description: 공동인증서 비밀번호
                 idcard:
                   type: object
                   required:
@@ -453,7 +429,6 @@ paths:
                       minLength: 1
                       description: 식별코드
               required:
-                - certs
                 - idcard
             examples:
               운전면허증 검증:
