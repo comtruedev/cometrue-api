@@ -439,12 +439,12 @@ paths:
                       - '1990'
                       - '02'
                       - '16'
-                    number:
-                      - '12'
-                      - '34'
-                      - '567890'
-                      - '12'
-                    code: 7w6gen
+                  number:
+                    - '12'
+                    - '34'
+                    - '567890'
+                    - '12'
+                  code: 7w6gen
               URL Example:
                 value:
                   id_type: jumin
@@ -729,16 +729,17 @@ paths:
               외국인 등록증검증:
                 value:
                   certs:
-                    Name: ''
-                    Number:
-                      - ''
-                      - ''
-                    PFX: ''
-                    Password: ''
+                    name: ''
+                    number:
+                      - '111111'
+                      - '211111'
+                    key: .key (base64)
+                    cert: .cert or .der (base64)
+                    password: ''
                   idcard:
                     number:
-                      - '870412'
-                      - '5101297'
+                      - '111111'
+                      - '211111'
                     issue_date: '20100101'
         description: ''
       security:
