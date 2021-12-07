@@ -555,10 +555,10 @@ paths:
                         type: string
                     Key:
                       type: string
-                      description: 공동인증서
+                      description: 공동인증서 .key파일을 base64로 인코딩한 문자열
                     Cert:
                       type: string
-                      description: 공동인증서
+                      description: 공동인증서 .cert 혹은 .der 파일을 base64로 인코딩한 문자열
                     Password:
                       type: string
                       description: 공동인증서 비밀번호
@@ -702,10 +702,10 @@ paths:
                         type: string
                     Key:
                       type: string
-                      description: 공동인증서
+                      description: 공동인증서 .key파일을 base64로 인코딩한 문자열
                     Cert:
                       type: string
-                      description: 공동인증서
+                      description: 공동인증서 .cert 혹은 .der 파일을 base64로 인코딩한 문자열
                     Password:
                       type: string
                       description: 공동인증서 비밀번호
