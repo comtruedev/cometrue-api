@@ -537,29 +537,29 @@ paths:
                 certs:
                   type: object
                   required:
-                    - Name
-                    - Number
-                    - Key
-                    - Cert
-                    - Password
+                    - name
+                    - number
+                    - key
+                    - cert
+                    - password
                   properties:
-                    Name:
+                    name:
                       type: string
                       description: 성명
-                    Number:
+                    number:
                       type: array
                       minItems: 2
                       description: 공동인증서 주민등록번호
                       maxItems: 2
                       items:
                         type: string
-                    Key:
+                    key:
                       type: string
                       description: 공동인증서 .key파일을 base64로 인코딩한 문자열
-                    Cert:
+                    cert:
                       type: string
                       description: 공동인증서 .cert 혹은 .der 파일을 base64로 인코딩한 문자열
-                    Password:
+                    password:
                       type: string
                       description: 공동인증서 비밀번호
                 idcard:
@@ -684,29 +684,29 @@ paths:
                 certs:
                   type: object
                   required:
-                    - Name
-                    - Number
-                    - Key
-                    - Cert
-                    - Password
+                    - name
+                    - number
+                    - key
+                    - cert
+                    - password
                   properties:
-                    Name:
+                    name:
                       type: string
                       description: 성명
-                    Number:
+                    number:
                       type: array
                       minItems: 2
                       description: 공동인증서 외국인등록번호
                       maxItems: 2
                       items:
                         type: string
-                    Key:
+                    key:
                       type: string
                       description: 공동인증서 .key파일을 base64로 인코딩한 문자열
-                    Cert:
+                    cert:
                       type: string
                       description: 공동인증서 .cert 혹은 .der 파일을 base64로 인코딩한 문자열
-                    Password:
+                    password:
                       type: string
                       description: 공동인증서 비밀번호
                 idcard:
