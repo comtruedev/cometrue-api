@@ -539,7 +539,8 @@ paths:
                   required:
                     - Name
                     - Number
-                    - PFX
+                    - Key
+                    - Cert
                     - Password
                   properties:
                     Name:
@@ -552,7 +553,10 @@ paths:
                       maxItems: 2
                       items:
                         type: string
-                    PFX:
+                    Key:
+                      type: string
+                      description: 공동인증서
+                    Cert:
                       type: string
                       description: 공동인증서
                     Password:
@@ -682,7 +686,8 @@ paths:
                   required:
                     - Name
                     - Number
-                    - PFX
+                    - Key
+                    - Cert
                     - Password
                   properties:
                     Name:
@@ -695,7 +700,10 @@ paths:
                       maxItems: 2
                       items:
                         type: string
-                    PFX:
+                    Key:
+                      type: string
+                      description: 공동인증서
+                    Cert:
                       type: string
                       description: 공동인증서
                     Password:
