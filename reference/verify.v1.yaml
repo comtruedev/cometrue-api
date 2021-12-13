@@ -439,12 +439,12 @@ paths:
                       - '1990'
                       - '02'
                       - '16'
-                  number:
-                    - '12'
-                    - '34'
-                    - '567890'
-                    - '12'
-                  code: 7w6gen
+                    number:
+                      - '12'
+                      - '34'
+                      - '567890'
+                      - '12'
+                    code: 7w6gen
               URL Example:
                 value:
                   id_type: jumin
