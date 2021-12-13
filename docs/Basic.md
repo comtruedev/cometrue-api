@@ -30,6 +30,6 @@ HTTP Status Code | HTTP | Description
  401 | Unauthorized | 허가되자 않은 접근
  404 | Not Found | API 호출 URL이 잘못되었을 경우
  422 | Unprocessable Entity | API 구독이 취소되거나, 평가판이 종료되었을 경우
- 429 | Too many Request |비정상적으로 호출을 많이 시도하였을 때
+ 429 | Too many Request |API 제공량을 초과하여 호출을 시도하였을 때
  500 | Internal Server Error | API 호출은 정상적으로 했지만 API 서버 오류로 인한 경우
 
