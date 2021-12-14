@@ -46,6 +46,7 @@ info:
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
   - description: Cometrue
+    url: 'https://api.comtrue.com'
 paths:
   /api/v1/document/classify:
     post:

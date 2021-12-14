@@ -19,6 +19,7 @@ info:
     [Contact](mailto:ask@comtrue.com) | [cometrue.ai AI API](https://cometrue.ai) | [Terms of Service](https://cometrue.ai/index.php/ai-api-terms-of-service/)
 servers:
   - description: ''
+    url: 'https://api.comtrue.com'
 paths:
   /api/v1/id/ocr:
     post:
