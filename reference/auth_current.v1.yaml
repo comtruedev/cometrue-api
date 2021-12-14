@@ -9,7 +9,7 @@ info:
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
   description: API 게이트웨이로부터 Access Token 발급 과정
 servers:
-  - {}
+  - url: 'https://api.comtrue.com'
 paths:
   /auth/token:
     post:
