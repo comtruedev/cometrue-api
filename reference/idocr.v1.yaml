@@ -173,7 +173,7 @@ paths:
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: Bearer <token_string>
+          description: API Access Token
           required: true
       requestBody:
         content:
