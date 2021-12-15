@@ -791,10 +791,7 @@ paths:
     parameters: []
 components:
   schemas: {}
-  securitySchemes:
-    'Authorization: <token_string>':
-      type: http
-      scheme: bearer
+  securitySchemes: {}
   responses:
     '400':
       description: |
