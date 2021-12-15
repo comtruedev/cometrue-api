@@ -19,7 +19,7 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.comtrue.com'
+  - url: 'http://127.0.0.1'
 paths:
   /api/v1/face/detect:
     post:
@@ -207,8 +207,6 @@ paths:
                   image: 'https://www.cometrue.ai/data/license.jpg'
                   is_url: true
         description: ''
-      security:
-        - api_key: []
       x-internal: false
     parameters: []
 components:
