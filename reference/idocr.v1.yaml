@@ -167,7 +167,13 @@ paths:
 
         - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
         - 지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: Bearer <token_string>
+          required: true
       requestBody:
         content:
           application/json:
