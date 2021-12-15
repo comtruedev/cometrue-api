@@ -792,10 +792,9 @@ paths:
 components:
   schemas: {}
   securitySchemes:
-    Authorization:
-      name: Bearer <token_string>
-      type: apiKey
-      in: header
+    asdfasdfasdfasdfasdfasdf:
+      type: http
+      scheme: bearer
   responses:
     '400':
       description: |
