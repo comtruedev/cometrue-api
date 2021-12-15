@@ -785,11 +785,10 @@ paths:
 components:
   schemas: {}
   securitySchemes:
-    api_key:
-      name: api_key
+    Authorization:
+      name: Bearer <token_string>
       type: apiKey
       in: query
-      description: api.cometrue.ai에서 발급받은 API key
   responses:
     '400':
       description: |
