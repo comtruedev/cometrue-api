@@ -56,9 +56,14 @@ paths:
                   status:
                     type: string
                     minLength: 1
+                    description: 상태
+                    enum:
+                      - success
+                      - fail
                   auth_code:
                     type: string
                     description: 인증문자열
+                    example: 일원인증332
                   detail:
                     type: string
                     description: API 에러메세지
@@ -69,15 +74,19 @@ paths:
                       rsp_code:
                         type: string
                         minLength: 1
+                        description: 응답코드(API)
                       rsp_message:
                         type: string
                         minLength: 1
+                        description: 응답메시지(API)
                       bank_rsp_code:
                         type: string
                         minLength: 1
+                        description: 응답코드(참가은행)
                       bank_rsp_message:
                         type: string
                         minLength: 1
+                        description: 응답메시지(참가은행)
                 required:
                   - status
               examples:
@@ -148,7 +157,6 @@ paths:
                 - account
                 - account_name
                 - print_type
-                - prefix
             examples:
               요청:
                 value:
