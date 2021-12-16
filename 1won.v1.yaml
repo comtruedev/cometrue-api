@@ -166,6 +166,7 @@ components:
         </details>
         그 외
         https://developers.kftc.or.kr/dev/doc/open-banking
+
         **3.7. API 응답코드** 참고
       content:
         application/json:
