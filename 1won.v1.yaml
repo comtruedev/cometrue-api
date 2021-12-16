@@ -44,127 +44,42 @@ paths:
               schema:
                 description: ''
                 type: object
+                x-examples:
+                  example-1:
+                    status: fail
+                    openbanking:
+                      rsp_code: A0009
+                      rsp_message: API 세부업무 처리실패(리스트 건별 처리결과 확인 요망)
+                      bank_rsp_code: '818'
+                      bank_rsp_message: 시뮬레이터　응답전문　조회에　실패하였습니다
                 properties:
-                  result:
+                  status:
+                    type: string
+                    minLength: 1
+                  auth_code:
+                    type: string
+                    description: 인증문자열
+                  detail:
+                    type: string
+                    description: API 에러메세지
+                  openbanking:
                     type: object
-                    required:
-                      - message
-                      - detail
+                    description: '오픈뱅킹 에러코드, 메세지'
                     properties:
-                      message:
+                      rsp_code:
                         type: string
                         minLength: 1
-                        enum:
-                          - '"success"'
-                          - '"fail"'
-                      detail:
-                        type: object
-                        description: 개인정보 검출된 건수
-                        required:
-                          - social
-                          - foreign
-                          - passport
-                          - license
-                          - credit
-                          - account
-                          - phone
-                          - mobile
-                          - email
-                          - corp
-                          - business
-                          - insurance
-                        properties:
-                          social:
-                            type: number
-                            description: 주민등록번호가 검출된 건수
-                          foreign:
-                            type: number
-                            description: 외국인번호가 검출된 건수
-                          passport:
-                            type: number
-                            description: 여권번호가 검출된 건수
-                          license:
-                            type: number
-                            description: 운전면허번호가 검출된 건수
-                          credit:
-                            type: number
-                            description: 카드번호가 검출된 건수
-                          account:
-                            type: number
-                            description: 계좌번호가 검출된 건수
-                          phone:
-                            type: number
-                            description: 전화번호가 검출된 건수
-                          mobile:
-                            type: number
-                            description: 휴대전화번호가 검출된 건수
-                          email:
-                            type: number
-                            description: 메일주소가 검출된 건수
-                          corp:
-                            type: number
-                            description: 법인번호가 검출된 건수
-                          business:
-                            type: number
-                            description: 사업자번호가 검출된 건수
-                          insurance:
-                            type: number
-                            description: 건강보험번호가 검출된 건수
-                  match:
-                    type: object
-                    description: rst_masked가 true일 경우 검출된 정책과 마스킹된 문자열
-                    properties:
-                      social:
-                        type: array
-                        items:
-                          type: string
-                      foreign:
-                        type: array
-                        items:
-                          type: string
-                      passport:
-                        type: array
-                        items:
-                          type: string
-                      license:
-                        type: array
-                        items:
-                          type: string
-                      credit:
-                        type: array
-                        items:
-                          type: string
-                      account:
-                        type: array
-                        items:
-                          type: string
-                      phone:
-                        type: array
-                        items:
-                          type: string
-                      mobile:
-                        type: array
-                        items:
-                          type: string
-                      email:
-                        type: array
-                        items:
-                          type: string
-                      corp:
-                        type: array
-                        items:
-                          type: string
-                      business:
-                        type: array
-                        items:
-                          type: string
-                      insurance:
-                        type: array
-                        items:
-                          type: string
+                      rsp_message:
+                        type: string
+                        minLength: 1
+                      bank_rsp_code:
+                        type: string
+                        minLength: 1
+                      bank_rsp_message:
+                        type: string
+                        minLength: 1
                 required:
-                  - result
-                  - match
+                  - status
               examples:
                 결과:
                   value:
