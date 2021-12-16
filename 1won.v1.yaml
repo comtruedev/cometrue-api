@@ -156,7 +156,7 @@ components:
         사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
 
         <details markdown="1">
-        <summary>API 에러메세지</summary>
+        <summary>에러메세지</summary>
         "message": "openbanking timeout"<br>
         "message": "oauth failed"<br>
         "message": "API ERROR"<br>
@@ -164,10 +164,11 @@ components:
         "message": "exceed request limit"<br>
         "message": "too long prefix"<br>
         </details>
-        그 외
+        openbanking은
+
         https://developers.kftc.or.kr/dev/doc/open-banking
 
-        **3.7. API 응답코드** 참고
+        <h1>3.7. API 응답코드</h1> 참고
       content:
         application/json:
           schema:
