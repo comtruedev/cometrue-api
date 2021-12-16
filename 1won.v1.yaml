@@ -217,7 +217,6 @@ components:
                     description: 응답메시지(참가은행)
             required:
               - status
-              - message
           examples:
             결과:
               value:
