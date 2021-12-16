@@ -72,7 +72,7 @@ paths:
             Internal Server Error
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
-      description: "요청계좌에 1원을 송금후 인증문자열을 제공해줍니다.\n\n**기관코드**\n<pre>\n2\tKDB산업은행\t23\tSC제일은행\t37\t전북은행\n3\tIBK기업은행\t27\t한국씨티은행\t39\t경남은행\n4\tKB국민은행\t31\t대구은행\t        81\t하나은행\n7\t수협은행\t        32\t부산은행\t        88\t신한은행\n11\tNH농협은행\t34\t광주은행\t        89\t케이뱅크\n20\t우리은행\t        35\t제주은행\t        90\t카카오뱅크\n</pre>"
+      description: "요청계좌에 1원을 송금후 인증문자열을 제공해줍니다.\n\n**기관코드**\n<pre>\n2\tKDB산업은행\t23\tSC제일은행\t37\t전북은행\n3\tIBK기업은행\t27\t한국씨티은행\t39\t경남은행\n4\tKB국민은행\t31\t대구은행\t        81\t하나은행\n7\t수협은행\t        32\t부산은행\t        88\t신한은행\n11\tNH농협은행\t34\t광주은행\t        89\t케이뱅크\n20\t우리은행\t        35\t제주은행\t        90\t카카오뱅크\n</pre>\n\nhttps://developers.kftc.or.kr/dev/doc/open-banking\n\n\n3.3. 금융기관코드 참고"
       parameters:
         - schema:
             type: string
