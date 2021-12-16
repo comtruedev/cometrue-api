@@ -1,0 +1,420 @@
+openapi: 3.0.0
+info:
+  title: 1원인증
+  version: '1.0'
+  description: |-
+    **서비스 소개**
+
+    컴트루테크놀로지의 개인정보 필터를 통해 텍스트 내 개인정보를 검출합니다.<br>
+    다양한 텍스트 영역 내 개인정보의 존재 여부를 확인할 수 있습니다.<br>
+    다양한 패턴의 개인정보를 인식합니다.
+
+    **서비스 특징**
+
+    주민등록번호를 포함하여 약 12여 종의 개인정보 패턴을 지원합니다. (국내 최다)<br>
+    후처리 관련 서비스와 연동 시 개인정보를 검출하여 다양하게 후처리 할 수 있습니다.
+
+    **적용 부분**
+
+    공공기관 및 일반 기업 : 개인정보보호 솔루션
+
+    PC : 파일 내 텍스트<br>
+    웹 서버 : 게시글 본문<br>
+    DB 서버 이메일 서버 등 다양한 위치의 텍스트에 대한 개인정보 검출이 필요한 경우
+  contact:
+    email: ask@comtrue.com
+    url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+servers:
+  - url: 'https://api.cometrue.ai'
+paths:
+  /api/v1/1won/deposit:
+    post:
+      summary: 1원인증
+      operationId: post-privacy-check
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - message
+                      - detail
+                    properties:
+                      message:
+                        type: string
+                        minLength: 1
+                        enum:
+                          - '"success"'
+                          - '"fail"'
+                      detail:
+                        type: object
+                        description: 개인정보 검출된 건수
+                        required:
+                          - social
+                          - foreign
+                          - passport
+                          - license
+                          - credit
+                          - account
+                          - phone
+                          - mobile
+                          - email
+                          - corp
+                          - business
+                          - insurance
+                        properties:
+                          social:
+                            type: number
+                            description: 주민등록번호가 검출된 건수
+                          foreign:
+                            type: number
+                            description: 외국인번호가 검출된 건수
+                          passport:
+                            type: number
+                            description: 여권번호가 검출된 건수
+                          license:
+                            type: number
+                            description: 운전면허번호가 검출된 건수
+                          credit:
+                            type: number
+                            description: 카드번호가 검출된 건수
+                          account:
+                            type: number
+                            description: 계좌번호가 검출된 건수
+                          phone:
+                            type: number
+                            description: 전화번호가 검출된 건수
+                          mobile:
+                            type: number
+                            description: 휴대전화번호가 검출된 건수
+                          email:
+                            type: number
+                            description: 메일주소가 검출된 건수
+                          corp:
+                            type: number
+                            description: 법인번호가 검출된 건수
+                          business:
+                            type: number
+                            description: 사업자번호가 검출된 건수
+                          insurance:
+                            type: number
+                            description: 건강보험번호가 검출된 건수
+                  match:
+                    type: object
+                    description: rst_masked가 true일 경우 검출된 정책과 마스킹된 문자열
+                    properties:
+                      social:
+                        type: array
+                        items:
+                          type: string
+                      foreign:
+                        type: array
+                        items:
+                          type: string
+                      passport:
+                        type: array
+                        items:
+                          type: string
+                      license:
+                        type: array
+                        items:
+                          type: string
+                      credit:
+                        type: array
+                        items:
+                          type: string
+                      account:
+                        type: array
+                        items:
+                          type: string
+                      phone:
+                        type: array
+                        items:
+                          type: string
+                      mobile:
+                        type: array
+                        items:
+                          type: string
+                      email:
+                        type: array
+                        items:
+                          type: string
+                      corp:
+                        type: array
+                        items:
+                          type: string
+                      business:
+                        type: array
+                        items:
+                          type: string
+                      insurance:
+                        type: array
+                        items:
+                          type: string
+                required:
+                  - result
+                  - match
+              examples:
+                결과:
+                  value:
+                    status: success
+                    auth_code: 일원인증2967
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |
+        요청계좌에 1원을 송금후 인증문자열을 제공해줍니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: API Access Token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                organization_code:
+                  type: string
+                  minLength: 1
+                  description: 기관코드
+                account:
+                  type: string
+                  minLength: 1
+                  description: 계좌번호
+                account_name:
+                  type: string
+                  minLength: 1
+                  description: 예금주 이름
+                print_type:
+                  type: integer
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 5
+                    - 6
+                  description: 인증문자열 타입
+                prefix:
+                  type: string
+                  minLength: 1
+                  description: 고객사 지정문자열
+              required:
+                - organization_code
+                - account
+                - account_name
+                - print_type
+                - prefix
+            examples:
+              요청:
+                value:
+                  organization_code: '89'
+                  account: '100000000000'
+                  account_name: 아무나
+                  print_type: 3
+                  prefix: 1원인증
+              URL Example:
+                value:
+                  id_type: jumin
+                  image: 'https://www.cometrue.ai/data/license.jpg'
+                  is_url: true
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses:
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "error": "empty data"<br>
+        "error": "invalid request format"<br>
+        "error": "ocr server failed"<br>
+        "error": "invalid file format"<br>
+        "error": "invalid base64 string"
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              error:
+                type: string
+                minLength: 1
+            required:
+              - result
+              - error
+          examples:
+            empty data:
+              value:
+                result:
+                  message: fail
+                error: empty data
+            invalid request:
+              value:
+                result:
+                  message: fail
+                error: invalid request format
+            ocr server failed:
+              value:
+                result:
+                  message: fail
+                error: ocr server failed
+            invalid file format:
+              value:
+                result:
+                  message: fail
+                error: invalid file format
+            invalid base64 string:
+              value:
+                result:
+                  message: fail
+                error: invalid base64 string
+    '409':
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //OCR error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+            not enough similar area:
+              value:
+                message: 'text detection error: 206'
+    '415':
+      description: |-
+        Unsupported Media Type
+
+        "error": "invalid Content-Type"
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              result:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              error:
+                type: string
+                minLength: 1
+            required:
+              - result
+              - error
+          examples:
+            invalid Content-Type:
+              value:
+                result:
+                  message: fail
+                error: invalid Content-Type
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+          examples:
+            example-1:
+              value: {}
