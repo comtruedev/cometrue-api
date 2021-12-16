@@ -65,8 +65,6 @@ paths:
             Unauthorized
 
             허가되지 않은 사용자의 접근
-        '409':
-          $ref: '#/components/responses/409'
         '500':
           description: |-
             Internal Server Error
@@ -144,11 +142,6 @@ paths:
                   account_name: 아무나
                   print_type: 3
                   prefix: 1원인증
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security: []
     parameters: []
@@ -226,72 +219,6 @@ components:
                   rsp_message: API 세부업무 처리실패(리스트 건별 처리결과 확인 요망)
                   bank_rsp_code: '815'
                   bank_rsp_message: '예금주명 불일치 [수취인성명 불일치]'
-    '409':
-      description: |-
-        Conflict
-
-        서버에서의 처리 중 에러
-
-        <details markdown="1">
-        <summary>에러메세지</summary>
-
-        </details>
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              message:
-                type: string
-            required:
-              - message
-          examples:
-            Vertex detection error:
-              value:
-                message: 'text detection error: 202'
-            Text detection error:
-              value:
-                message: text detection error
-            //OCR error:
-              value:
-                message: text recognition error
-            //Matching error:
-              value:
-                message: matching error
-            onnxexception:
-              value:
-                message: 'Onnx runtime error: 100'
-            stdexception:
-              value:
-                message: 'Std Exception: 101'
-            cvexception:
-              value:
-                message: 'OpenCV error: 100'
-            cannot find text:
-              value:
-                message: 'text detection error: 201'
-            cannot find square:
-              value:
-                message: 'text detection error: 203'
-            not enough to be square:
-              value:
-                message: 'text detection error: 204'
-            not enough contour:
-              value:
-                message: 'text detection error: 207'
-            not enough group:
-              value:
-                message: 'text detection error: 208'
-            cannot find object:
-              value:
-                message: 'object detection error: 209'
-            json decode error:
-              value:
-                message: Json decode error
-            not enough similar area:
-              value:
-                message: 'text detection error: 206'
     '415':
       description: |-
         Unsupported Media Type
@@ -303,26 +230,24 @@ components:
             description: ''
             type: object
             properties:
-              result:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    minLength: 1
-                required:
-                  - message
-              error:
+              status:
+                type: string
+                minLength: 1
+              message:
                 type: string
                 minLength: 1
             required:
-              - result
-              - error
+              - status
+              - message
+            x-examples:
+              example-1:
+                status: fail
+                message: invalid Content-Type
           examples:
             invalid Content-Type:
               value:
-                result:
-                  message: fail
-                error: invalid Content-Type
+                status: fail
+                message: invalid Content-Type
         application/xml:
           schema:
             type: object
