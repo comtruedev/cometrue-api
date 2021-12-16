@@ -2,14 +2,12 @@ openapi: 3.0.0
 info:
   title: 1원인증
   version: '1.0'
-  description: |+
+  description: |
     **서비스 소개**
 
 
 
     **서비스 특징**
-
-
   contact:
     email: ask@comtrue.com
     url: 'https://cometrue.ai'
@@ -151,11 +149,12 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-        "error": "empty data"<br>
-        "error": "invalid request format"<br>
-        "error": "ocr server failed"<br>
-        "error": "invalid file format"<br>
-        "error": "invalid base64 string"
+        "message": "openbanking timeout"<br>
+        "message": "oauth failed"<br>
+        "message": "API ERROR"<br>
+        "message": "print_type is not correct"<br>
+        "message": "exceed request limit"<br>
+        "message": "too long prefix"<br>
         </details>
       content:
         application/json:
@@ -178,7 +177,7 @@ components:
                 enum:
                   - success
                   - fail
-              detail:
+              message:
                 type: string
                 description: API 에러메세지
               openbanking:
@@ -188,11 +187,11 @@ components:
                   rsp_code:
                     type: string
                     minLength: 1
-                    description: 응답코드(API)
+                    description: 오픈뱅킹 응답코드(API)
                   rsp_message:
                     type: string
                     minLength: 1
-                    description: 응답메시지(API)
+                    description: 오픈뱅킹 응답메시지(API)
                   bank_rsp_code:
                     type: string
                     minLength: 1
@@ -203,7 +202,7 @@ components:
                     description: 응답메시지(참가은행)
             required:
               - status
-              - detail
+              - message
           examples:
             결과:
               value:
