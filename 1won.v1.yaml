@@ -164,11 +164,11 @@ components:
         "message": "exceed request limit"<br>
         "message": "too long prefix"<br>
         </details>
-        openbanking은
+        openbanking필드 정보는
 
         https://developers.kftc.or.kr/dev/doc/open-banking
 
-        <h1>3.7. API 응답코드</h1> 참고
+        상단의 오픈뱅킹 홈페이지 3.7. API 응답코드 참고
       content:
         application/json:
           schema:
