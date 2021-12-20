@@ -19,7 +19,7 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'http://127.0.0.1'
+  - url: 'https://api.cometrue.ai'
 paths:
   /api/v1/face/detect:
     post:
@@ -36,18 +36,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    Template: ''
-                    ROI:
-                      - index: 0
-                        x: 530
-                        'y': 87
-                        width: 119
-                        height: 152
-                        text: ''
-                        tag: face
-                        language: ''
                 properties:
                   Template:
                     type: string
@@ -173,7 +161,14 @@ paths:
         얼굴을 인식하여 인식한 얼굴 영역의 리스트를 제공합니다.
 
         model_type이 1이라면 다수의 얼굴 영역을, 2의 경우에는 하나의 얼굴 영역을 찾습니다.
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
       requestBody:
         content:
           application/json:
@@ -201,22 +196,12 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
         description: ''
-      x-internal: false
+      security: []
     parameters: []
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      name: api_key
-      type: apiKey
-      in: query
-      description: api.cometrue.ai에서 발급받은 API key
+  securitySchemes: {}
   responses:
     '400':
       description: |
