@@ -1,15 +1,20 @@
 openapi: 3.0.0
 info:
-  title: 인증(auth)
+  title: 계정 인증
   version: '1.0'
   contact:
     email: ask@comtrue.com
     url: 'https://cometrue.ai'
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
-  description: API 게이트웨이로부터 Access Token 발급 과정
+  description: |
+    **서비스 소개**
+
+    컴트루테크놀로지의 API를 사용하기 위한 토큰을 발급하는 API입니다.
+
+    HTTP요청헤더에 발급 받은 토큰을 Authorization 정보에 추가 하여 API를 이용 할 수 있습니다.
 servers:
-  - url: 'https://api.comtrue.com'
+  - url: 'https://api.cometrue.ai'
 paths:
   /auth/token:
     post:
@@ -70,34 +75,25 @@ paths:
                 server error:
                   value:
                     reason: 에러에 대한 내용
-      description: 올바른 username과 passsword로 요청하면 access token을 발급받을 수 있습니다.
+      description: |-
+        발급받은 username과 passsword로 요청하면 토큰을 발급 받을 수 있습니다.
+
+        토큰의 형태는 jwt이며, `Authorization: Bearer <token>` 와 같이 요청헤더에 추가하여 API를 이용 할 수 있습니다.
+
+        username과 password 발급을 원하시면 [문의하기](https://cometrue.ai/index.php/ai-api-qna/) 를 통해 문의바랍니다.
     parameters: []
 components:
   schemas:
-    CreateKey:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-      x-examples: {}
     CreateToken:
       type: object
-      x-examples:
-        example-1:
-          key: 4adfe27e-63d3-45b9-8238-62b6ed6fdb5e
-          secret: string
       properties:
         username:
           type: string
+          description: 발급받은 username
         password:
           type: string
-  securitySchemes:
-    Authorization:
-      name: API Key(JWT)
-      type: apiKey
-      in: query
+          description: 발급받은 password
+  securitySchemes: {}
   responses:
     '401':
       description: |
