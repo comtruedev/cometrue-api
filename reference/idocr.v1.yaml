@@ -341,7 +341,8 @@ paths:
                     멀티파트 이미지파일
 
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
-                  format: binary
+                  format: file
+                  example: 'filename="/C:/Users/comtrue/Desktop/driver.jpg" Content-Type: image/jpeg'
               required:
                 - image
         description: ''
