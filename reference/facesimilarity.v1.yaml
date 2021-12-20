@@ -19,7 +19,8 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.cometrue.ai'
+  - description: Cometrue
+    url: 'https://api.cometrue.ai'
 paths:
   /api/v1/face/similarity:
     post:
@@ -98,7 +99,7 @@ paths:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
                   image2: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-        description: ''
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security: []
     parameters: []
 components:
