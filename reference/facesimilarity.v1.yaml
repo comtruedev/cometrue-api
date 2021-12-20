@@ -19,7 +19,7 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.comtrue.com'
+  - url: 'https://api.cometrue.ai'
 paths:
   /api/v1/face/similarity:
     post:
@@ -63,7 +63,14 @@ paths:
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: 얼굴인식 신경망을 이용하여 한 얼굴과 다른 얼굴간의 얼굴 비교를 통해 유사도 값을 제공합니다.
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
       requestBody:
         content:
           application/json:
@@ -92,18 +99,11 @@ paths:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
                   image2: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
-      security:
-        - api_key: []
-      x-internal: false
+      security: []
     parameters: []
 components:
   schemas: {}
-  securitySchemes:
-    api_key:
-      name: api_key
-      type: apiKey
-      in: query
-      description: api.cometrue.ai에서 발급받은 API key
+  securitySchemes: {}
   responses:
     '400':
       description: |
