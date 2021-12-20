@@ -19,7 +19,7 @@ info:
     [Contact](mailto:ask@comtrue.com) | [cometrue.ai AI API](https://cometrue.ai) | [Terms of Service](https://cometrue.ai/index.php/ai-api-terms-of-service/)
 servers:
   - description: ''
-    url: 'https://api.comtrue.com'
+    url: 'https://api.cometrue.ai'
 paths:
   /api/v1/id/ocr:
     post:
@@ -36,9 +36,6 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     description: 검출한 정보
@@ -99,12 +96,10 @@ paths:
                           여권 기간 만료일
                           ex) `01JAN1970`
                 required:
-                  - quadrilateral
                   - result
               examples:
                 주민등록증:
                   value:
-                    quadrilateral: true
                     result:
                       date: '20191205'
                       name: 홍길동
@@ -112,7 +107,6 @@ paths:
                       title: 주민등록증
                 운전면허증:
                   value:
-                    quadrilateral: true
                     result:
                       birth_date: '19660220'
                       code: 7wggen
@@ -121,14 +115,12 @@ paths:
                       title: 자동차운전면허증
                 여권:
                   value:
-                    quadrilateral: true
                     result:
                       title: passport
                       mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
                       mrz2: D123456785KOR7501012M13031001234567V15788666
                 한국여권:
                   value:
-                    quadrilateral: true
                     result:
                       name: 홍길동
                       number: '012345678'
@@ -140,7 +132,6 @@ paths:
                       expiry_date: 10MAR2013
                 외국인등록증:
                   value:
-                    quadrilateral: true
                     result:
                       date: '20110101'
                       name: HONG KIL DONG
@@ -173,7 +164,7 @@ paths:
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -209,13 +200,28 @@ paths:
                 value:
                   id_type: jumin
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+              required:
+                - id_type
+                - image
         description: ''
-      x-internal: false
     parameters: []
   /api/v1/jumin/ocr:
     post:
@@ -233,9 +239,6 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     description: 검출한 정보
@@ -266,12 +269,10 @@ paths:
                         enum:
                           - 주민등록증
                 required:
-                  - quadrilateral
                   - result
               examples:
                 주민등록증:
                   value:
-                    quadrilateral: true
                     result:
                       date: '20191205'
                       name: 홍길동
@@ -295,14 +296,20 @@ paths:
         주민등록증을 인식하여 이름, 주민등록번호, 발급일자를 제공합니다.
 
         **주의사항**
-        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
       parameters:
         - schema:
             type: string
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -324,14 +331,20 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
         description: ''
       security: []
-      x-internal: false
     parameters: []
   /api/v1/driver/ocr:
     post:
@@ -348,28 +361,16 @@ paths:
               schema:
                 description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    quadrilateral: true
-                    result:
-                      birth_date: '19660220'
-                      code: 7wggen
-                      name: 홍길동
-                      number: 11-90-041222-33
-                      title: 자동차운전면허증
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
+                    description: 검출한 정보
                     required:
                       - birth_date
                       - code
                       - name
                       - number
                       - title
-                    description: 검출한 정보
                     properties:
                       birth_date:
                         type: string
@@ -394,20 +395,18 @@ paths:
                         type: string
                         description: 신분증 종류
                         enum:
-                          - 자동차운전면허증
+                          - 운전면허증
                 required:
-                  - quadrilateral
                   - result
               examples:
                 운전면허증:
                   value:
-                    quadrilateral: true
                     result:
                       birth_date: '19660220'
                       code: 7wggen
                       name: 홍길동
                       number: 11-90-041222-33
-                      title: 자동차운전면허증
+                      title: 운전면허증
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -426,14 +425,20 @@ paths:
         한국인 운전면허증을 인식하여 운전면허번호, 이름, 생년월일, 암호일련번호를 제공합니다.
 
         **주의사항**
-        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
       parameters:
         - schema:
             type: string
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -455,14 +460,20 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
         description: ''
       security: []
-      x-internal: false
     parameters: []
   /api/v1/alien/ocr:
     post:
@@ -480,9 +491,6 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     description: 검출한 정보
@@ -513,12 +521,10 @@ paths:
                         enum:
                           - 외국인등록증
                 required:
-                  - quadrilateral
                   - result
               examples:
                 외국인등록증:
                   value:
-                    quadrilateral: true
                     result:
                       date: '20110101'
                       name: HONG KIL DONG
@@ -542,14 +548,20 @@ paths:
         외국인등록증을 인식하여 이름, 외국인등록번호, 발급일자를 추출하여 제공합니다.
 
         **주의사항**
-        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
       parameters:
         - schema:
             type: string
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -571,14 +583,20 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
         description: ''
       security: []
-      x-internal: false
     parameters: []
   /api/v1/passport/ocr:
     post:
@@ -596,9 +614,6 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     description: 검출한 정보
@@ -619,12 +634,10 @@ paths:
                         type: string
                         description: 기계판독영역
                 required:
-                  - quadrilateral
                   - result
               examples:
                 여권:
                   value:
-                    quadrilateral: true
                     result:
                       title: passport
                       mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -647,14 +660,20 @@ paths:
         여권을 인식 하여 기계판독영역(MRZ)을 제공합니다.
 
         **주의사항**
-        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
+          
       parameters:
         - schema:
             type: string
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -676,14 +695,20 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
         description: ''
       security: []
-      x-internal: false
     parameters: []
   /api/v1/kpassport/ocr:
     post:
@@ -701,9 +726,6 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  quadrilateral:
-                    type: boolean
-                    description: 신분증에 해당하는 사각형 검출여부
                   result:
                     type: object
                     description: 검출한 정보
@@ -753,12 +775,10 @@ paths:
                           ex) `01JAN1970`
                         example: 01JAN1970
                 required:
-                  - quadrilateral
                   - result
               examples:
                 한국여권:
                   value:
-                    quadrilateral: true
                     result:
                       name: 홍길동
                       number: D12345678
@@ -786,14 +806,19 @@ paths:
         한국여권을 인식 하여 한글 이름, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
 
         **주의사항**
-        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
       parameters:
         - schema:
             type: string
             example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
           in: header
           name: Authorization
-          description: API Access Token
+          description: 계정 인증을 통해 발급 받은 Access token
           required: true
       requestBody:
         content:
@@ -815,14 +840,20 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-              URL Example:
-                value:
-                  id_type: jumin
-                  image: 'https://www.cometrue.ai/data/license.jpg'
-                  is_url: true
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
         description: ''
       security: []
-      x-internal: false
     parameters: []
 components:
   schemas: {}
