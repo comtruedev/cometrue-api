@@ -341,7 +341,7 @@ paths:
                     멀티파트 이미지파일
 
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
-                  format: byte
+                  format: binary
               required:
                 - image
         description: ''
