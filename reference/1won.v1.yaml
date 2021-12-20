@@ -23,7 +23,8 @@ info:
     name: cometrue.ai AI API
   termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
 servers:
-  - url: 'https://api.cometrue.ai'
+  - description: Cometrue
+    url: 'https://api.cometrue.ai'
 paths:
   /api/v1/1won/deposit:
     post:
@@ -126,11 +127,12 @@ paths:
                     5: 4자리숫자 + 고정문자열
 
                     6: 랜덤한 한글 4글자
+                  default: 0
                 prefix:
                   type: string
                   minLength: 1
                   maxLength: 7
-                  description: 고정문자
+                  description: 고정문자열
               required:
                 - organization_code
                 - account
@@ -166,7 +168,7 @@ components:
         "message": "exceed request limit"<br>
         "message": "too long prefix"<br>
         </details>
-        openbanking필드 정보는
+        openbanking 필드 정보는
 
         [오픈뱅킹](https://developers.kftc.or.kr/dev/doc/open-banking)
 
