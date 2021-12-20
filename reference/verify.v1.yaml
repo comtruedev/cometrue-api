@@ -675,9 +675,15 @@ components:
 
         <details markdown="1">
         <summary>에러메세지</summary>
-        "incorrect image data": 잘못된 이미지 파일<br>
         "not supported idcard type": 지원하지 않는 신분증 형식<br>
-        "incorrect certificates pfx data": 잘못된 공인인증서 파일<br>
+        "incorrect certificates cert data": 잘못된 공인인증서 파일<br>
+        "incorrect certificates key data": 잘못된 공인인증서 파일<br>
+        "wrong registration name": 잘못된 이름(주민등록증)<br>
+        "wrong registration issue date": 잘못된 주민등록증 발급일자<br>
+        "wrong driver name": 잘못된 이름(운전면허증)<br/>
+        "wrong driver number": 잘못된 운전면허 번호<br>
+        "wrong driver birthday": 잘못된 생년월일(운전면허증)<br>
+        "wrong driver code": 잘못된 운전면허증 식별코드<br>
         </details>
       content:
         application/json:
@@ -687,15 +693,15 @@ components:
               error:
                 type: string
           examples:
-            incorrect image data:
-              value:
-                error: incorrect image data
             not supported idcard type:
               value:
                 error: not supported idcard type
-            incorrect certificates:
+            incorrect certificates cert:
               value:
-                error: incorrect certificates pfx data
+                error: incorrect certificates cert data
+            incorrect certificates key:
+              value:
+                error: incorrect certificates key data
     '409':
       description: |-
         Conflict
