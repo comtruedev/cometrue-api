@@ -335,10 +335,31 @@ paths:
             Bad Request
 
             사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - error
+              examples: {}
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          description: |-
+            Conflict
+
+            서버에서의 처리 중 에러
 
             <details markdown="1">
             <summary>에러메세지</summary>
-            "not supported idcard type": 지원하지 않는 신분증 형식<br>
             "wrong driver name": 잘못된 이름<br/>
             "wrong driver number": 잘못된 운전면허 번호<br>
             "wrong driver birthday": 잘못된 생년월일<br>
@@ -355,23 +376,22 @@ paths:
                     minLength: 1
                 required:
                   - error
+                x-examples:
+                  example-1:
+                    error: 'validate: wrong driver number'
               examples:
-                incorrect certificates key data:
+                wrong driver number:
                   value:
-                    error: incorrect certificates key data
-                incorrect certificates cert data:
+                    error: 'validate: wrong driver number'
+                wrong driver name:
                   value:
-                    error: incorrect certificates cert data
-                not supported idcard type:
+                    error: 'validate: wrong driver name'
+                wrong driver birthday:
                   value:
-                    error: not supported idcard type
-        '401':
-          description: |-
-            Unauthorized
-
-            허가되지 않은 사용자의 접근
-        '409':
-          $ref: '#/components/responses/409'
+                    error: 'validate: wrong driver birthday'
+                wrong driver code:
+                  value:
+                    error: 'validate: wrong driver code'
         '500':
           description: |-
             Internal Server Error
@@ -476,11 +496,8 @@ paths:
 
             <details markdown="1">
             <summary>에러메세지</summary>
-            "not supported idcard type": 지원하지 않는 신분증 형식<br>
             "incorrect certificates cert data": 잘못된 공인인증서 파일<br>
             "incorrect certificates key data": 잘못된 공인인증서 파일<br>
-            "wrong registration name": 잘못된 이름<br>
-            "wrong registration issue date": 잘못된 주민등록증 발급일자<br>
             </details>
           content:
             application/json:
@@ -500,16 +517,43 @@ paths:
                 incorrect certificates cert data:
                   value:
                     error: incorrect certificates cert data
-                not supported idcard type:
-                  value:
-                    error: not supported idcard type
         '401':
           description: |-
             Unauthorized
 
             허가되지 않은 사용자의 접근
         '409':
-          $ref: '#/components/responses/409'
+          description: |-
+            Conflict
+
+            서버에서의 처리 중 에러
+
+            <details markdown="1">
+            <summary>에러메세지</summary>
+            "wrong registration name": 잘못된 이름<br>
+            "wrong registration issue date": 잘못된 주민등록증 발급일자<br>
+            </details>
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - error
+                x-examples:
+                  example-1:
+                    error: 'validate: wrong driver number'
+              examples:
+                wrong registration name:
+                  value:
+                    error: 'validate: wrong registration name'
+                wrong registration issue date:
+                  value:
+                    error: 'validate: wrong registration issue date'
         '500':
           description: |-
             Internal Server Error
