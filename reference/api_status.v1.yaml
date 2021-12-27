@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: API 상태조회
+  version: '1.0'
+  description: ''
+  contact:
+    email: ask@comtrue.com
+    url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+servers:
+  - url: 'https://api.cometrue.ai'
+    description: Cometrue
+paths:
+  /api/status:
+    parameters: []
+    get:
+      summary: API 상태조회
+      operationId: get-api-status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    1WON VERIFY: true
+                    IDCARD VERIFY JUMIN: true
+                    ONNXWRAPPER: true
+                properties:
+                  '{API_NAME}':
+                    type: boolean
+                    description: |-
+                      `true`: 이용가능
+                      `false`: 이용불가능
+                required:
+                  - '{API_NAME}'
+              examples:
+                api status:
+                  value:
+                    1WON VERIFY: true
+                    IDCARD VERIFY JUMIN: true
+                    ONNXWRAPPER: true
+      description: 발급받은 Access token으로 사용가능한 API의 현재 상태를 조회 할 수 있습니다.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses: {}
