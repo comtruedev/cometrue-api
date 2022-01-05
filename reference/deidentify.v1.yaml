@@ -1,0 +1,944 @@
+openapi: 3.0.0
+info:
+  title: 신분증 비식별화
+  version: '1.0'
+  description: |-
+    **서비스 소개**
+
+    컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 OCR 서비스 입니다.<br>
+    국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행합니다. 
+
+    **서비스 특징**
+
+    자체개발 OCR 신경망을 적용하여 OCR이 필요한 영역에 대해 정확한 인식을 수행합니다.<br>
+    신분증 진위확인 서비스와 연계하여 사용할 수 있습니다.
+  contact:
+    email: ask@comtrue.com
+    url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+servers:
+  - description: Cometrue
+    url: 'https://api.cometrue.ai'
+paths:
+  /api/v1/id/deidentify:
+    post:
+      summary: 신분증 비식별화
+      operationId: post-deid
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples:
+                비식별화:
+                  value:
+                    result:
+                      did_image: string
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        신분증 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                  enum:
+                    - jumin
+                    - driver
+                    - kpassport
+                    - alien
+                    - passport
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - id_type
+                - image
+                - did_option
+            examples:
+              Base64 Example:
+                value:
+                  id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+              required:
+                - id_type
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/jumin/deidentify:
+    post:
+      summary: 주민등록증 비식별화
+      operationId: post-deidjumin
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    result:
+                      did_image: string
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |
+        주민등록증을 인식하여 이름, 주민등록번호, 발급일자를 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - image
+                - did_option
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v1/driver/deidentify:
+    post:
+      summary: 운전면허증 비식별화
+      operationId: post-deiddriver
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    result:
+                      did_image: string
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        한국인 운전면허증을 인식하여 운전면허번호, 이름, 생년월일, 암호일련번호를 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - image
+                - did_option
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v1/alien/deidentify:
+    post:
+      summary: 외국인등록증 비식별화
+      operationId: post-deidalien
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    result:
+                      did_image: string
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples:
+                example-1:
+                  value:
+                    result:
+                      did_image: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        외국인등록증을 인식하여 외국인등록번호, 발급일자를 추출하여 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v1/passport/deidentify:
+    post:
+      summary: 여권 비식별화
+      operationId: post-deidpassport
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    result:
+                      did_image: string
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples:
+                example-1:
+                  value:
+                    result:
+                      did_image: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409-passport'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        여권을 인식 하여 기계판독영역(MRZ)을 제공합니다.
+
+        **주의사항**
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v1/kpassport/deidentify:
+    post:
+      summary: 한국여권 비식별화
+      operationId: post-deidkpassport
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    result:
+                      did_image: string
+                properties:
+                  result:
+                    type: object
+                    required:
+                      - did_image
+                    properties:
+                      did_image:
+                        type: string
+                        minLength: 1
+                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                required:
+                  - result
+              examples:
+                example-1:
+                  value:
+                    result:
+                      did_image: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409-passport'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        한국여권을 인식 하여 한글 이름, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
+
+        **주의사항**
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                did_option:
+                  type: integer
+                  description: 비식별화옵션
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  did_option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses:
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "Image is empty"<br>
+        "request format or type is not valid"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            request format or type is not valid:
+              value:
+                message: request format or type is not valid
+            image empty:
+              value:
+                message: Image is empty
+    '409':
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "Onnx runtime error: 100"<br>
+        "Std Exception: 101"<br>
+        "OpenCV error: 100"<br>
+        "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
+        "text detection error: 203": cannot find square<br>
+        "text detection error: 204": not enough to be square<br>
+        "text detection error: 207": not enough contour<br>
+        "text detection error: 208": not enough group<br>
+        "object detection error: 209": cannot find object<br>
+        "Json decode error"
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //deidentify error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+    ErrorResponse:
+      description: 신분증 인식 및 OCR에 대한 Error Message
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+    400_id-ocr:
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "id_type not provided"<br>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Unsupported ID type"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "id_type: is not correct."<br>
+        "Image is empty"<br>
+        "request format or type is not valid"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            id_type not given:
+              value:
+                message: id_type not provided
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Unsupported ID:
+              value:
+                message: Unsupported ID type
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            id_type not correct:
+              value:
+                message: 'id_type: is not correct.'
+            request format or type is not valid:
+              value:
+                message: request format or type is not valid
+            image empty:
+              value:
+                message: Image is empty
+    409-passport:
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "Onnx runtime error: 100"<br>
+        "Std Exception: 101"<br>
+        "OpenCV error: 100"<br>
+        "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
+        "text detection error: 203": cannot find square<br>
+        "text detection error: 204": not enough to be square<br>
+        "text detection error: 205": cannot find MRZ<br>
+        "text detection error: 207": not enough contour<br>
+        "text detection error: 208": not enough group<br>
+        "object detection error: 209": cannot find object<br>
+        "Json decode error"
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //deidentify error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+            cannot find MRZ:
+              value:
+                message: 'text detection error: 205'
