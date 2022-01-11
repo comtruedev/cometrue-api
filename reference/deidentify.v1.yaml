@@ -99,10 +99,50 @@ paths:
                 required:
                   - result
               examples:
-                비식별화:
+                주민등록증:
                   value:
                     result:
-                      did_image: string
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
+                운전면허증:
+                  value:
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 운전면허증
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
+                여권:
+                  value:
+                    result:
+                      title: passport
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567V15788666
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
+                한국여권:
+                  value:
+                    result:
+                      name: 홍길동
+                      number: '012345678'
+                      title: 여권
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567V15788666
+                      birth_date: 01JAN1975
+                      issue_date: 10MAR2008
+                      expiry_date: 10MAR2013
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
+                외국인등록증:
+                  value:
+                    result:
+                      date: '20110101'
+                      name: HONG KIL DONG
+                      number: 123456-1234567
+                      title: 외국인등록증
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
         '400':
           $ref: '#/components/responses/400_id-ocr'
         '401':
