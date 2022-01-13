@@ -633,7 +633,6 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-                  did_option: 1
           multipart/form-data:
             schema:
               type: object
@@ -753,7 +752,6 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-                  did_option: 1
           multipart/form-data:
             schema:
               type: object
@@ -909,7 +907,6 @@ paths:
               Base64 Example:
                 value:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
-                  did_option: 1
           multipart/form-data:
             schema:
               type: object
