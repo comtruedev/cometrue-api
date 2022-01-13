@@ -202,7 +202,12 @@ paths:
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 did_option:
                   type: integer
-                  description: 비식별화옵션(
+                  description: |-
+                    비식별화옵션(주민등록증, 운전면허증)
+
+                    `1`-주민등록번호 전체자리 비식별화
+
+                    `2`-주민등록번호 뒷자리만 비식별화
                   enum:
                     - 1
                     - 2
@@ -348,7 +353,12 @@ paths:
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 did_option:
                   type: integer
-                  description: 비식별화옵션
+                  description: |-
+                    비식별화옵션
+
+                    `1`-주민등록번호 전체자리 비식별화
+
+                    `2`-주민등록번호 뒷자리만 비식별화
               required:
                 - image
                 - did_option
@@ -487,7 +497,12 @@ paths:
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 did_option:
                   type: integer
-                  description: 비식별화옵션
+                  description: |-
+                    비식별화옵션
+
+                    `1`-주민등록번호 전체자리 비식별화
+
+                    `2`-주민등록번호 뒷자리만 비식별화
               required:
                 - image
                 - did_option
