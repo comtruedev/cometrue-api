@@ -5,8 +5,8 @@ info:
   description: |-
     **서비스 소개**
 
-    컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 OCR 서비스 입니다.<br>
-    국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행합니다. 
+    컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 비식별화 서비스 입니다.<br>
+    국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행후 비식별화합니다. 
 
     **서비스 특징**
 
@@ -95,7 +95,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -160,6 +160,8 @@ paths:
       description: |-
         신분증 인식 후 정보를 추출하여 제공합니다.
 
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
+
         **주의사항**
 
         - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
@@ -200,7 +202,10 @@ paths:
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
                 did_option:
                   type: integer
-                  description: 비식별화옵션
+                  description: 비식별화옵션(
+                  enum:
+                    - 1
+                    - 2
               required:
                 - id_type
                 - image
@@ -280,7 +285,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -308,6 +313,8 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |
         주민등록증을 인식하여 이름, 주민등록번호, 발급일자를 제공합니다.
+
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
 
         **주의사항**
         - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
@@ -416,7 +423,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -445,6 +452,8 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         한국인 운전면허증을 인식하여 운전면허번호, 이름, 생년월일, 암호일련번호를 제공합니다.
+
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
 
         **주의사항**
         - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
@@ -543,7 +552,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -570,6 +579,8 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         외국인등록증을 인식하여 외국인등록번호, 발급일자를 추출하여 제공합니다.
+
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
 
         **주의사항**
         - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
@@ -601,9 +612,6 @@ paths:
                     이미지를 base64로 인코딩 한 스트링
 
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
-                did_option:
-                  type: integer
-                  description: 비식별화옵션
               required:
                 - image
             examples:
@@ -664,7 +672,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -691,6 +699,8 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         여권을 인식 하여 기계판독영역(MRZ)을 제공합니다.
+
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
 
         **주의사항**
         - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
@@ -722,9 +732,6 @@ paths:
                     이미지를 base64로 인코딩 한 스트링
 
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
-                did_option:
-                  type: integer
-                  description: 비식별화옵션
               required:
                 - image
             examples:
@@ -805,7 +812,7 @@ paths:
                       did_image:
                         type: string
                         minLength: 1
-                        description: base64로 인코딩된 개인정보 비식별화 이미지
+                        description: base64로 인코딩된 개인정보 비식별화 이미지(jpg)
                 required:
                   - result
               examples:
@@ -838,6 +845,8 @@ paths:
       description: |-
         한국여권을 인식 하여 한글 이름, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
 
+        요청한 이미지에서 개인정보를 비식별화하여 제공합니다.
+
         **주의사항**
         - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
         - 아래와 같은 촬영 환경을 권장합니다.
@@ -867,9 +876,6 @@ paths:
                     이미지를 base64로 인코딩 한 스트링
 
                     지원포맷: jpg(jpeg), png, tif(tiff), bmp
-                did_option:
-                  type: integer
-                  description: 비식별화옵션
               required:
                 - image
             examples:
