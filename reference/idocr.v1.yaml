@@ -751,6 +751,15 @@ paths:
                         type: string
                         description: 여권 기간 만료일
                         example: 01JAN1970
+                      first_name:
+                        type: string
+                        description: 영문이름
+                      last_name:
+                        type: string
+                        description: 영문성
+                      personal_number:
+                        type: string
+                        description: 주민등록번호
                 required:
                   - result
               examples:
@@ -758,7 +767,10 @@ paths:
                   value:
                     result:
                       name: 홍길동
+                      first_name: KIL DONG
+                      last_name: HONG
                       number: D12345678
+                      personal_number: '111111'
                       title: 여권
                       mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
                       mrz2: D123456785KOR7501012M13031001234567V15788666
@@ -780,7 +792,7 @@ paths:
 
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
-        한국여권을 인식 하여 한글 이름, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
+        한국여권을 인식 하여 한글 이름, 영문이름, 영문성, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
 
         **주의사항**
         - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
