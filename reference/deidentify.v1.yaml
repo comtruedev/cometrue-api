@@ -91,7 +91,7 @@ paths:
                       expiry_date:
                         type: string
                         description: 여권 기간 만료일
-                        example: 01JAN1970                    
+                        example: 01JAN1970
                       did_image:
                         type: string
                         minLength: 1
@@ -256,7 +256,7 @@ paths:
                       - date
                       - name
                       - number
-                      - title                    
+                      - title
                       - did_image
                     properties:
                       date:
@@ -276,14 +276,22 @@ paths:
                         type: string
                         description: 신분증 종류
                         enum:
-                          - 주민등록증                    
+                          - 주민등록증
                       did_image:
                         type: string
                         minLength: 1
                         description: base64로 인코딩된 개인정보 비식별화 이미지
                 required:
                   - result
-              examples: {}
+              examples:
+                주민등록증:
+                  value:
+                    result:
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -380,7 +388,7 @@ paths:
                       - code
                       - name
                       - number
-                      - title                    
+                      - title
                       - did_image
                     properties:
                       birth_date:
@@ -404,14 +412,14 @@ paths:
                         type: string
                         description: 신분증 종류
                         enum:
-                          - 운전면허증                    
+                          - 운전면허증
                       did_image:
                         type: string
                         minLength: 1
                         description: base64로 인코딩된 개인정보 비식별화 이미지
                 required:
                   - result
-              examples: 
+              examples:
                 운전면허증:
                   value:
                     result:
@@ -419,8 +427,8 @@ paths:
                       code: 7wggen
                       name: 홍길동
                       number: 11-90-041222-33
-                      title: 운전면허증  
-                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA            
+                      title: 운전면허증
+                      did_image: /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAvQD8ADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAA
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -515,7 +523,7 @@ paths:
                     required:
                       - date
                       - number
-                      - title                    
+                      - title
                       - did_image
                     properties:
                       date:
@@ -531,14 +539,14 @@ paths:
                         type: string
                         description: 신분증 종류
                         enum:
-                          - 외국인등록증                    
+                          - 외국인등록증
                       did_image:
                         type: string
                         minLength: 1
                         description: base64로 인코딩된 개인정보 비식별화 이미지
                 required:
                   - result
-              examples:                  
+              examples:
                 외국인등록증:
                   value:
                     result:
@@ -639,7 +647,7 @@ paths:
                     required:
                       - title
                       - mrz1
-                      - mrz2                    
+                      - mrz2
                       - did_image
                     properties:
                       title:
@@ -652,7 +660,7 @@ paths:
                         description: 기계판독영역
                       mrz2:
                         type: string
-                        description: 기계판독영역                    
+                        description: 기계판독영역
                       did_image:
                         type: string
                         minLength: 1
@@ -760,7 +768,7 @@ paths:
                     required:
                       - name
                       - number
-                      - title                    
+                      - title
                       - did_image
                     properties:
                       name:
@@ -793,7 +801,7 @@ paths:
                       expiry_date:
                         type: string
                         description: 여권 기간 만료일
-                        example: 01JAN1970                    
+                        example: 01JAN1970
                       did_image:
                         type: string
                         minLength: 1
