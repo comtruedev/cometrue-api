@@ -114,6 +114,7 @@ paths:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
       security: []
+      x-internal: true
     parameters: []
   /api/v1/driver/_ocr:
     post:
@@ -218,6 +219,7 @@ paths:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
       security: []
+      x-internal: true
     parameters: []
   /api/v1/alien/_ocr:
     post:
@@ -304,6 +306,7 @@ paths:
                   image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
         description: ''
       security: []
+      x-internal: true
     parameters: []
   /api/v1/driver/verify:
     post:
@@ -376,9 +379,6 @@ paths:
                     minLength: 1
                 required:
                   - error
-                x-examples:
-                  example-1:
-                    error: 'validate: wrong driver number'
               examples:
                 wrong driver number:
                   value:
@@ -544,9 +544,6 @@ paths:
                     minLength: 1
                 required:
                   - error
-                x-examples:
-                  example-1:
-                    error: 'validate: wrong driver number'
               examples:
                 wrong registration name:
                   value:
