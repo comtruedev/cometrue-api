@@ -342,6 +342,215 @@ paths:
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
       security: []
     parameters: []
+  /api/v1/document/ocr:
+    post:
+      summary: 문서 OCR
+      operationId: post-documentocr
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  business_loc:
+                    type: string
+                    minLength: 1
+                  business_type:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - detail
+                        - main
+                      properties:
+                        detail:
+                          type: string
+                          minLength: 1
+                        main:
+                          type: string
+                          minLength: 1
+                  ceo_name_corp:
+                    type: string
+                    minLength: 1
+                  company_name_corp:
+                    type: string
+                    minLength: 1
+                  email_for_etax:
+                    type: string
+                  head_office_loc:
+                    type: string
+                    minLength: 1
+                  issue_authority:
+                    type: string
+                    minLength: 1
+                  issue_date:
+                    type: string
+                    minLength: 1
+                  issue_reason:
+                    type: string
+                    minLength: 1
+                  opening_date:
+                    type: string
+                  reg_num:
+                    type: string
+                    minLength: 1
+                  reg_num_corp:
+                    type: string
+                    minLength: 1
+                  taxable_business:
+                    type: string
+                    minLength: 1
+                required:
+                  - business_loc
+                  - business_type
+                  - ceo_name_corp
+                  - company_name_corp
+                  - email_for_etax
+                  - head_office_loc
+                  - issue_authority
+                  - issue_date
+                  - issue_reason
+                  - opening_date
+                  - reg_num
+                  - reg_num_corp
+                  - taxable_business
+                x-examples:
+                  example-1:
+                    business_loc: '서움특별시 마포구 성암로 330. a동 4층 410호(상암동, omc첨단산업센터)'
+                    business_type:
+                      - detail: 소교트웨어자문개발및공급업
+                        main: 서비스
+                      - detail: 전자기기
+                        main: 제조업
+                      - detail: 전자상거래
+                        main: 소매
+                      - detail: 데이타베이스업
+                        main: 서비스
+                    ceo_name_corp: 박노현
+                    company_name_corp: (주)컴트루테크놀로지
+                    email_for_etax: ''
+                    head_office_loc: '서울특별시마포구 성암로 330. a동 4층 410호(상암동, omc청단산업센터)'
+                    issue_authority: 마포세무서장
+                    issue_date: 2019년02월28일
+                    issue_reason: 정정
+                    opening_date: ''
+                    reg_num: 220-81-43863
+                    reg_num_corp: 110111-1399876
+                    taxable_business: 부
+              examples:
+                사업자등록증:
+                  value:
+                    business_loc: '서움특별시 마포구 성암로 330. a동 4층 410호(상암동, dmc첨단산업센터)'
+                    business_type:
+                      - detail: 소교트웨어자문개발및공급업
+                        main: 서비스
+                      - detail: 전자기기
+                        main: 제조업
+                      - detail: 전자상거래
+                        main: 소매
+                      - detail: 데이타베이스업
+                        main: 서비스
+                    ceo_name_corp: 박노현
+                    company_name_corp: (주)컴트루테크놀로지
+                    email_for_etax: ''
+                    head_office_loc: '서울특별시마포구 성암로 330. a동 4층 410호(상암동, dmc첨단산업센터)'
+                    issue_authority: 마포세무서장
+                    issue_date: 2019년02월28일
+                    issue_reason: 정정
+                    opening_date: ''
+                    reg_num: 111-22-33333
+                    reg_num_corp: 111111-2222222
+                    taxable_business: 부
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |
+        문서를 인식해서 정보를 제공합니다.
+
+        **주의사항**
+        - 문서 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 문서의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 문서 외부의 패딩이 최소화 되도록 촬영
+          - 문서의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 문서가 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                doc_type:
+                  type: string
+                  description: 문서타입
+                  enum:
+                    - business
+                option:
+                  type: integer
+                  description: |-
+                    처리로직옵션
+                    `1`-기본dbnet<br>
+                    `2`-단어단위 dbnet<br>
+                    `3`-영역 dbnet
+              required:
+                - image
+            examples:
+              사업자등록증:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  doc_type: business
+                  option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+      x-internal: true
+    parameters: []
   /api/v1/driver/ocr:
     post:
       summary: 운전면허증 OCR
