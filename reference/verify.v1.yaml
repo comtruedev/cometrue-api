@@ -708,8 +708,8 @@ paths:
 
             <details markdown="1">
             <summary>에러메세지</summary>
-            "wrong registration name": 잘못된 이름<br>
-            "wrong registration issue date": 잘못된 주민등록증 발급일자<br>
+            "wrong passport name": 잘못된 이름<br>
+            "wrong passport issue date": 잘못된 여권 발급일자<br>
             </details>
           content:
             application/json:
@@ -723,12 +723,12 @@ paths:
                 required:
                   - error
               examples:
-                wrong registration name:
+                wrong passport name:
                   value:
-                    error: 'validate: wrong registration name'
+                    error: 'validate: wrong passport name'
                 wrong registration issue date:
                   value:
-                    error: 'validate: wrong registration issue date'
+                    error: 'validate: wrong passport issue date'
         '500':
           description: |-
             Internal Server Error
