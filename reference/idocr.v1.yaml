@@ -221,6 +221,224 @@ paths:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
     parameters: []
+  /api/v1/id/ocr_:
+    post:
+      summary: 신분증 OCR (추가요청)
+      operationId: post-idocr_
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증/외국인등록증 발급일자
+                        example: '19700101'
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호<br>
+                          운전면허증 - 운전면허번호<br>
+                          한국여권 - 여권번호<br>
+                          외국인등록증 - 외국인등록번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 주민등록증
+                          - 외국인등록증
+                          - 여권
+                          - passport
+                          - 운전면허증
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      mrz2:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      birth_date:
+                        type: string
+                        description: |-
+                          운전면허증 생년월일<br>
+                          *Example:* `19700101`
+
+                          한국여권 생년월일<br>
+                          *Example:* `01JAN1970`
+                      issue_date:
+                        type: string
+                        description: 여권 발급일
+                        example: 01JAN1970
+                      expiry_date:
+                        type: string
+                        description: 여권 기간 만료일
+                        example: 01JAN1970
+                  completed:
+                    type: object
+                    properties:
+                      is_completed:
+                        type: boolean
+                        description: 모든 항목이 검출이 되었을 경우 true
+                      uuid:
+                        type: string
+                        format: uuid
+                        description: uuid 추가요청 키
+                    required:
+                      - is_completed
+                required:
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    result:
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 운전면허증
+                여권:
+                  value:
+                    result:
+                      title: passport
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567V15788666
+                한국여권:
+                  value:
+                    result:
+                      name: 홍길동
+                      number: '012345678'
+                      title: 여권
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567V15788666
+                      birth_date: 01JAN1975
+                      issue_date: 10MAR2008
+                      expiry_date: 10MAR2013
+                외국인등록증:
+                  value:
+                    result:
+                      date: '20110101'
+                      name: HONG KIL DONG
+                      number: 123456-1234567
+                      title: 외국인등록증
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        신분증 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                  enum:
+                    - jumin
+                    - driver
+                    - kpassport
+                    - alien
+                    - passport
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                uuid:
+                  type: string
+                  format: uuid
+                  description: uuid 추가요청 키
+              required:
+                - id_type
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  uuid: b6534e3d-8dc2-4a9f-8820-cdde0d88736f
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+              required:
+                - id_type
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      x-internal: true
+    parameters: []
   /api/v1/jumin/ocr:
     post:
       summary: 주민등록증 OCR
