@@ -303,6 +303,7 @@ paths:
                         type: string
                         format: uuid
                         description: uuid 추가요청 키
+                        example: 062f20d1-5382-4eed-8d81-e0e8a876ac90
                     required:
                       - is_completed
                 required:
@@ -406,6 +407,7 @@ paths:
                   type: string
                   format: uuid
                   description: uuid 추가요청 키
+                  example: 062f20d1-5382-4eed-8d81-e0e8a876ac90
               required:
                 - id_type
                 - image
