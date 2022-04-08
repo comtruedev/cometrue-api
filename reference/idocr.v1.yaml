@@ -302,7 +302,9 @@ paths:
                       uuid:
                         type: string
                         format: uuid
-                        description: ocr 추가요청 키
+                        description: |-
+                          ocr 추가요청 키
+                          is_completed가 true일 경우 제공하지 않음
                         example: 062f20d1-5382-4eed-8d81-e0e8a876ac90
                     required:
                       - is_completed
