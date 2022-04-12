@@ -115,6 +115,7 @@ paths:
                     description: 개업연월일
                   reg_num:
                     type: string
+                    description: 등록번호
                   reg_num_corp:
                     type: string
                     minLength: 1
