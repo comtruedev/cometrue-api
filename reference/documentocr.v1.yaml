@@ -181,6 +181,13 @@ paths:
                     신분증 종류
 
                     사업자등록증-`business`
+                    주민등록표초본-`chobon`
+                    주민등록표등본-`deungbon`
+                    기본증명서-`basic`
+                    가족관계증명서-`family`
+                    혼인관계증명서-`marriage`
+                    친양자입양관계증명서-`paternal_adopt`
+                    입양관계증명서-`adopt`
                   enum:
                     - business
                     - basic
@@ -188,6 +195,8 @@ paths:
                     - marriage
                     - paternal_adopt
                     - adopt
+                    - chobon
+                    - deungbon
                 image:
                   type: string
                   minLength: 1
@@ -458,31 +467,69 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
                 type: object
                 x-examples:
                   example-1:
-                    business_loc: '서울특별시 마포구 성암로 330, A동 4층 410호(상암동, DMC첨단산업센터)'
-                    business_type:
-                      - detail: 스프트웨어자문개발및공급업
-                        main: 서비스
-                      - detail: 전자기기
-                        main: 제조업
-                      - detail: 전자상거래
-                        main: 소매
-                      - detail: 데이타베이스업
-                        main: 서비스
-                    ceo_name_corp: 박노현
-                    company_name_corp: (주)컴트루테크놀로지
-                    email_for_etax: ''
-                    head_office_loc: '서울특별시 마포구 성암로 330. A동 4층 410호(상암동, DMC청단산업센터)'
-                    issue_authority: 마포세무서장
-                    issue_date: 2019년02월28일
-                    issue_reason: 정정
-                    opening_date: 1997년04월08일
-                    reg_num: ''
-                    reg_num_corp: 110111-1399876
-                    taxable_business: X
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+                properties:
+                  document_type:
+                    type: string
+                    description: 문서종류
+                  issue_date:
+                    type: string
+                    description: 발급일
+                  issue_type:
+                    type: string
+                    description: 구분
+                    enum:
+                      - 일반
+                      - 상세
+                      - 특정
+                  person_concerned:
+                    type: object
+                    description: 발급자 정보
+                    properties:
+                      gender:
+                        type: string
+                        description: 성별
+                      name:
+                        type: string
+                        description: 성명
+                      number:
+                        type: string
+                        description: 나이
+                      relation:
+                        type: string
+                        description: 관계
+                  place_of_registration:
+                    type: string
+                    description: 등록기준지
+                  family:
+                    type: array
+                    description: 가족사항
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          description: 성별
+                        name:
+                          type: string
+                          description: 이름
+                        number:
+                          type: string
+                          description: 주민등록번호
+                        relation:
+                          type: string
+                          description: 관계
               examples: {}
         '400':
           $ref: '#/components/responses/400_id-ocr'
@@ -500,6 +547,840 @@ paths:
             서버가 유지보수 중이거나 응답할 수 없는 상태
       description: |-
         기본증명서를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/family/ocr:
+    post:
+      summary: 가족관계증명서 OCR
+      operationId: post-familyocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+                properties:
+                  document_type:
+                    type: string
+                    description: 문서종류
+                  issue_date:
+                    type: string
+                    description: 발급일
+                  issue_type:
+                    type: string
+                    description: 구분
+                    enum:
+                      - 일반
+                      - 상세
+                      - 특정
+                  person_concerned:
+                    type: object
+                    description: 발급자 정보
+                    properties:
+                      gender:
+                        type: string
+                        description: 성별
+                      name:
+                        type: string
+                        description: 성명
+                      number:
+                        type: string
+                        description: 나이
+                      relation:
+                        type: string
+                        description: 관계
+                  place_of_registration:
+                    type: string
+                    description: 등록기준지
+                  family:
+                    type: array
+                    description: 가족사항
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          description: 성별
+                        name:
+                          type: string
+                          description: 이름
+                        number:
+                          type: string
+                          description: 주민등록번호
+                        relation:
+                          type: string
+                          description: 관계
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        기본증명서를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/marriage/ocr:
+    post:
+      summary: 혼인관계증명서 OCR
+      operationId: post-marriageocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+                properties:
+                  document_type:
+                    type: string
+                    description: 문서종류
+                  issue_date:
+                    type: string
+                    description: 발급일
+                  issue_type:
+                    type: string
+                    description: 구분
+                    enum:
+                      - 일반
+                      - 상세
+                      - 특정
+                  person_concerned:
+                    type: object
+                    description: 발급자 정보
+                    properties:
+                      gender:
+                        type: string
+                        description: 성별
+                      name:
+                        type: string
+                        description: 성명
+                      number:
+                        type: string
+                        description: 나이
+                      relation:
+                        type: string
+                        description: 관계
+                  place_of_registration:
+                    type: string
+                    description: 등록기준지
+                  family:
+                    type: array
+                    description: 가족사항
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          description: 성별
+                        name:
+                          type: string
+                          description: 이름
+                        number:
+                          type: string
+                          description: 주민등록번호
+                        relation:
+                          type: string
+                          description: 관계
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        혼인관계증명서를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/paternal-adopt/ocr:
+    post:
+      summary: 친양자입양관계증명서 OCR
+      operationId: post-paternaladoptocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+                properties:
+                  document_type:
+                    type: string
+                    description: 문서종류
+                  issue_date:
+                    type: string
+                    description: 발급일
+                  issue_type:
+                    type: string
+                    description: 구분
+                    enum:
+                      - 일반
+                      - 상세
+                      - 특정
+                  person_concerned:
+                    type: object
+                    description: 발급자 정보
+                    properties:
+                      gender:
+                        type: string
+                        description: 성별
+                      name:
+                        type: string
+                        description: 성명
+                      number:
+                        type: string
+                        description: 나이
+                      relation:
+                        type: string
+                        description: 관계
+                  place_of_registration:
+                    type: string
+                    description: 등록기준지
+                  family:
+                    type: array
+                    description: 가족사항
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          description: 성별
+                        name:
+                          type: string
+                          description: 이름
+                        number:
+                          type: string
+                          description: 주민등록번호
+                        relation:
+                          type: string
+                          description: 관계
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        친양자입양관계증명서를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/adopt/ocr:
+    post:
+      summary: 입양관계증명서 OCR
+      operationId: post-adptocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+                properties:
+                  document_type:
+                    type: string
+                    description: 문서종류
+                  issue_date:
+                    type: string
+                    description: 발급일
+                  issue_type:
+                    type: string
+                    description: 구분
+                    enum:
+                      - 일반
+                      - 상세
+                      - 특정
+                  person_concerned:
+                    type: object
+                    description: 발급자 정보
+                    properties:
+                      gender:
+                        type: string
+                        description: 성별
+                      name:
+                        type: string
+                        description: 성명
+                      number:
+                        type: string
+                        description: 나이
+                      relation:
+                        type: string
+                        description: 관계
+                  place_of_registration:
+                    type: string
+                    description: 등록기준지
+                  family:
+                    type: array
+                    description: 가족사항
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                          description: 성별
+                        name:
+                          type: string
+                          description: 이름
+                        number:
+                          type: string
+                          description: 주민등록번호
+                        relation:
+                          type: string
+                          description: 관계
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        입양관계증명서를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/chobon/ocr:
+    post:
+      summary: 주민등록표(초본) OCR
+      operationId: post-chobonocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        주민등록표(초본)를 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 문서 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                option:
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+                  default: 2
+                  enum:
+                    - 0
+                    - 1
+                    - 2
+                  type: number
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+                option:
+                  type: number
+                  description: |-
+                    0 : 사용하지 않음
+                    1 : 앵글넷(권장하지 않음)
+                    2 : 회전 신경망 사용(권장)
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v1/deugbon/ocr:
+    post:
+      summary: 주민등록표(등본) OCR
+      operationId: post-deugbonocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    document_type: 기본증명서
+                    issue_date: 2021년 06월 09일
+                    issue_type: 일반
+                    person_concerned:
+                      gender: 남
+                      name: 최아람
+                      number: 920314-1******
+                      relation: 본인
+                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        주민등록표(등본)를 인식 후 정보를 추출하여 제공합니다.
 
         **주의사항**
 
