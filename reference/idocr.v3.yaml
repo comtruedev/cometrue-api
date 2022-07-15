@@ -1,0 +1,1598 @@
+openapi: 3.0.0
+x-stoplight:
+  id: y9gt3fu38kjfa
+info:
+  title: 신분증 OCR
+  version: '1.0'
+  description: |-
+    **서비스 소개**
+
+    컴트루테크놀로지의 인공지능 OCR 신경망을 활용한 신분증 OCR 서비스 입니다.<br>
+    국내에서 사용되는 신분증 4종 (주민등록증, 운전면허증, 외국인등록증, 여권)에 대한 개인정보 OCR을 수행합니다. 
+
+    **서비스 특징**
+
+    자체개발 OCR 신경망을 적용하여 OCR이 필요한 영역에 대해 정확한 인식을 수행합니다.<br>
+    신분증 진위확인 서비스와 연계하여 사용할 수 있습니다.
+  contact:
+    email: ask@comtrue.com
+    url: 'https://cometrue.ai'
+    name: cometrue.ai AI API
+  termsOfService: 'https://cometrue.ai/index.php/ai-api-terms-of-service/'
+servers:
+  - description: Cometrue
+    url: 'https://api.cometrue.ai'
+paths:
+  /api/v3/id/ocr:
+    post:
+      summary: 신분증 OCR
+      operationId: post-idocr
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - title
+                    properties:
+                      issue_date:
+                        type: string
+                        minLength: 1
+                        description: 발급일자
+                        example: '19700101'
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      id_number:
+                        type: string
+                        minLength: 1
+                        description: 주민등록번호/외국인등록번호
+                      driver_number:
+                        type: string
+                        minLength: 1
+                        description: 운전면허번호
+                      passport_number:
+                        type: string
+                        minLength: 1
+                        description: 여권번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 주민등록증
+                          - 외국인등록증
+                          - 여권
+                          - passport
+                          - 운전면허증
+                      mrz1:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      mrz2:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      birth_date:
+                        type: string
+                        description: |-
+                          운전면허증 생년월일<br>
+                          *Example:* `19700101`
+
+                          한국여권 생년월일<br>
+                          *Example:* `01JAN1970`
+                      expiry_date:
+                        type: string
+                        description: 만료일자
+                        example: 01JAN1970
+                      passport_type:
+                        type: string
+                        description: 여권종류
+                      first_name:
+                        type: string
+                        description: 여권 이름
+                      last_name:
+                        type: string
+                        description: 여권 성
+                      gender:
+                        type: string
+                        description: 여권 성별
+                required:
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    result:
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 운전면허증
+                여권:
+                  value:
+                    result:
+                      title: passport
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+                한국여권:
+                  value:
+                    result:
+                      name: 홍길동
+                      number: '012345678'
+                      title: 여권
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+                      birth_date: 01JAN1975
+                      issue_date: 10MAR2008
+                      expiry_date: 10MAR2013
+                외국인등록증:
+                  value:
+                    result:
+                      date: '20110101'
+                      name: HONG KIL DONG
+                      number: 123456-1234567
+                      title: 외국인등록증
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        신분증 인식 후 정보를 추출하여 제공합니다.
+
+        **주의사항**
+
+        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                  enum:
+                    - jumin
+                    - driver
+                    - kpassport
+                    - alien
+                    - passport
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - id_type
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+              required:
+                - id_type
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+    parameters: []
+  /api/v3/id/ocr_:
+    post:
+      summary: 신분증 OCR (추가요청)
+      operationId: post-idocr_
+      responses:
+        '200':
+          description: |-
+            OK
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - title
+                    properties:
+                      date:
+                        type: string
+                        minLength: 1
+                        description: 주민등록증/외국인등록증 발급일자
+                        example: '19700101'
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      number:
+                        type: string
+                        minLength: 1
+                        description: |-
+                          주민등록증 - 주민등록번호<br>
+                          운전면허증 - 운전면허번호<br>
+                          한국여권 - 여권번호<br>
+                          외국인등록증 - 외국인등록번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 주민등록증
+                          - 외국인등록증
+                          - 여권
+                          - passport
+                          - 운전면허증
+                      code:
+                        type: string
+                        description: 운전면허증 식별코드
+                      mrz1:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      mrz2:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      birth_date:
+                        type: string
+                        description: |-
+                          운전면허증 생년월일<br>
+                          *Example:* `19700101`
+
+                          한국여권 생년월일<br>
+                          *Example:* `01JAN1970`
+                      issue_date:
+                        type: string
+                        description: 여권 발급일
+                        example: 01JAN1970
+                      expiry_date:
+                        type: string
+                        description: 여권 기간 만료일
+                        example: 01JAN1970
+                  completed:
+                    type: object
+                    properties:
+                      is_completed:
+                        type: boolean
+                        description: 모든 항목이 검출이 되었을 경우 true
+                      uuid:
+                        type: string
+                        format: uuid
+                        description: |-
+                          ocr 추가요청 키
+                          is_completed가 true일 경우 제공하지 않음
+                        example: 062f20d1-5382-4eed-8d81-e0e8a876ac90
+                    required:
+                      - is_completed
+                required:
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    result:
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+                운전면허증:
+                  value:
+                    result:
+                      birth_date: '19660220'
+                      code: 7wggen
+                      name: 홍길동
+                      number: 11-90-041222-33
+                      title: 운전면허증
+                여권:
+                  value:
+                    result:
+                      title: passport
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+                한국여권:
+                  value:
+                    result:
+                      name: 홍길동
+                      number: '012345678'
+                      title: 여권
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+                      birth_date: 01JAN1975
+                      issue_date: 10MAR2008
+                      expiry_date: 10MAR2013
+                외국인등록증:
+                  value:
+                    result:
+                      date: '20110101'
+                      name: HONG KIL DONG
+                      number: 123456-1234567
+                      title: 외국인등록증
+        '400':
+          $ref: '#/components/responses/400_id-ocr'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        신분증 인식 후 정보를 추출하여 제공합니다.
+        추출되지 않은 항목이 하나라도 존재 할 경우 uuid 키를 제공하여, 해당 키로 추가요청을 통해 OCR을 수행합니다.
+
+        **주의사항**
+
+        - 신분증 이미지는 회전되지 않고, 패딩이 없어야 합니다.
+        - 지원하는 신분증은 한국인 주민등록증, 한국인 운전면허증, 한국인 여권, 외국인등록증, 여권입니다.
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                  enum:
+                    - jumin
+                    - driver
+                    - kpassport
+                    - alien
+                    - passport
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                uuid:
+                  type: string
+                  format: uuid
+                  description: ocr 추가요청 키
+                  example: 062f20d1-5382-4eed-8d81-e0e8a876ac90
+              required:
+                - id_type
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  id_type: jumin
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  uuid: b6534e3d-8dc2-4a9f-8820-cdde0d88736f
+          multipart/form-data:
+            schema:
+              description: ''
+              type: object
+              properties:
+                id_type:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    신분증 종류
+
+                    주민등록번호-`jumin`, 운전면허증-`driver`, 한국여권-`kpassport`, 외국인등록증-`alien`, 여권-`passport`
+                image:
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                  type: string
+              required:
+                - id_type
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      x-internal: true
+    parameters: []
+  /api/v3/jumin/ocr:
+    post:
+      summary: 주민등록증 OCR
+      operationId: post-idocrjumin
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - date
+                      - name
+                      - number
+                      - title
+                    properties:
+                      issue_date:
+                        type: string
+                        minLength: 1
+                        description: 발급일자
+                        example: '19700101'
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      id_number:
+                        type: string
+                        minLength: 1
+                        description: 주민등록번호/외국인등록번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 주민등록증
+                required:
+                  - result
+              examples:
+                주민등록증:
+                  value:
+                    result:
+                      date: '20191205'
+                      name: 홍길동
+                      number: 123456-1234567
+                      title: 주민등록증
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |
+        주민등록증을 인식하여 이름, 주민등록번호, 발급일자를 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v3/document/ocr:
+    post:
+      summary: 문서 OCR
+      operationId: post-documentocr
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  business_loc:
+                    type: string
+                    minLength: 1
+                  business_type:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - detail
+                        - main
+                      properties:
+                        detail:
+                          type: string
+                          minLength: 1
+                        main:
+                          type: string
+                          minLength: 1
+                  ceo_name_corp:
+                    type: string
+                    minLength: 1
+                  company_name_corp:
+                    type: string
+                    minLength: 1
+                  email_for_etax:
+                    type: string
+                  head_office_loc:
+                    type: string
+                    minLength: 1
+                  issue_authority:
+                    type: string
+                    minLength: 1
+                  issue_date:
+                    type: string
+                    minLength: 1
+                  issue_reason:
+                    type: string
+                    minLength: 1
+                  opening_date:
+                    type: string
+                  reg_num:
+                    type: string
+                    minLength: 1
+                  reg_num_corp:
+                    type: string
+                    minLength: 1
+                  taxable_business:
+                    type: string
+                    minLength: 1
+                required:
+                  - business_loc
+                  - business_type
+                  - ceo_name_corp
+                  - company_name_corp
+                  - email_for_etax
+                  - head_office_loc
+                  - issue_authority
+                  - issue_date
+                  - issue_reason
+                  - opening_date
+                  - reg_num
+                  - reg_num_corp
+                  - taxable_business
+                x-examples:
+                  example-1:
+                    business_loc: '서움특별시 마포구 성암로 330. a동 4층 410호(상암동, omc첨단산업센터)'
+                    business_type:
+                      - detail: 소교트웨어자문개발및공급업
+                        main: 서비스
+                      - detail: 전자기기
+                        main: 제조업
+                      - detail: 전자상거래
+                        main: 소매
+                      - detail: 데이타베이스업
+                        main: 서비스
+                    ceo_name_corp: 박노현
+                    company_name_corp: (주)컴트루테크놀로지
+                    email_for_etax: ''
+                    head_office_loc: '서울특별시마포구 성암로 330. a동 4층 410호(상암동, omc청단산업센터)'
+                    issue_authority: 마포세무서장
+                    issue_date: 2019년02월28일
+                    issue_reason: 정정
+                    opening_date: ''
+                    reg_num: 220-81-43863
+                    reg_num_corp: 110111-1399876
+                    taxable_business: 부
+              examples:
+                사업자등록증:
+                  value:
+                    business_loc: '서움특별시 마포구 성암로 330. a동 4층 410호(상암동, dmc첨단산업센터)'
+                    business_type:
+                      - detail: 소교트웨어자문개발및공급업
+                        main: 서비스
+                      - detail: 전자기기
+                        main: 제조업
+                      - detail: 전자상거래
+                        main: 소매
+                      - detail: 데이타베이스업
+                        main: 서비스
+                    ceo_name_corp: 박노현
+                    company_name_corp: (주)컴트루테크놀로지
+                    email_for_etax: ''
+                    head_office_loc: '서울특별시마포구 성암로 330. a동 4층 410호(상암동, dmc첨단산업센터)'
+                    issue_authority: 마포세무서장
+                    issue_date: 2019년02월28일
+                    issue_reason: 정정
+                    opening_date: ''
+                    reg_num: 111-22-33333
+                    reg_num_corp: 111111-2222222
+                    taxable_business: 부
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |
+        문서를 인식해서 정보를 제공합니다.
+
+        **주의사항**
+        - 문서 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 문서의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 문서 외부의 패딩이 최소화 되도록 촬영
+          - 문서의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 문서가 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+                doc_type:
+                  type: string
+                  description: 문서타입
+                  enum:
+                    - business
+                option:
+                  type: integer
+                  description: |-
+                    처리로직옵션
+                    `1`-기본dbnet<br>
+                    `2`-단어단위 dbnet<br>
+                    `3`-영역 dbnet
+              required:
+                - image
+            examples:
+              사업자등록증:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+                  doc_type: business
+                  option: 1
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+      x-internal: true
+    parameters: []
+  /api/v3/driver/ocr:
+    post:
+      summary: 운전면허증 OCR
+      operationId: post-idocrdriver
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - birth_date
+                      - name
+                      - driver_number
+                      - title
+                      - issue_date
+                    properties:
+                      birth_date:
+                        type: string
+                        minLength: 1
+                        description: 생년월일
+                        example: '19700101'
+                      issue_date:
+                        type: string
+                        minLength: 1
+                        description: 발급일자
+                        example: '19700101'
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      driver_number:
+                        type: string
+                        minLength: 1
+                        description: 운전면허번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 운전면허증
+                required:
+                  - result
+              examples:
+                운전면허증:
+                  value:
+                    result:
+                      birth_date: '19660220'
+                      name: 홍길동
+                      driver_number: 11-90-041222-33
+                      issue_date: '19700101'
+                      title: 운전면허증
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        한국인 운전면허증을 인식하여 운전면허번호, 이름, 생년월일, 암호일련번호를 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v3/alien/ocr:
+    post:
+      summary: 외국인등록증 OCR
+      operationId: post-idocralien
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - issue_date
+                      - title
+                      - id_number
+                      - name
+                    properties:
+                      issue_date:
+                        type: string
+                        minLength: 1
+                        description: 외국인등록증 발급일자
+                        example: '19700101'
+                      id_number:
+                        type: string
+                        minLength: 1
+                        description: 외국인등록번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 외국인등록증
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명                          
+                required:
+                  - result
+              examples:
+                외국인등록증:
+                  value:
+                    result:
+                      issue_date: '20110101'
+                      id_number: 123456-1234567
+                      title: 외국인등록증
+                      name: GILDONG HONG
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        외국인등록증을 인식하여 외국인등록번호, 발급일자를 추출하여 제공합니다.
+
+        **주의사항**
+        - 신분증 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 신분증의 색상과 유사하지 않은 단색에 가까운 배경에서 촬영하거나, 신분증 외부의 패딩이 최소화 되도록 촬영
+          - 신분증의 외곽선 (4개의 선분과 꼭짓점) 이 잘 드러나는 상태로 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 인해 신분증이 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v3/passport/ocr:
+    post:
+      summary: 여권 OCR
+      operationId: post-idocrpassport
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - title
+                      - mrz1
+                      - mrz2
+                    properties:
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - passport
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      id_number:
+                        type: string
+                        minLength: 1
+                        description: 주민등록번호
+                      passport_number:
+                        type: string
+                        minLength: 1
+                        description: 여권번호
+                      mrz1:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      mrz2:
+                        type: string
+                        description: 여권 - 기계판독영역
+                      birth_date:
+                        type: string
+                        description: |-
+                          여권 생년월일<br>
+                          *Example:* `01JAN1970`
+                      expiry_date:
+                        type: string
+                        description: 만료일자
+                        example: 01JAN1970
+                      passport_type:
+                        type: string
+                        description: 여권종류
+                      first_name:
+                        type: string
+                        description: 여권 이름
+                      last_name:
+                        type: string
+                        description: 여권 성
+                      gender:
+                        type: string
+                        description: 여권 성별                        
+                required:
+                  - result
+              examples:
+                여권:
+                  value:
+                    result:
+                      title: passport
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409-passport'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        여권을 인식 하여 기계판독영역(MRZ)을 제공합니다.
+
+        **주의사항**
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
+          
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+  /api/v3/kpassport/ocr:
+    post:
+      summary: 한국여권 OCR
+      operationId: post-idocrkpassport
+      responses:
+        '200':
+          description: |-
+            OK
+
+            정상응답
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  result:
+                    type: object
+                    description: 검출한 정보
+                    required:
+                      - name
+                      - passport_number
+                      - title
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        description: 성명
+                      passport_number:
+                        type: string
+                        minLength: 1
+                        description: 여권번호
+                      title:
+                        type: string
+                        description: 신분증 종류
+                        enum:
+                          - 여권
+                      mrz1:
+                        type: string
+                        description: 기계판독영역
+                      mrz2:
+                        type: string
+                        description: 기계판독영역
+                      birth_date:
+                        type: string
+                        description: 생년월일
+                        example: 01JAN1970
+                      issue_date:
+                        type: string
+                        description: 여권 발급일
+                        example: 01JAN1970
+                      expiry_date:
+                        type: string
+                        description: 여권 기간 만료일
+                        example: 01JAN1970
+                      first_name:
+                        type: string
+                        description: 영문이름
+                      last_name:
+                        type: string
+                        description: 영문성
+                      id_number:
+                        type: string
+                        description: 주민등록번호
+                      passport_type:
+                        type: string
+                        description: 여권종류                        
+                required:
+                  - result
+              examples:
+                한국여권:
+                  value:
+                    result:
+                      name: 홍길동
+                      first_name: KIL DONG
+                      last_name: HONG
+                      passport_number: D12345678
+                      id_number: '111111'
+                      title: 여권
+                      mrz1: PDKORHONG<<KIL<DONG<<<<<<<<<<<<<<<<<<<<<<<<<
+                      mrz2: D123456785KOR7501012M13031001234567v35788666
+                      birth_date: 01JAN1975
+                      issue_date: 10MAR2008
+                      expiry_date: 10MAR2013
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          description: |-
+            Unauthorized
+
+            허가되지 않은 사용자의 접근
+        '409':
+          $ref: '#/components/responses/409-passport'
+        '500':
+          description: |-
+            Internal Server Error
+
+            서버가 유지보수 중이거나 응답할 수 없는 상태
+      description: |-
+        한국여권을 인식 하여 한글 이름, 영문이름, 영문성, 주민등록번호, 여권번호, 기계판독영역(MRZ), 생년월일, 발급일자, 기간만료일을 제공합니다.
+
+        **주의사항**
+        - 여권 이미지는 회전되지 않아야 하며, 의미없는 문자나 이미지가 포함된 외부 패딩은 없어야 합니다.
+        - 아래와 같은 촬영 환경을 권장합니다.
+          - 여권의 외부의 패딩이 최소화 되도록 촬영
+          - 인식 대상이 되는 면이 구부러 지거나, 휘어져 인식에 방해가 되지 않도록 최대한 펼쳐서 촬영
+          - 사람이 충분히 식별 가능한 정도의 선명도를 가지고 빛번짐이나 반사가 심하지 않은 상태로 촬영
+          - 손가락이나 외부 물체들로 여권이 심하게 가려지지 않은 상태로 촬영
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Njk3ODI4MzgsImxpY2Vuc2UiOiJiODU1Yzc....
+          in: header
+          name: Authorization
+          description: 계정 인증을 통해 발급 받은 Access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                image:
+                  type: string
+                  minLength: 1
+                  description: |-
+                    이미지를 base64로 인코딩 한 스트링
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+            examples:
+              Base64 Example:
+                value:
+                  image: iVBORw0KGgoAAAANSUhEUgAACbEAAA2zCAYAAADce6KLAAAA....
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: |-
+                    멀티파트 이미지파일
+
+                    지원포맷: jpg(jpeg), png, tif(tiff), bmp
+              required:
+                - image
+        description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
+      security: []
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes: {}
+  responses:
+    '400':
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "Image is empty"<br>
+        "request format or type is not valid"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            request format or type is not valid:
+              value:
+                message: request format or type is not valid
+            image empty:
+              value:
+                message: Image is empty
+    '409':
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "Onnx runtime error: 100"<br>
+        "Std Exception: 101"<br>
+        "OpenCV error: 100"<br>
+        "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
+        "text detection error: 203": cannot find square<br>
+        "text detection error: 204": not enough to be square<br>
+        "text detection error: 207": not enough contour<br>
+        "text detection error: 208": not enough group<br>
+        "object detection error: 209": cannot find object<br>
+        "Json decode error"
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //OCR error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+    ErrorResponse:
+      description: 신분증 인식 및 OCR에 대한 Error Message
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+    400_id-ocr:
+      description: |
+        Bad Request
+
+        사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "id_type not provided"<br>
+        "image: not provided"<br>
+        "image base64 decode error"<br>
+        "Unsupported ID type"<br>
+        "Image cannot be read"<br>
+        "Image is too small to process"<br>
+        "id_type: is not correct."<br>
+        "Image is empty"<br>
+        "request format or type is not valid"<br>
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            id_type not given:
+              value:
+                message: id_type not provided
+            image not given:
+              value:
+                message: 'image: not provided'
+            base64 decoding of the image failed:
+              value:
+                message: image base64 decode error
+            Unsupported ID:
+              value:
+                message: Unsupported ID type
+            Image not readable:
+              value:
+                message: Image cannot be read
+            Query image is too small to process:
+              value:
+                message: Image is too small to process
+            id_type not correct:
+              value:
+                message: 'id_type: is not correct.'
+            request format or type is not valid:
+              value:
+                message: request format or type is not valid
+            image empty:
+              value:
+                message: Image is empty
+    409-passport:
+      description: |-
+        Conflict
+
+        서버에서의 처리 중 에러
+
+        <details markdown="1">
+        <summary>에러메세지</summary>
+        "Onnx runtime error: 100"<br>
+        "Std Exception: 101"<br>
+        "OpenCV error: 100"<br>
+        "text detection error: 201": cannot find text<br>
+        "text detection error: 202": Vertex detection error<br>
+        "text detection error: 203": cannot find square<br>
+        "text detection error: 204": not enough to be square<br>
+        "text detection error: 205": cannot find MRZ<br>
+        "text detection error: 207": not enough contour<br>
+        "text detection error: 208": not enough group<br>
+        "object detection error: 209": cannot find object<br>
+        "Json decode error"
+        </details>
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
+          examples:
+            Vertex detection error:
+              value:
+                message: 'text detection error: 202'
+            Text detection error:
+              value:
+                message: text detection error
+            //OCR error:
+              value:
+                message: text recognition error
+            //Matching error:
+              value:
+                message: matching error
+            onnxexception:
+              value:
+                message: 'Onnx runtime error: 100'
+            stdexception:
+              value:
+                message: 'Std Exception: 101'
+            cvexception:
+              value:
+                message: 'OpenCV error: 100'
+            cannot find text:
+              value:
+                message: 'text detection error: 201'
+            cannot find square:
+              value:
+                message: 'text detection error: 203'
+            not enough to be square:
+              value:
+                message: 'text detection error: 204'
+            not enough contour:
+              value:
+                message: 'text detection error: 207'
+            not enough group:
+              value:
+                message: 'text detection error: 208'
+            cannot find object:
+              value:
+                message: 'object detection error: 209'
+            json decode error:
+              value:
+                message: Json decode error
+            cannot find MRZ:
+              value:
+                message: 'text detection error: 205'
