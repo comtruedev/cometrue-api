@@ -149,6 +149,7 @@ paths:
                       birth_date: 01 Jan 1975
                       issue_date: 10 Mar 2008
                       expiry_date: 10 Mar 2013
+                      passport_type: D
                 외국인등록증:
                   value:
                     result:
@@ -1270,6 +1271,7 @@ paths:
                       birth_date: 01 Jan 1975
                       issue_date: 10 Mar 2008
                       expiry_date: 10 Mar 2013
+                      passport_type: D
         '400':
           $ref: '#/components/responses/400'
         '401':
