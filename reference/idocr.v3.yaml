@@ -809,17 +809,11 @@ paths:
                       - name
                       - driver_number
                       - title
-                      - issue_date
                     properties:
                       birth_date:
                         type: string
                         minLength: 1
                         description: 생년월일
-                        example: '19700101'
-                      issue_date:
-                        type: string
-                        minLength: 1
-                        description: 발급일자
                         example: '19700101'
                       name:
                         type: string
@@ -843,7 +837,6 @@ paths:
                       birth_date: '19660220'
                       name: 홍길동
                       driver_number: 11-90-041222-33
-                      issue_date: '19700101'
                       title: 운전면허증
         '400':
           $ref: '#/components/responses/400'
