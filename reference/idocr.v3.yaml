@@ -3,7 +3,7 @@ x-stoplight:
   id: y9gt3fu38kjfa
 info:
   title: 신분증 OCR
-  version: '1.0'
+  version: '3.0'
   description: |-
     **서비스 소개**
 
@@ -955,7 +955,7 @@ paths:
                       name:
                         type: string
                         minLength: 1
-                        description: 성명                          
+                        description: 성명
                 required:
                   - result
               examples:
@@ -1101,7 +1101,7 @@ paths:
                         description: 여권 성
                       gender:
                         type: string
-                        description: 여권 성별                        
+                        description: 여권 성별
                 required:
                   - result
               examples:
@@ -1245,7 +1245,7 @@ paths:
                         description: 주민등록번호
                       passport_type:
                         type: string
-                        description: 여권종류                        
+                        description: 여권종류
                 required:
                   - result
               examples:
