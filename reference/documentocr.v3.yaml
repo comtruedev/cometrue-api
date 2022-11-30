@@ -1,7 +1,9 @@
 openapi: 3.0.0
+x-stoplight:
+  id: yamxzjj7mlinr
 info:
   title: 문서 OCR
-  version: '1.0'
+  version: '3.0'
   description: |-
     **서비스 소개**
 
@@ -21,7 +23,7 @@ servers:
   - description: Cometrue
     url: 'https://api.cometrue.ai'
 paths:
-  /api/v1/document/ocr:
+  /api/v3/document/ocr:
     post:
       summary: 문서 OCR
       operationId: post-documentocr
@@ -35,29 +37,6 @@ paths:
               schema:
                 description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    business_loc: '서울특별시 마포구 성암로 330, A동 4층 410호(상암동, DMC첨단산업센터)'
-                    business_type:
-                      - detail: 스프트웨어자문개발및공급업
-                        main: 서비스
-                      - detail: 전자기기
-                        main: 제조업
-                      - detail: 전자상거래
-                        main: 소매
-                      - detail: 데이타베이스업
-                        main: 서비스
-                    ceo_name_corp: 박노현
-                    company_name_corp: (주)컴트루테크놀로지
-                    email_for_etax: ''
-                    head_office_loc: '서울특별시 마포구 성암로 330. A동 4층 410호(상암동, DMC청단산업센터)'
-                    issue_authority: 마포세무서장
-                    issue_date: 2019년02월28일
-                    issue_reason: 정정
-                    opening_date: 1997년04월08일
-                    reg_num: ''
-                    reg_num_corp: 110111-1399876
-                    taxable_business: X
                 properties:
                   business_loc:
                     type: string
@@ -256,9 +235,8 @@ paths:
                 - doc_type
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/business/ocr:
+  /api/v3/business/ocr:
     post:
       summary: 사업자등록증 OCR
       operationId: post-businessocr
@@ -266,116 +244,151 @@ paths:
         '200':
           description: |-
             OK
+
             정상응답
+
+            status가 -1일 경우 제공되는 에러메세지는 다음과 같습니다.
+            <details markdown="1">
+            <summary>세부정보</summary>
+            <table border="1" align="center">
+            <th>message</th>
+            <th>설명</th>
+
+            <tr>
+            <td>System error: 100</td>
+            <td>서버 내부에 오류가 발생했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid request: 107</td>
+            <td>잘못된 파라미터를 사용했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid image file: 108</td>
+            <td>읽을 수 없는 이미지 파일입니다.</td>
+            </tr>
+
+            <tr>
+            <td>Text detection failed: 201</td>
+            <td>이미지에서 인식 가능한 텍스트를 찾지 못했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>OCR Validation Failed: 502</td>
+            <td>OCR 결과가 잘못되었습니다.</td>
+            </tr>
+
+            </table>
+
+            </details>
           content:
             application/json:
               schema:
-                description: ''
                 type: object
-                x-examples:
-                  example-1:
-                    business_loc: '서울특별시 마포구 성암로 330, A동 4층 410호(상암동, DMC첨단산업센터)'
-                    business_type:
-                      - detail: 스프트웨어자문개발및공급업
-                        main: 서비스
-                      - detail: 전자기기
-                        main: 제조업
-                      - detail: 전자상거래
-                        main: 소매
-                      - detail: 데이타베이스업
-                        main: 서비스
-                    ceo_name_corp: 박노현
-                    company_name_corp: (주)컴트루테크놀로지
-                    email_for_etax: ''
-                    head_office_loc: '서울특별시 마포구 성암로 330. A동 4층 410호(상암동, DMC청단산업센터)'
-                    issue_authority: 마포세무서장
-                    issue_date: 2019년02월28일
-                    issue_reason: 정정
-                    opening_date: 1997년04월08일
-                    reg_num: ''
-                    reg_num_corp: 110111-1399876
-                    taxable_business: X
                 properties:
-                  business_loc:
+                  status:
+                    type: integer
+                    description: 상태
+                  message:
                     type: string
-                    minLength: 1
-                    description: 사업장소재지
-                  business_type:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    description: 사업의종류
-                    items:
-                      type: object
-                      properties:
-                        detail:
-                          type: string
-                          minLength: 1
-                          description: 업태
-                        main:
-                          type: string
-                          minLength: 1
-                          description: 종목
-                      required:
-                        - detail
-                        - main
-                  ceo_name_corp:
-                    type: string
-                    minLength: 1
-                    description: 대표자
-                  company_name_corp:
-                    type: string
-                    minLength: 1
-                    description: 법인명(단체명)
-                  email_for_etax:
-                    type: string
-                    description: 전자세금계산서 전용 전자우편주소
-                  head_office_loc:
-                    type: string
-                    minLength: 1
-                    description: 본점소재지
-                  issue_authority:
-                    type: string
-                    minLength: 1
-                    description: 발급기관
-                  issue_date:
-                    type: string
-                    minLength: 1
-                    description: 발급일
-                  issue_reason:
-                    type: string
-                    minLength: 1
-                    description: 발급사유
-                  opening_date:
-                    type: string
-                    minLength: 1
-                    description: 개업연월일
-                  reg_num:
-                    type: string
-                    description: 등록번호
-                  reg_num_corp:
-                    type: string
-                    minLength: 1
-                    description: 법인등록번호
-                  taxable_business:
-                    type: string
-                    minLength: 1
-                    description: 사업자 단위 과세 적용사업자 여부
-                required:
-                  - business_loc
-                  - business_type
-                  - ceo_name_corp
-                  - company_name_corp
-                  - email_for_etax
-                  - head_office_loc
-                  - issue_authority
-                  - issue_date
-                  - issue_reason
-                  - opening_date
-                  - reg_num
-                  - reg_num_corp
-                  - taxable_business
-              examples: {}
+                    description: API 메세지
+                  result:
+                    type: object
+                    description: 결과
+                    properties:
+                      business_loc:
+                        type: string
+                        minLength: 1
+                        description: 사업장소재지
+                      business_type:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: 사업의종류
+                        items:
+                          type: object
+                          properties:
+                            detail:
+                              type: string
+                              minLength: 1
+                              description: 업태
+                            main:
+                              type: string
+                              minLength: 1
+                              description: 종목
+                          required:
+                            - detail
+                            - main
+                      ceo_name_corp:
+                        type: string
+                        minLength: 1
+                        description: 대표자
+                      company_name_corp:
+                        type: string
+                        minLength: 1
+                        description: 법인명(단체명)
+                      email_for_etax:
+                        type: string
+                        description: 전자세금계산서 전용 전자우편주소
+                      head_office_loc:
+                        type: string
+                        minLength: 1
+                        description: 본점소재지
+                      issue_authority:
+                        type: string
+                        minLength: 1
+                        description: 발급기관
+                      issue_date:
+                        type: string
+                        minLength: 1
+                        description: 발급일
+                      issue_reason:
+                        type: string
+                        minLength: 1
+                        description: 발급사유
+                      opening_date:
+                        type: string
+                        minLength: 1
+                        description: 개업연월일
+                      reg_num:
+                        type: string
+                        description: 등록번호
+                      reg_num_corp:
+                        type: string
+                        minLength: 1
+                        description: 법인등록번호
+                      taxable_business:
+                        type: string
+                        minLength: 1
+                        description: 사업자 단위 과세 적용사업자 여부
+              examples:
+                사업자등록증:
+                  value:
+                    status: 0
+                    message: OK
+                    result:
+                      business_loc: 서울특별시 마포구 성암로 330. A동 4층 410호(상암동 DMC첨단산업센터)
+                      business_type:
+                        - detail: 스프트웨어자문개발및공급업
+                          main: 서비스
+                        - detail: 전자기기
+                          main: 제조업
+                        - detail: 전자상거래
+                          main: 소매
+                        - detail: 데이타베이스업
+                          main: 서비스
+                      ceo_name_corp: 박노현
+                      company_name_corp: (주)컴트루테크놀로지
+                      email_for_etax: comtrue@hometax.go.kr
+                      head_office_loc: 서울특별시 마포구 성암로 330 A동 4층 410호(상암동 DMC청단산업센터)
+                      issue_authority: 마포세무서장
+                      issue_date: 2019 년 OO 월 OO 일
+                      issue_reason: 정정
+                      opening_date: ''
+                      reg_num: 220-81-43863
+                      reg_num_corp: 110111-1399876
+                      taxable_business: X
         '400':
           $ref: '#/components/responses/400_id-ocr'
         '401':
@@ -455,9 +468,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/basic/ocr:
+  /api/v3/basic/ocr:
     post:
       summary: 기본증명서 OCR
       operationId: post-basicocr
@@ -470,17 +482,6 @@ paths:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
                 properties:
                   document_type:
                     type: string
@@ -612,9 +613,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/family/ocr:
+  /api/v3/family/ocr:
     post:
       summary: 가족관계증명서 OCR
       operationId: post-familyocr
@@ -627,17 +627,6 @@ paths:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
                 properties:
                   document_type:
                     type: string
@@ -769,9 +758,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/marriage/ocr:
+  /api/v3/marriage/ocr:
     post:
       summary: 혼인관계증명서 OCR
       operationId: post-marriageocr
@@ -784,17 +772,6 @@ paths:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
                 properties:
                   document_type:
                     type: string
@@ -926,9 +903,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/paternal-adopt/ocr:
+  /api/v3/paternal-adopt/ocr:
     post:
       summary: 친양자입양관계증명서 OCR
       operationId: post-paternaladoptocr
@@ -941,17 +917,6 @@ paths:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
                 properties:
                   document_type:
                     type: string
@@ -1083,9 +1048,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/adopt/ocr:
+  /api/v3/adopt/ocr:
     post:
       summary: 입양관계증명서 OCR
       operationId: post-adptocr
@@ -1098,17 +1062,6 @@ paths:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
                 properties:
                   document_type:
                     type: string
@@ -1240,9 +1193,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/chobon/ocr:
+  /api/v3/chobon/ocr:
     post:
       summary: 주민등록표(초본) OCR
       operationId: post-chobonocr
@@ -1250,23 +1202,93 @@ paths:
         '200':
           description: |-
             OK
+
             정상응답
+
+            status가 -1일 경우 제공되는 에러메세지는 다음과 같습니다.
+            <details markdown="1">
+            <summary>세부정보</summary>
+            <table border="1" align="center">
+            <th>message</th>
+            <th>설명</th>
+
+            <tr>
+            <td>System error: 100</td>
+            <td>서버 내부에 오류가 발생했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid request: 107</td>
+            <td>잘못된 파라미터를 사용했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid image file: 108</td>
+            <td>읽을 수 없는 이미지 파일입니다.</td>
+            </tr>
+
+            <tr>
+            <td>Text detection failed: 201</td>
+            <td>이미지에서 인식 가능한 텍스트를 찾지 못했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>OCR Validation Failed: 502</td>
+            <td>OCR 결과가 잘못되었습니다.</td>
+            </tr>
+
+            </table>
+
+            </details>
           content:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
-              examples: {}
+                properties:
+                  status:
+                    type: integer
+                    description: 상태
+                  message:
+                    type: string
+                    description: API 에러메세지
+                  result:
+                    type: object
+                    description: 결과
+                    properties:
+                      address:
+                        type: object
+                        description: 주소
+                        properties:
+                          address:
+                            type: string
+                            description: 주소
+                          date_of_event:
+                            type: string
+                            description: 발생일
+                          date_of_report:
+                            type: string
+                            description: 신고일
+                      id_number:
+                        type: string
+                        description: 주민등록번호
+                      issue_date:
+                        type: string
+                        description: 발급일
+                      name:
+                        type: string
+                        description: 성명
+              examples:
+                초본:
+                  value:
+                    status: 0
+                    message: OK
+                    result:
+                      address:
+                        address: 경기도 수원시 팔달구 영통등 913-3 벽적골 두산아파트
+                        date_of_report: '2000-06-26'
+                      id_number: 950619-
+                      issue_date: 2020년 04월 07일
+                      name: 김OO
         '400':
           $ref: '#/components/responses/400_id-ocr'
         '401':
@@ -1346,9 +1368,8 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
-  /api/v1/deugbon/ocr:
+  /api/v3/deugbon/ocr:
     post:
       summary: 주민등록표(등본) OCR
       operationId: post-deugbonocr
@@ -1356,23 +1377,146 @@ paths:
         '200':
           description: |-
             OK
+
             정상응답
+
+            status가 -1일 경우 제공되는 에러메세지는 다음과 같습니다.
+            <details markdown="1">
+            <summary>세부정보</summary>
+            <table border="1" align="center">
+            <th>message</th>
+            <th>설명</th>
+
+            <tr>
+            <td>System error: 100</td>
+            <td>서버 내부에 오류가 발생했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid request: 107</td>
+            <td>잘못된 파라미터를 사용했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>Invalid image file: 108</td>
+            <td>읽을 수 없는 이미지 파일입니다.</td>
+            </tr>
+
+            <tr>
+            <td>Text detection failed: 201</td>
+            <td>이미지에서 인식 가능한 텍스트를 찾지 못했습니다.</td>
+            </tr>
+
+            <tr>
+            <td>OCR Validation Failed: 502</td>
+            <td>OCR 결과가 잘못되었습니다.</td>
+            </tr>
+
+            </table>
+
+            </details>
           content:
             application/json:
               schema:
                 type: object
-                x-examples:
-                  example-1:
-                    document_type: 기본증명서
-                    issue_date: 2021년 06월 09일
-                    issue_type: 일반
-                    person_concerned:
-                      gender: 남
-                      name: 최아람
-                      number: 920314-1******
-                      relation: 본인
-                    place_of_registration: 전라남도 나주시 봉황면 유곡리 239번지
-              examples: {}
+                properties:
+                  status:
+                    type: integer
+                    description: 상태
+                  message:
+                    type: string
+                    description: API 에러메세지
+                  result:
+                    type: object
+                    description: 결과
+                    properties:
+                      address:
+                        type: object
+                        description: 주소
+                        properties:
+                          address:
+                            type: string
+                            description: 현주소
+                          date_of_event:
+                            type: string
+                            description: 발생일
+                          date_of_report:
+                            type: string
+                            description: 신고일
+                          reason_for_change:
+                            type: string
+                            description: 변동사유
+                      household:
+                        type: object
+                        description: 세대주
+                        properties:
+                          date_of_composition:
+                            type: string
+                            description: 세대구성일자
+                          householder:
+                            type: string
+                            description: 세대주 성명
+                          reason_for_composition:
+                            type: string
+                            description: 변동사유
+                      issue_date:
+                        type: string
+                        description: 발급일
+                      members:
+                        type: array
+                        description: 구성원
+                        items:
+                          type: object
+                          properties:
+                            date_of_event:
+                              type: string
+                              description: 발생일
+                            date_of_report:
+                              type: string
+                              description: 신고일
+                            id_number:
+                              type: string
+                              description: 주민등록번호
+                            name:
+                              type: string
+                              description: 성명
+                            number:
+                              type: string
+                              description: 번호
+                            reason_for_change:
+                              type: string
+                              description: 변동사유
+                            registration_status:
+                              type: string
+                              description: 등록상태
+                            relation:
+                              type: string
+                              description: 세대주 관계
+              examples:
+                등본:
+                  value:
+                    status: 0
+                    message: OK
+                    result:
+                      address:
+                        address: '서울특별시 마포구 월드컵북로54길 17, 1304호 (상암동,사보이시티디엠씨)'
+                        date_of_event: '2019-11-13'
+                        date_of_report: '2019-11-13'
+                        reason_for_change: 전입
+                      household:
+                        date_of_composition: '2019-11-13'
+                        householder: 김OO
+                        reason_for_composition: 전입
+                      issue_date: 2021년 05월 30일
+                      members:
+                        - date_of_event: '2019-11-13'
+                          date_of_report: '2019-11-13'
+                          id_number: 950619-2******
+                          name: 김OO
+                          number: '1'
+                          reason_for_change: 전입
+                          registration_status: 거주자
+                          relation: 본인
         '400':
           $ref: '#/components/responses/400_id-ocr'
         '401':
@@ -1452,7 +1596,6 @@ paths:
               required:
                 - image
         description: 요청헤더의 Content-Type과 body 형식이 일치해야 합니다.
-      x-internal: true
     parameters: []
 components:
   schemas: {}
@@ -1465,13 +1608,31 @@ components:
         사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
 
         <details markdown="1">
-        <summary>에러메세지</summary>
-        "image: not provided"<br>
-        "image base64 decode error"<br>
-        "Image cannot be read"<br>
-        "Image is too small to process"<br>
-        "Image is empty"<br>
-        "request format or type is not valid"<br>
+        <summary>세부정보</summary>
+        <table>
+        <th>message</th>
+        <th>설명</th>
+
+        <tr>
+        <td>image not provided</td>
+        <td>image 키값이 존재하지 않음</td>
+        </tr>
+
+        <tr>
+        <td>image base64 decode error</td>
+        <td>base64 디코드 에러</td>
+        </tr>
+
+        <tr>
+        <td>Image is empty</td>
+        <td>이미지가 비어있음</td>
+        </tr>
+
+        <tr>
+        <td>request format or type is not valid</td>
+        <td>요청형식이나 Content-Type이 올바르지 않음</td>
+        </tr>
+        </table>
         </details>
       content:
         application/json:
@@ -1594,16 +1755,31 @@ components:
         사용자가 키를 잘못 입력하였거나, 값에 문제가 있을때
 
         <details markdown="1">
-        <summary>에러메세지</summary>
-        "id_type not provided"<br>
-        "image: not provided"<br>
-        "image base64 decode error"<br>
-        "Unsupported ID type"<br>
-        "Image cannot be read"<br>
-        "Image is too small to process"<br>
-        "id_type: is not correct."<br>
-        "Image is empty"<br>
-        "request format or type is not valid"<br>
+        <summary>세부정보</summary>
+        <table>
+        <th>message</th>
+        <th>설명</th>
+
+        <tr>
+        <td>image not provided</td>
+        <td>image 키값이 존재하지 않음</td>
+        </tr>
+
+        <tr>
+        <td>image base64 decode error</td>
+        <td>base64 디코드 에러</td>
+        </tr>
+
+        <tr>
+        <td>Image is empty</td>
+        <td>이미지가 비어있음</td>
+        </tr>
+
+        <tr>
+        <td>request format or type is not valid</td>
+        <td>요청형식이나 Content-Type이 올바르지 않음</td>
+        </tr>
+        </table>
         </details>
       content:
         application/json:
@@ -1720,4 +1896,3 @@ components:
             cannot find MRZ:
               value:
                 message: 'text detection error: 205'
-x-internal: true
